@@ -1,0 +1,36 @@
+---
+title: "State Explorer"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Interactive map with states
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Table of species found on site vs off site within the slected state
+
+```{r}
+
+```
+
+### Summaries of the data collection efforts and PV presence occuring in the state
+
+```{r}
+
+```
+
