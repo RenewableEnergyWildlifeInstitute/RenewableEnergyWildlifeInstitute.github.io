@@ -1,34 +1,141 @@
 ---
-title: "State Explorer"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
+title: "State Summaries: Coming Soon!"
+output: flexdashboard::flex_dashboard
 ---
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(DT)
+library(dichromat)
+library(RColorBrewer) # display.brewer.pal(n = 9, name = 'Greens')
+library(readxl)
+library(dplyr)
+library(sf)
+library(leaflet)
+
+colors <- colorschemes$BluetoOrange.12
+region.colors <- colors[c(1:6,11)]
+
+greens9 <- brewer.pal(n = 9, name = "Greens")
+greens7 <- brewer.pal(n = 9, name = "Greens")[-c(1:2)]
+
+bgo.cols <- c(colors[c(1:4)], greens7[c(7,6,4,3)], colors[c(12:9)])
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+```{r functions}
+# Read Template
+templateReadList <- function(path) {
+  sheets <- readxl::excel_sheets(path)
+  sheets <- sheets[-match(c("Instructions", "Lookups"),sheets)] #Remove Instructions and lookups sheets
+  x <- lapply(sheets, function(X)
+    readxl::read_excel(
+      path,
+      sheet = X,
+      skip = 1,
+      .name_repair = "universal"
+    )) |>  #Skip first row of instructions
+    setNames(sheets) |> 
+    lapply(dropExampleRows)
+  x
+}
+
+dropExampleRows <- function(table) {
+  tail(table, -2)
+}
+
+# Read Catalog Data
+catalogReadList <- function(path) {
+  sheets <- readxl::excel_sheets(path)
+  x <- lapply(sheets, function(X)
+    readxl::read_excel(
+      path,
+      sheet = X,
+      .name_repair = "universal"
+    )) |>  #Skip first row of instructions
+    setNames(sheets)
+  x
+}
+
+# Join Read Data
+templateJoin <- function(dataList){
+  x <- dataList$Study_Info %>%
+    left_join(dataList$Site_Info, by = c("Study.Protocol.ID")) %>%
+    left_join(dataList$Plot_Info, by = c("Site.Name", "Study.Protocol.ID", "Plot.Design")) %>%
+    full_join(dataList$Surveys, by = c("Site.Plot.ID", "Study.Protocol.ID")) %>%
+    left_join(dataList$Observations, by = c("Site.Plot.Survey.ID", "Study.Protocol.ID"))
+  x
+}
+
+
+# Read and Process USPVDB, use sf as it is easier to manipulate later, specify CRS to transform into
+pvdbRead <- function(crs){
+  pvdbDat <- httr::GET(url = "https://eersc.usgs.gov/api/uspvdb/v1/projects") |>
+    jsonlite::parse_json(simplifyVector = T) |>
+    st_as_sf(coords = c("xlong", "ylat"),
+             crs = st_crs("ESRI:102003")) |> 
+    st_transform(crs = crs)
+}
+
+
+```
+
+
+```{r DataRead, include = F}
+
+#Geospatial Datasets
+states_poly <- st_read("data/geo/States_coterminous.shp") |> st_transform(crs = st_crs(4326))
+fws_poly <- st_read("data/geo/fws_coterminous.shp") |> st_transform(crs = st_crs(4326))
+ecoL2_poly <- st_read("data/geo/Eco_L2_coterminous.shp") |> st_transform(crs = st_crs(4326))
+
+#Simulated SolSource Data
+#vegDat <- templateReadList("data/simulated_SolSource/Study-JK-lx-860 Vegetation Surveys-Many Visits.xlsx")
+#polDat <- templateReadList("data/simulated_SolSource/Study-OJ-gj-672 Pollinator Surveys-Many Sites.xlsx")
+
+```
+
+
+Summary {}
+=======================================================================
+
+#### **`r paste0("Updated ", format(Sys.time(), '%B %d, %Y'))`** {data-height=900}
+
+The tables and figures provided in this data portal sunmmarize the studies that can be found within the SolSource Database. It uses a compiled dataset which can be requested from the datasets catalog. 
+
+
+Column {data-width=600}
+--------------------------------------
 
 ### Interactive map with states
 
 ```{r}
+map <- leaflet::leaflet(states_poly, options = leafletOptions(minZoom = 2, maxZoom = 6)) %>%
+  leaflet::addTiles() %>%
+  leaflet::setView(lng = -95, lat = 40, zoom = 4) %>%
+   leaflet::addPolygons(data = states_poly,  
+            color = "black",
+            fillOpacity = 0.20,
+            labelOptions = labelOptions(style = list("font-size" = "12px")),
+            highlight = highlightOptions(color = "white", bringToFront = TRUE), 
+            group = "States")
+
+map
 
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+Column {data-width=300}
+-------------------------------------
 
 ### Table of species found on site vs off site within the slected state
+
+Species offsite
 
 ```{r}
 
 ```
 
 ### Summaries of the data collection efforts and PV presence occuring in the state
+
+Data Collection Efforts
 
 ```{r}
 
