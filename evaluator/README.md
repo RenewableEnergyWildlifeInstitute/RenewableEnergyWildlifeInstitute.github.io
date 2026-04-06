@@ -121,15 +121,6 @@ https://<owner>.github.io/<repo>/evaluator/review.html?reviewer=email@example.co
 - **Recall** = correct predictions / (correct predictions + missing tags)
 - **F1** = harmonic mean of precision and recall
 
-## Security Considerations
-
-- **PAT Storage**: The PAT is stored in `data/config.json` in the repo so that reviewers can write data without their own GitHub accounts. This is acceptable for an internal research tool.
-- **Scope the PAT narrowly**: Use a fine-grained token with **only Contents read/write access** to this single repository.
-- **Rotate regularly**: Set a 90-day expiration and create a new token when it expires. Update the config via the admin dashboard.
-- **Private repo recommended**: If the repo is private, the config file (and PAT) won't be publicly accessible.
-- **Admin passphrase**: The admin passphrase is stored in the admin's browser localStorage. Change it from the default immediately after setup.
-- **No server-side code**: The entire tool runs client-side. The PAT is used directly from the browser to call the GitHub API. There is no backend that could be compromised.
-
 ## Data Format
 
 Each reviewer's evaluations are stored in `data/reviews/{sanitized_email}.json`:
@@ -154,27 +145,3 @@ Each reviewer's evaluations are stored in `data/reviews/{sanitized_email}.json`:
   ]
 }
 ```
-
-## Tag Dictionary
-
-71 tags across 10 categories:
-
-| Category | Count | Examples |
-|----------|-------|---------|
-| Technology Type | 8 | Land-based Wind, Offshore Wind, PV Solar |
-| Data Collection | 4 | New Field Data Collected, No Field Data Used |
-| FWS Region | 8 | Northeast, Southeast, Midwest |
-| Continent | 7 | North America, Europe, Asia |
-| Taxa Group | 11 | Birds, Bats, Vegetation, Fish |
-| Special Interest Taxa | 10 | Migratory Tree Bats, Eagles, Pollinators |
-| Solar Interaction Summary | 4 | Population-Level Interactions |
-| Wind Interaction Summary | 6 | Collisions, Habitat Impacts, Siting |
-| General Purpose | 4 | Review Paper, REWI Product or Coauthor |
-| Hot Topics | 9 | Curtailment, Fatality, Biodiversity |
-
-## Troubleshooting
-
-- **"Cannot load app configuration"**: The admin hasn't completed setup yet, or the config.json is empty.
-- **"Rate limit exceeded"**: GitHub API allows 5,000 requests/hour for authenticated users. Wait for the reset time shown in the error.
-- **"Write conflict"**: Another reviewer or the admin modified the same file simultaneously. Try saving again — the app fetches the latest version before writing.
-- **Reviewer sees no documents**: The admin hasn't assigned documents to their email, or used a different email address.
