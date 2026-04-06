@@ -116,11 +116,6 @@ https://<owner>.github.io/<repo>/evaluator/review.html?reviewer=email@example.co
    - Per-category and per-tag breakdowns
    - All individual review records
 
-**Metrics computed from evaluations:**
-- **Precision** = correct predictions / total predictions
-- **Recall** = correct predictions / (correct predictions + missing tags)
-- **F1** = harmonic mean of precision and recall
-
 ## Data Format
 
 Each reviewer's evaluations are stored in `data/reviews/{sanitized_email}.json`:
