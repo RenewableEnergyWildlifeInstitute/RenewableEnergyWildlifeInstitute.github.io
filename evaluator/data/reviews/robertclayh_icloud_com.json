@@ -1,0 +1,81 @@
+{
+  "reviewer_email": "robertclayh@icloud.com",
+  "reviews": [
+    {
+      "key": "DEF456",
+      "title": "Solar Panel Effects",
+      "review_timestamp": "2026-02-23T22:40:22.723Z",
+      "status": "in_progress",
+      "predicted_tags": [
+        "PV Solar",
+        "Vegetation",
+        "Pollinators"
+      ],
+      "evaluations": {},
+      "missing_tags": []
+    },
+    {
+      "key": "J6H4G4VA",
+      "title": "Utilizing high-resolution genetic markers to track population-level exposure of migratory birds to renewable energy development",
+      "review_timestamp": "2026-03-02T17:58:44.263Z",
+      "status": "in_progress",
+      "predicted_tags": [
+        "Birds",
+        "Fatality"
+      ],
+      "evaluations": {},
+      "missing_tags": []
+    },
+    {
+      "key": "6XIG8R9V",
+      "title": "Golden Eagle breeding response to utility-scale solar development and prolonged drought in California",
+      "review_timestamp": "2026-03-02T18:16:41.630Z",
+      "status": "in_progress",
+      "predicted_tags": [
+        "PV Solar"
+      ],
+      "evaluations": {},
+      "missing_tags": [
+        "Birds"
+      ]
+    },
+    {
+      "key": "SY8RHE3E",
+      "title": "Vulnerability of avian populations to renewable energy production",
+      "review_timestamp": "2026-03-03T15:09:52.478Z",
+      "status": "completed",
+      "predicted_tags": [
+        "PV Solar",
+        "Birds",
+        "Fatality"
+      ],
+      "evaluations": {
+        "PV Solar": "correct",
+        "Birds": "correct",
+        "Fatality": "correct"
+      },
+      "missing_tags": [
+        "Land-based Wind",
+        "North America",
+        "Eagles",
+        "Collisions",
+        "Human Threat Context"
+      ]
+    },
+    {
+      "key": "EPZ9DJSU",
+      "title": "The use of solar farms by bats in mosaic landscapes: Implications for conservation",
+      "review_timestamp": "2026-03-11T17:34:53.419Z",
+      "status": "in_progress",
+      "predicted_tags": [
+        "Bats"
+      ],
+      "evaluations": {
+        "Bats": "correct"
+      },
+      "missing_tags": [
+        "PV Solar"
+      ]
+    }
+  ]
+}

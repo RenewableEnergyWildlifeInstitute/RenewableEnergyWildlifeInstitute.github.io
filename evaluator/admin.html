@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — REWI Tag Evaluation Tool</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Auth overlay -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-box">
+      <h2>Admin Access</h2>
+      <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+        Enter the admin passphrase to continue.
+      </p>
+      <div class="form-group">
+        <input type="password" id="auth-pass" placeholder="Passphrase" autofocus>
+      </div>
+      <button class="btn btn-primary" onclick="authenticate()" style="width:100%">Enter</button>
+      <p id="auth-error" style="color:var(--danger); font-size: 0.8rem; margin-top: 0.5rem;" class="hidden">
+        Incorrect passphrase.
+      </p>
+      <p style="margin-top:1rem; font-size: 0.75rem; color: var(--gray-400);">
+        First time? The default passphrase is <code>rewi-admin</code>. Change it after setup.
+      </p>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">REWI Evaluator <span>Admin Dashboard</span></a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container hidden" id="admin-main">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="setup">Setup</button>
+      <button class="tab" data-tab="run-model">Run Model</button>
+      <button class="tab" data-tab="data">Predictions</button>
+      <button class="tab" data-tab="assign">Assignments</button>
+      <button class="tab" data-tab="status">Review Status</button>
+      <button class="tab" data-tab="export">Export</button>
+    </div>
+
+    <!-- Setup Tab -->
+    <div class="tab-content active" id="tab-setup">
+      <div class="card">
+        <h2>GitHub API Configuration</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Configure the GitHub repo where evaluation data will be stored.
+          The PAT needs <code>repo</code> scope (or fine-grained: Contents read/write).
+        </p>
+        <div class="form-group">
+          <label for="cfg-owner">Repository Owner</label>
+          <input type="text" id="cfg-owner" placeholder="e.g., RenewableEnergyWildlifeInstitute">
+        </div>
+        <div class="form-group">
+          <label for="cfg-repo">Repository Name</label>
+          <input type="text" id="cfg-repo" placeholder="e.g., UVA-Capstone-Su-25">
+        </div>
+        <div class="form-group">
+          <label for="cfg-token">Personal Access Token</label>
+          <input type="password" id="cfg-token" placeholder="ghp_...">
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-test-conn" onclick="testConnection()">Test Connection</button>
+          <button class="btn btn-success" id="btn-save-config" onclick="saveSetup()">Save Configuration</button>
+        </div>
+        <p id="conn-status" style="margin-top:0.75rem; font-size:0.85rem; color:var(--gray-500);"></p>
+      </div>
+
+      <div class="card">
+        <h2>Change Admin Passphrase</h2>
+        <div class="form-group">
+          <label for="new-pass">New Passphrase</label>
+          <input type="password" id="new-pass" placeholder="Enter new passphrase">
+        </div>
+        <button class="btn" onclick="changePassphrase()">Update Passphrase</button>
+      </div>
+    </div>
+
+    <!-- Run Model Tab -->
+    <div class="tab-content" id="tab-run-model">
+      <div class="card">
+        <h2>Generate Predicted Tags</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Trigger the LLM pipeline to generate predicted tags for a document.
+          This launches a GitHub Actions workflow that runs the model, parses its output,
+          and appends the prediction to the evaluator dataset.
+        </p>
+
+        <div class="form-group">
+          <label for="run-doc-key">Document Key <span style="font-weight:normal; color:var(--gray-400);">(optional — leave blank for random)</span></label>
+          <input type="text" id="run-doc-key" placeholder="e.g., SY8RHE3E">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-run-model" onclick="triggerModelRun()">
+            &#9654; Generate Prediction
+          </button>
+        </div>
+
+        <div id="run-status" style="margin-top:1rem; font-size:0.875rem; color:var(--gray-500);" class="hidden"></div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Runs</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Status of the most recent model runs. Click <strong>Refresh</strong> to update.
+        </p>
+        <button class="btn btn-sm" onclick="loadRecentRuns()" style="margin-bottom:0.75rem;">Refresh</button>
+        <div class="table-wrap">
+          <table id="runs-table">
+            <thead>
+              <tr>
+                <th>Run #</th>
+                <th>Status</th>
+                <th>Started</th>
+                <th>Duration</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody id="runs-tbody">
+              <tr><td colspan="5" style="color:var(--gray-500);">Click Refresh to load runs.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Predictions Tab -->
+    <div class="tab-content" id="tab-data">
+      <div class="card">
+        <h2>Upload Predictions Data</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Upload a CSV or JSON file containing parsed predictions. Required columns:
+          <code>key</code>, <code>title</code>, <code>abstract</code>, <code>predicted_tags</code>.
+          Optional: <code>full_text</code>, <code>ground_truth_tags</code>.
+        </p>
+        <div class="form-group">
+          <input type="file" id="predictions-file" accept=".csv,.json">
+        </div>
+        <button class="btn btn-primary" id="btn-upload" onclick="uploadPredictions()">Upload & Save to Repo</button>
+        <p id="upload-status" style="margin-top:0.75rem; font-size:0.85rem; color:var(--gray-500);"></p>
+      </div>
+
+      <div class="card">
+        <h2>Current Predictions Dataset</h2>
+        <p id="predictions-summary" style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Loading...
+        </p>
+        <div class="table-wrap">
+          <table id="predictions-table">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Title</th>
+                <th>Predicted Tags</th>
+                <th>Ground Truth</th>
+              </tr>
+            </thead>
+            <tbody id="predictions-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assignments Tab -->
+    <div class="tab-content" id="tab-assign">
+      <div class="card">
+        <h2>Assign Documents to Reviewers</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Enter a reviewer's email, select documents to assign, then save.
+          A shareable link will be generated for the reviewer.
+        </p>
+
+        <div class="form-group">
+          <label for="assign-email">Reviewer Email</label>
+          <input type="email" id="assign-email" placeholder="reviewer@example.com">
+        </div>
+
+        <div id="assign-doc-list">
+          <div class="select-controls">
+            <a onclick="selectAllDocs(true)">Select all</a>
+            <span style="color:var(--gray-300);">|</span>
+            <a onclick="selectAllDocs(false)">Select none</a>
+          </div>
+          <div class="doc-checkbox-grid" id="assign-checkboxes">
+            <p style="color:var(--gray-500); font-size:0.875rem;">
+              No predictions loaded. Upload predictions data first.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;" class="btn-group">
+          <button class="btn btn-primary" onclick="saveAssignment()">Save Assignment</button>
+        </div>
+
+        <div id="reviewer-link-box" class="hidden" style="margin-top:1rem; padding:1rem; background:var(--gray-50); border-radius:var(--radius); border:1px solid var(--gray-200);">
+          <p style="font-size:0.8rem; color:var(--gray-600); margin-bottom:0.5rem;">Share this link with the reviewer:</p>
+          <input type="text" id="reviewer-link" readonly style="width:100%; font-size:0.8rem; background:white;">
+          <button class="btn btn-sm" style="margin-top:0.5rem;" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Current Assignments</h2>
+        <div class="table-wrap">
+          <table id="assignments-table">
+            <thead>
+              <tr>
+                <th>Reviewer Email</th>
+                <th>Documents Assigned</th>
+                <th>Reviewer Link</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="assignments-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Status Tab -->
+    <div class="tab-content" id="tab-status">
+      <div class="card">
+        <h2>Review Progress</h2>
+        <div id="status-loading" style="color:var(--gray-500); font-size: 0.875rem;">Loading review data...</div>
+        <div id="status-content" class="hidden">
+          <div class="metric-grid" id="status-metrics"></div>
+          <div class="table-wrap" style="margin-top:1rem;">
+            <table id="status-table">
+              <thead>
+                <tr>
+                  <th>Reviewer</th>
+                  <th>Assigned</th>
+                  <th>Completed</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody id="status-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Tab -->
+    <div class="tab-content" id="tab-export">
+      <div class="card">
+        <h2>Export All Reviews</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Download aggregated evaluation data from all reviewers for the evaluation pipeline.
+        </p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="doExportJSON()">Export as JSON</button>
+          <button class="btn" onclick="doExportCSV()">Export as CSV</button>
+        </div>
+      </div>
+
+      <div class="card hidden" id="reviewed-docs-card">
+        <h3>Reviewed Documents</h3>
+        <p style="font-size:0.875rem; color:var(--gray-600); margin-bottom:1rem;">
+          All documents with at least one completed review and their validated tags (ground truth + approved predictions + reviewer additions).
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:10%">Key</th>
+                <th style="width:30%">Title</th>
+                <th>Validated Tags</th>
+                <th style="width:15%">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reviewed-docs-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/tags.js"></script>
+  <script src="js/github.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/export.js"></script>
+  <script>
+    /* ---- Auth ---- */
+    const DEFAULT_PASS = 'rewi-admin';
+
+    function getPassphrase() {
+      return localStorage.getItem('rewi_admin_pass') || DEFAULT_PASS;
+    }
+
+    function authenticate() {
+      const input = document.getElementById('auth-pass').value;
+      if (input === getPassphrase()) {
+        localStorage.setItem('rewi_admin_authed', 'true');
+        document.getElementById('auth-overlay').classList.add('hidden');
+        document.getElementById('admin-main').classList.remove('hidden');
+        initAdmin();
+      } else {
+        document.getElementById('auth-error').classList.remove('hidden');
+      }
+    }
+
+    document.getElementById('auth-pass').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') authenticate();
+    });
+
+    function logout() {
+      localStorage.removeItem('rewi_admin_authed');
+      location.reload();
+    }
+
+    function changePassphrase() {
+      const newPass = document.getElementById('new-pass').value;
+      if (!newPass || newPass.length < 4) {
+        showToast('Passphrase must be at least 4 characters.', 'error');
+        return;
+      }
+      localStorage.setItem('rewi_admin_pass', newPass);
+      showToast('Passphrase updated.', 'success');
+    }
+
+    // Check if already authed
+    if (localStorage.getItem('rewi_admin_authed') === 'true') {
+      document.getElementById('auth-overlay').classList.add('hidden');
+      document.getElementById('admin-main').classList.remove('hidden');
+      document.addEventListener('DOMContentLoaded', initAdmin);
+    }
+
+    /* ---- Tabs ---- */
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+
+        // Lazy-load tab data
+        if (tab.dataset.tab === 'run-model') loadRecentRuns();
+        if (tab.dataset.tab === 'status') loadStatus();
+        if (tab.dataset.tab === 'export') loadExportMetrics();
+      });
+    });
+
+    /* ---- State ---- */
+    let predictions = [];
+    let assignments = {};
+
+    /* ---- Init ---- */
+    async function initAdmin() {
+      // Try localStorage first; if missing, bootstrap from GitHub Pages (same as reviewer).
+      let config = await loadConfig();
+      if (!config) {
+        try { config = await initForReviewer(); } catch { /* admin can enter manually */ }
+      }
+      if (config) {
+        document.getElementById('cfg-owner').value = config.owner || '';
+        document.getElementById('cfg-repo').value = config.repo || '';
+        document.getElementById('cfg-token').value = config.token || '';
+      }
+
+      // Load predictions
+      try {
+        predictions = await loadPredictions();
+        renderPredictionsTable();
+      } catch (err) {
+        console.warn('Could not load predictions:', err);
+      }
+
+      // Load assignments (must happen before renderAssignmentCheckboxes so it can filter)
+      try {
+        assignments = await loadAssignments();
+        renderAssignmentsTable();
+      } catch (err) {
+        console.warn('Could not load assignments:', err);
+      }
+
+      // Render checkboxes after both predictions and assignments are loaded
+      renderAssignmentCheckboxes();
+    }
+
+    /* ---- Setup ---- */
+    async function testConnection() {
+      const owner = document.getElementById('cfg-owner').value.trim();
+      const repo = document.getElementById('cfg-repo').value.trim();
+      const token = document.getElementById('cfg-token').value.trim();
+      const status = document.getElementById('conn-status');
+
+      if (!owner || !repo || !token) {
+        status.textContent = 'Please fill in all fields.';
+        status.style.color = 'var(--danger)';
+        return;
+      }
+
+      setButtonLoading(document.getElementById('btn-test-conn'), true);
+      githubAPI.configure(owner, repo, token);
+
+      try {
+        const info = await githubAPI.testConnection();
+        status.innerHTML = `<span class="status-dot status-dot-success"></span> Connected to <strong>${info.full_name}</strong>` +
+          (info.private ? ' (private)' : ' (public)');
+        status.style.color = 'var(--success)';
+      } catch (err) {
+        status.textContent = `Connection failed: ${err.message}`;
+        status.style.color = 'var(--danger)';
+      }
+
+      setButtonLoading(document.getElementById('btn-test-conn'), false);
+    }
+
+    async function saveSetup() {
+      const owner = document.getElementById('cfg-owner').value.trim();
+      const repo = document.getElementById('cfg-repo').value.trim();
+      const token = document.getElementById('cfg-token').value.trim();
+
+      if (!owner || !repo || !token) {
+        showToast('Please fill in all fields.', 'error');
+        return;
+      }
+
+      setButtonLoading(document.getElementById('btn-save-config'), true);
+      try {
+        await saveConfig(owner, repo, token);
+        showToast('Configuration saved.', 'success');
+      } catch (err) {
+        showToast(`Save failed: ${err.message}`, 'error');
+      }
+      setButtonLoading(document.getElementById('btn-save-config'), false);
+    }
+
+    /* ---- Predictions Upload ---- */
+    async function uploadPredictions() {
+      const fileInput = document.getElementById('predictions-file');
+      const status = document.getElementById('upload-status');
+
+      if (!fileInput.files.length) {
+        showToast('Please select a file.', 'error');
+        return;
+      }
+
+      if (!githubAPI.isConfigured()) {
+        showToast('Configure GitHub API first (Setup tab).', 'error');
+        return;
+      }
+
+      setButtonLoading(document.getElementById('btn-upload'), true);
+      const file = fileInput.files[0];
+
+      try {
+        const text = await file.text();
+        let parsed;
+
+        if (file.name.endsWith('.json')) {
+          parsed = JSON.parse(text);
+          if (!Array.isArray(parsed)) {
+            throw new Error('JSON must be an array of records.');
+          }
+        } else {
+          parsed = parseCSV(text);
+        }
+
+        // Validate required fields
+        const required = ['key', 'title'];
+        for (const field of required) {
+          if (!parsed[0].hasOwnProperty(field)) {
+            throw new Error(`Missing required column: ${field}`);
+          }
+        }
+
+        // Ensure tags are arrays
+        for (const record of parsed) {
+          if (typeof record.predicted_tags === 'string') {
+            record.predicted_tags = parseTagList(record.predicted_tags);
+          }
+          if (typeof record.ground_truth_tags === 'string') {
+            record.ground_truth_tags = parseTagList(record.ground_truth_tags);
+          }
+          if (!record.predicted_tags) record.predicted_tags = [];
+          if (!record.ground_truth_tags) record.ground_truth_tags = [];
+        }
+
+        // Write to GitHub
+        await githubAPI.writeFile(
+          'evaluator/data/predictions.json',
+          parsed,
+          `Upload predictions data (${parsed.length} documents)`
+        );
+
+        predictions = parsed;
+        localStorage.setItem('rewi_predictions', JSON.stringify(parsed));
+        renderPredictionsTable();
+        renderAssignmentCheckboxes();
+
+        status.textContent = `Uploaded ${parsed.length} documents.`;
+        status.style.color = 'var(--success)';
+        showToast(`Uploaded ${parsed.length} documents.`, 'success');
+      } catch (err) {
+        status.textContent = `Error: ${err.message}`;
+        status.style.color = 'var(--danger)';
+        showToast(`Upload failed: ${err.message}`, 'error');
+      }
+
+      setButtonLoading(document.getElementById('btn-upload'), false);
+    }
+
+    function renderPredictionsTable() {
+      const tbody = document.getElementById('predictions-tbody');
+      const summary = document.getElementById('predictions-summary');
+
+      if (!predictions.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--gray-500);">No predictions loaded.</td></tr>';
+        summary.textContent = 'No predictions loaded yet.';
+        return;
+      }
+
+      summary.textContent = `${predictions.length} documents loaded.`;
+      tbody.innerHTML = predictions.map(p => `
+        <tr>
+          <td><code style="font-size:0.75rem;">${escapeHtml(p.key || '')}</code></td>
+          <td>${escapeHtml(truncate(p.title || '', 80))}</td>
+          <td>${(p.predicted_tags || []).length} tags</td>
+          <td>${(p.ground_truth_tags || []).length} tags</td>
+        </tr>
+      `).join('');
+    }
+
+    /* ---- Assignments ---- */
+    function renderAssignmentCheckboxes() {
+      const container = document.getElementById('assign-checkboxes');
+      if (!predictions.length) {
+        container.innerHTML = '<p style="color:var(--gray-500); font-size:0.875rem;">No predictions loaded. Upload predictions data first.</p>';
+        return;
+      }
+
+      // Collect all already-assigned document keys
+      const assignedKeys = new Set();
+      for (const keys of Object.values(assignments)) {
+        for (const k of keys) assignedKeys.add(k);
+      }
+
+      const unassigned = predictions.filter(p => !assignedKeys.has(p.key));
+
+      if (!unassigned.length) {
+        container.innerHTML = '<p style="color:var(--gray-500); font-size:0.875rem;">All documents have been assigned.</p>';
+        return;
+      }
+
+      container.innerHTML = unassigned.map(p => `
+        <div class="doc-checkbox-item">
+          <input type="checkbox" id="doc-${p.key}" value="${escapeHtml(p.key)}">
+          <label for="doc-${p.key}">
+            ${escapeHtml(truncate(p.title || p.key, 100))}
+            <small>${escapeHtml(p.key)} — ${(p.predicted_tags || []).length} predicted tags</small>
+          </label>
+        </div>
+      `).join('');
+    }
+
+    function selectAllDocs(selected) {
+      document.querySelectorAll('#assign-checkboxes input[type="checkbox"]').forEach(cb => {
+        cb.checked = selected;
+      });
+    }
+
+    async function saveAssignment() {
+      const email = document.getElementById('assign-email').value.trim();
+      if (!email || !email.includes('@')) {
+        showToast('Please enter a valid email.', 'error');
+        return;
+      }
+
+      const selectedKeys = [];
+      document.querySelectorAll('#assign-checkboxes input[type="checkbox"]:checked').forEach(cb => {
+        selectedKeys.push(cb.value);
+      });
+
+      if (!selectedKeys.length) {
+        showToast('Please select at least one document.', 'error');
+        return;
+      }
+
+      assignments[email] = selectedKeys;
+
+      try {
+        await githubAPI.writeFile(
+          'evaluator/data/assignments.json',
+          assignments,
+          `Update assignments for ${email}`
+        );
+        localStorage.setItem('rewi_assignments', JSON.stringify(assignments));
+        renderAssignmentsTable();
+
+        // Show link
+        const base = window.location.origin + window.location.pathname.replace(/admin\.html$/, '');
+        const link = `${base}review.html?reviewer=${encodeURIComponent(email)}`;
+        document.getElementById('reviewer-link').value = link;
+        document.getElementById('reviewer-link-box').classList.remove('hidden');
+
+        showToast(`Assigned ${selectedKeys.length} documents to ${email}.`, 'success');
+      } catch (err) {
+        showToast(`Save failed: ${err.message}`, 'error');
+      }
+    }
+
+    function renderAssignmentsTable() {
+      const tbody = document.getElementById('assignments-tbody');
+      const entries = Object.entries(assignments);
+
+      if (!entries.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--gray-500);">No assignments yet.</td></tr>';
+        return;
+      }
+
+      const base = window.location.origin + window.location.pathname.replace(/admin\.html$/, '');
+
+      tbody.innerHTML = entries.map(([email, keys]) => {
+        const link = `${base}review.html?reviewer=${encodeURIComponent(email)}`;
+        const safeEmail = escapeHtml(email);
+        return `
+          <tr>
+            <td><a href="#" class="reviewer-link" onclick="event.preventDefault(); showReviewerDocs('${safeEmail}')">${safeEmail}</a></td>
+            <td>${keys.length} documents</td>
+            <td><input type="text" value="${escapeHtml(link)}" readonly style="width:100%; font-size:0.75rem; border:1px solid var(--gray-200); padding:0.25rem; border-radius:4px;"></td>
+            <td><button class="btn btn-sm btn-danger" onclick="removeAssignment('${safeEmail}')">Remove</button></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /** Show a detail panel for a reviewer's assigned documents with reassignment options */
+    function showReviewerDocs(email) {
+      const keys = assignments[email] || [];
+      const predMap = {};
+      for (const p of predictions) predMap[p.key] = p;
+
+      // Build modal content
+      let html = `
+        <div class="reviewer-detail-overlay" id="reviewer-detail-overlay" onclick="if(event.target===this) closeReviewerDetail()">
+          <div class="reviewer-detail-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3 style="margin:0;">Documents assigned to ${escapeHtml(email)}</h3>
+              <button class="btn btn-sm" onclick="closeReviewerDetail()">Close</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Key</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+      `;
+
+      for (const key of keys) {
+        const pred = predMap[key];
+        const title = pred ? truncate(pred.title || key, 80) : key;
+        html += `
+          <tr>
+            <td><code style="font-size:0.75rem;">${escapeHtml(key)}</code></td>
+            <td>${escapeHtml(title)}</td>
+            <td><button class="btn btn-sm btn-danger" onclick="unassignDoc('${escapeHtml(email)}', '${escapeHtml(key)}')">Unassign</button></td>
+          </tr>
+        `;
+      }
+
+      html += `
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--gray-200);">
+              <h4 style="margin-bottom:0.5rem; font-size:0.9rem;">Reassign a document to another reviewer</h4>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <select id="reassign-doc" style="padding:0.4rem; border:1px solid var(--gray-300); border-radius:var(--radius); font-size:0.85rem;">
+                  ${keys.map(k => `<option value="${escapeHtml(k)}">${escapeHtml(k)}</option>`).join('')}
+                </select>
+                <span style="font-size:0.85rem;">to</span>
+                <select id="reassign-target" style="padding:0.4rem; border:1px solid var(--gray-300); border-radius:var(--radius); font-size:0.85rem;">
+                  ${Object.keys(assignments).filter(e => e !== email).map(e => `<option value="${escapeHtml(e)}">${escapeHtml(e)}</option>`).join('')}
+                </select>
+                <button class="btn btn-sm btn-primary" onclick="reassignDoc('${escapeHtml(email)}')">Reassign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Remove any existing overlay
+      const existing = document.getElementById('reviewer-detail-overlay');
+      if (existing) existing.remove();
+
+      document.body.insertAdjacentHTML('beforeend', html);
+    }
+
+    function closeReviewerDetail() {
+      const overlay = document.getElementById('reviewer-detail-overlay');
+      if (overlay) overlay.remove();
+    }
+
+    async function unassignDoc(email, key) {
+      if (!confirm(`Unassign "${key}" from ${email}?`)) return;
+      assignments[email] = (assignments[email] || []).filter(k => k !== key);
+      if (assignments[email].length === 0) delete assignments[email];
+
+      try {
+        await githubAPI.writeFile('evaluator/data/assignments.json', assignments, `Unassign ${key} from ${email}`);
+        localStorage.setItem('rewi_assignments', JSON.stringify(assignments));
+        renderAssignmentsTable();
+        renderAssignmentCheckboxes();
+        closeReviewerDetail();
+        if (assignments[email]) showReviewerDocs(email);
+        showToast(`Unassigned "${key}" from ${email}.`, 'success');
+      } catch (err) {
+        showToast(`Failed: ${err.message}`, 'error');
+      }
+    }
+
+    async function reassignDoc(fromEmail) {
+      const docKey = document.getElementById('reassign-doc').value;
+      const toEmail = document.getElementById('reassign-target').value;
+      if (!toEmail) { showToast('No target reviewer selected.', 'error'); return; }
+      if (!confirm(`Move "${docKey}" from ${fromEmail} to ${toEmail}?`)) return;
+
+      // Remove from source
+      assignments[fromEmail] = (assignments[fromEmail] || []).filter(k => k !== docKey);
+      if (assignments[fromEmail].length === 0) delete assignments[fromEmail];
+
+      // Add to target (avoid duplicates)
+      if (!assignments[toEmail]) assignments[toEmail] = [];
+      if (!assignments[toEmail].includes(docKey)) assignments[toEmail].push(docKey);
+
+      try {
+        await githubAPI.writeFile('evaluator/data/assignments.json', assignments, `Reassign ${docKey} from ${fromEmail} to ${toEmail}`);
+        localStorage.setItem('rewi_assignments', JSON.stringify(assignments));
+        renderAssignmentsTable();
+        renderAssignmentCheckboxes();
+        closeReviewerDetail();
+        if (assignments[fromEmail]) showReviewerDocs(fromEmail);
+        showToast(`Reassigned "${docKey}" to ${toEmail}.`, 'success');
+      } catch (err) {
+        showToast(`Failed: ${err.message}`, 'error');
+      }
+    }
+
+    async function removeAssignment(email) {
+      if (!confirm(`Remove all assignments for ${email}?`)) return;
+      delete assignments[email];
+      try {
+        await githubAPI.writeFile(
+          'evaluator/data/assignments.json',
+          assignments,
+          `Remove assignments for ${email}`
+        );
+        localStorage.setItem('rewi_assignments', JSON.stringify(assignments));
+        renderAssignmentsTable();
+        showToast('Assignment removed.', 'success');
+      } catch (err) {
+        showToast(`Failed: ${err.message}`, 'error');
+      }
+    }
+
+    function copyLink() {
+      const input = document.getElementById('reviewer-link');
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      showToast('Link copied to clipboard.', 'success');
+    }
+
+    /* ---- Status ---- */
+    async function loadStatus() {
+      const loading = document.getElementById('status-loading');
+      const content = document.getElementById('status-content');
+
+      loading.classList.remove('hidden');
+      content.classList.add('hidden');
+
+      try {
+        const allReviews = await loadAllReviews();
+        const entries = Object.entries(assignments);
+
+        const metricsDiv = document.getElementById('status-metrics');
+        const tbody = document.getElementById('status-tbody');
+
+        let totalAssigned = 0;
+        let totalCompleted = 0;
+
+        tbody.innerHTML = '';
+
+        for (const [email, keys] of entries) {
+          const reviewerData = allReviews.find(r => r.reviewer_email === email);
+          const completedKeys = reviewerData ?
+            reviewerData.reviews.filter(r => r.status === 'completed').map(r => r.key) : [];
+          const completed = completedKeys.length;
+          const assigned = keys.length;
+          totalAssigned += assigned;
+          totalCompleted += completed;
+          const pct = assigned > 0 ? Math.round((completed / assigned) * 100) : 0;
+
+          const safeEmail = escapeHtml(email);
+          // Store data for the detail view
+          if (!window._statusData) window._statusData = {};
+          window._statusData[email] = { keys, completedKeys };
+
+          tbody.innerHTML += `
+            <tr>
+              <td><a href="#" class="reviewer-link" onclick="event.preventDefault(); showStatusDetail('${safeEmail}')">${safeEmail}</a></td>
+              <td>${assigned}</td>
+              <td>${completed}</td>
+              <td>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+                <span class="progress-text">${pct}%</span>
+              </td>
+            </tr>
+          `;
+        }
+
+        const overallPct = totalAssigned > 0 ? Math.round((totalCompleted / totalAssigned) * 100) : 0;
+        metricsDiv.innerHTML = `
+          <div class="metric-card">
+            <div class="metric-value">${entries.length}</div>
+            <div class="metric-label">Reviewers</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${totalAssigned}</div>
+            <div class="metric-label">Total Assigned</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${totalCompleted}</div>
+            <div class="metric-label">Total Completed</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${overallPct}%</div>
+            <div class="metric-label">Overall Progress</div>
+          </div>
+        `;
+
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+      } catch (err) {
+        loading.textContent = `Error loading status: ${err.message}`;
+      }
+    }
+
+    /** Show detail overlay for a reviewer's status */
+    function showStatusDetail(email) {
+      const data = (window._statusData || {})[email];
+      if (!data) return;
+      const { keys, completedKeys } = data;
+      const completedSet = new Set(completedKeys);
+      const predMap = {};
+      for (const p of predictions) predMap[p.key] = p;
+
+      let html = `
+        <div class="reviewer-detail-overlay" id="reviewer-detail-overlay" onclick="if(event.target===this) closeReviewerDetail()">
+          <div class="reviewer-detail-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3 style="margin:0;">Review status for ${escapeHtml(email)}</h3>
+              <button class="btn btn-sm" onclick="closeReviewerDetail()">Close</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Key</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+      `;
+
+      for (const key of keys) {
+        const pred = predMap[key];
+        const title = pred ? truncate(pred.title || key, 80) : key;
+        const done = completedSet.has(key);
+        html += `
+          <tr>
+            <td><code style="font-size:0.75rem;">${escapeHtml(key)}</code></td>
+            <td>${escapeHtml(title)}</td>
+            <td><span class="badge ${done ? 'badge-completed' : 'badge-pending'}">${done ? 'Completed' : 'Pending'}</span></td>
+          </tr>
+        `;
+      }
+
+      html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const existing = document.getElementById('reviewer-detail-overlay');
+      if (existing) existing.remove();
+      document.body.insertAdjacentHTML('beforeend', html);
+    }
+
+    /* ---- Export ---- */
+    async function buildPredictionsMap() {
+      const preds = await loadPredictions();
+      const map = {};
+      for (const p of preds) map[p.key] = p;
+      return map;
+    }
+
+    async function loadExportMetrics() {
+      try {
+        const [allReviews, predictionsMap] = await Promise.all([loadAllReviews(), buildPredictionsMap()]);
+        const records = aggregateReviews(allReviews, predictionsMap);
+        renderReviewedDocumentsTable(buildDocumentSummary(records));
+      } catch (err) {
+        console.warn('Could not load export data:', err);
+      }
+    }
+
+    // Track hidden (completed) docs — persisted in localStorage
+    function getHiddenDocs() {
+      try { return JSON.parse(localStorage.getItem('rewi_hidden_docs') || '[]'); } catch { return []; }
+    }
+    function setHiddenDocs(arr) {
+      localStorage.setItem('rewi_hidden_docs', JSON.stringify(arr));
+    }
+
+    // Keep a reference to the full docs list for re-rendering
+    let _reviewedDocs = [];
+
+    function renderReviewedDocumentsTable(docs) {
+      if (docs) _reviewedDocs = docs;
+      const card = document.getElementById('reviewed-docs-card');
+      const tbody = document.getElementById('reviewed-docs-tbody');
+      const hiddenSet = new Set(getHiddenDocs());
+
+      const visible = _reviewedDocs.filter(d => !hiddenSet.has(d.key));
+
+      if (!visible.length) {
+        if (_reviewedDocs.length) {
+          tbody.innerHTML = '<tr><td colspan="4" style="color:var(--gray-500);">All reviewed documents have been marked as completed.</td></tr>';
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+        return;
+      }
+
+      tbody.innerHTML = visible.map(d => `
+        <tr id="export-row-${escapeHtml(d.key)}">
+          <td style="font-family:monospace; font-size:0.8rem;">${escapeHtml(d.key)}</td>
+          <td>${escapeHtml(truncate(d.title || d.key, 120))}</td>
+          <td>${d.validated_tags.map(t => `<span class="tag tag-predicted">${escapeHtml(t)}</span>`).join('')}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-success" onclick="markDocCompleted('${escapeHtml(d.key)}')" title="Mark as completed (hide from list)">Done</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteReviewEntry('${escapeHtml(d.key)}')" title="Delete review entry">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      card.classList.remove('hidden');
+    }
+
+    function markDocCompleted(key) {
+      const hidden = getHiddenDocs();
+      if (!hidden.includes(key)) hidden.push(key);
+      setHiddenDocs(hidden);
+      renderReviewedDocumentsTable();
+      showToast(`"${key}" marked as completed.`, 'success');
+    }
+
+    async function deleteReviewEntry(key) {
+      if (!confirm(`Are you sure you want to delete the review entry for "${key}"? This will remove all review data for this document from all reviewers and cannot be undone.`)) return;
+
+      try {
+        // Load all reviewer files and remove entries for this key
+        const allReviews = await loadAllReviews();
+        for (const reviewerData of allReviews) {
+          const before = reviewerData.reviews.length;
+          reviewerData.reviews = reviewerData.reviews.filter(r => r.key !== key);
+          if (reviewerData.reviews.length < before) {
+            // Save updated reviewer data
+            await saveReviewerData(reviewerData.reviewer_email, reviewerData);
+          }
+        }
+
+        // Also remove from hidden list if present
+        setHiddenDocs(getHiddenDocs().filter(k => k !== key));
+
+        // Remove from in-memory list and re-render
+        _reviewedDocs = _reviewedDocs.filter(d => d.key !== key);
+        renderReviewedDocumentsTable();
+        showToast(`Review entry for "${key}" deleted.`, 'success');
+      } catch (err) {
+        showToast(`Delete failed: ${err.message}`, 'error');
+      }
+    }
+
+    async function doExportJSON() {
+      try {
+        const [allReviews, predictionsMap] = await Promise.all([loadAllReviews(), buildPredictionsMap()]);
+        if (!allReviews.length) { showToast('No reviews to export.', 'warning'); return; }
+        exportJSON(allReviews, predictionsMap);
+        showToast('JSON exported.', 'success');
+      } catch (err) {
+        showToast(`Export failed: ${err.message}`, 'error');
+      }
+    }
+
+    async function doExportCSV() {
+      try {
+        const [allReviews, predictionsMap] = await Promise.all([loadAllReviews(), buildPredictionsMap()]);
+        if (!allReviews.length) { showToast('No reviews to export.', 'warning'); return; }
+        exportCSV(allReviews, predictionsMap);
+        showToast('CSV exported.', 'success');
+      } catch (err) {
+        showToast(`Export failed: ${err.message}`, 'error');
+      }
+    }
+
+    /* ---- Run Model ---- */
+    const WORKFLOW_FILE = 'run-model.yml';
+    let _runPollTimer = null;
+
+    async function triggerModelRun() {
+      if (!githubAPI.isConfigured()) {
+        showToast('Configure GitHub API first (Setup tab).', 'error');
+        return;
+      }
+
+      const docKey = document.getElementById('run-doc-key').value.trim();
+      const statusEl = document.getElementById('run-status');
+      const btn = document.getElementById('btn-run-model');
+
+      setButtonLoading(btn, true);
+      statusEl.classList.remove('hidden');
+      statusEl.style.color = 'var(--gray-500)';
+      statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Dispatching workflow…';
+
+      try {
+        const inputs = docKey ? { doc_key: docKey } : {};
+        await githubAPI.triggerWorkflowDispatch(WORKFLOW_FILE, 'main', inputs);
+
+        statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Workflow dispatched! Waiting for run to appear…';
+        showToast('Workflow dispatched successfully.', 'success');
+
+        // Poll for the run to appear and track it
+        startRunPolling(statusEl);
+      } catch (err) {
+        statusEl.style.color = 'var(--danger)';
+        statusEl.textContent = `Error: ${err.message}`;
+        showToast(`Dispatch failed: ${err.message}`, 'error');
+      }
+
+      setButtonLoading(btn, false);
+    }
+
+    function startRunPolling(statusEl) {
+      if (_runPollTimer) clearInterval(_runPollTimer);
+
+      let attempts = 0;
+      const maxAttempts = 120; // poll for up to 10 minutes (every 5s)
+
+      _runPollTimer = setInterval(async () => {
+        attempts++;
+        if (attempts > maxAttempts) {
+          clearInterval(_runPollTimer);
+          _runPollTimer = null;
+          statusEl.innerHTML = 'Polling timed out. Check the <strong>Recent Runs</strong> table or GitHub Actions page.';
+          return;
+        }
+
+        try {
+          const data = await githubAPI.getWorkflowRuns(WORKFLOW_FILE, 1);
+          const runs = data.workflow_runs || [];
+          if (!runs.length) return;
+
+          const run = runs[0];
+          const status = run.status;  // queued, in_progress, completed
+          const conclusion = run.conclusion;  // success, failure, cancelled, null
+
+          if (status === 'queued') {
+            statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Run is queued…';
+          } else if (status === 'in_progress') {
+            statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Run is in progress…';
+          } else if (status === 'completed') {
+            clearInterval(_runPollTimer);
+            _runPollTimer = null;
+
+            if (conclusion === 'success') {
+              statusEl.style.color = 'var(--success)';
+              statusEl.innerHTML = '<span class="status-dot status-dot-success"></span> Run completed successfully! Prediction added to dataset.';
+              showToast('Model run completed — prediction added.', 'success');
+              // Reload predictions so the new entry appears in the Predictions tab
+              try {
+                predictions = await loadPredictions();
+                renderPredictionsTable();
+                renderAssignmentCheckboxes();
+              } catch { /* best-effort */ }
+            } else {
+              statusEl.style.color = 'var(--danger)';
+              statusEl.innerHTML = `<span class="status-dot status-dot-danger"></span> Run finished with conclusion: <strong>${conclusion || 'unknown'}</strong>. <a href="${run.html_url}" target="_blank">View logs</a>`;
+              showToast(`Run finished: ${conclusion}`, 'error');
+            }
+
+            loadRecentRuns();
+          }
+        } catch {
+          // Transient fetch error — keep polling
+        }
+      }, 5000);
+    }
+
+    async function loadRecentRuns() {
+      const tbody = document.getElementById('runs-tbody');
+      if (!githubAPI.isConfigured()) {
+        tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">Configure GitHub API first.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">Loading…</td></tr>';
+
+      try {
+        const data = await githubAPI.getWorkflowRuns(WORKFLOW_FILE, 10);
+        const runs = data.workflow_runs || [];
+
+        if (!runs.length) {
+          tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">No runs found. Make sure the workflow file is pushed to the repo.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = runs.map(run => {
+          const started = run.created_at ? new Date(run.created_at).toLocaleString() : '—';
+          let duration = '—';
+          if (run.created_at && run.updated_at && run.status === 'completed') {
+            const ms = new Date(run.updated_at) - new Date(run.created_at);
+            const secs = Math.round(ms / 1000);
+            duration = secs < 60 ? `${secs}s` : `${Math.floor(secs / 60)}m ${secs % 60}s`;
+          }
+
+          let statusBadge;
+          if (run.status === 'completed') {
+            statusBadge = run.conclusion === 'success'
+              ? '<span class="badge badge-completed">Success</span>'
+              : `<span class="badge badge-danger">${escapeHtml(run.conclusion || 'failed')}</span>`;
+          } else {
+            statusBadge = `<span class="badge badge-pending">${escapeHtml(run.status)}</span>`;
+          }
+
+          return `
+            <tr>
+              <td><code style="font-size:0.75rem;">#${run.run_number}</code></td>
+              <td>${statusBadge}</td>
+              <td style="font-size:0.8rem;">${started}</td>
+              <td style="font-size:0.8rem;">${duration}</td>
+              <td><a href="${run.html_url}" target="_blank" style="font-size:0.8rem;">View</a></td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5" style="color:var(--danger);">Error: ${escapeHtml(err.message)}</td></tr>`;
+      }
+    }
+
+    /* ---- Utilities ---- */
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function truncate(str, len) {
+      return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+  </script>
+</body>
+</html>

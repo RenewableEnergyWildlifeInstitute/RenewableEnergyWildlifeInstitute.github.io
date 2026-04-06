@@ -1,0 +1,307 @@
+[
+  {
+    "key": "SY8RHE3E",
+    "title": "Vulnerability of avian populations to renewable energy production",
+    "abstract": "Renewable energy production can kill individual birds, but little is known about how it affects avian populations. We assessed the vulnerability of populations for 23 priority bird species killed at wind and solar facilities in California, USA. Bayesian hierarchical models suggested that 48% of these species were vulnerable to population-level effects from added fatalities caused by renewables and other sources. Effects of renewables extended far beyond the location of energy production to impact bird populations in distant regions across continental migration networks. Populations of species associated with grasslands where turbines were located were most vulnerable to wind. Populations of nocturnal migrant species were most vulnerable to solar, despite not typically being associated with deserts where the solar facilities we evaluated were located. Our findings indicate that addressing declines of North American bird populations requires consideration of the effects of renewables and other anthropogenic threats on both nearby and distant populations of vulnerable species.</p>",
+    "predicted_tags": [
+      "PV Solar",
+      "Birds",
+      "Fatality"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "CA",
+      "CSP Solar",
+      "Concentrated Solar Power",
+      "Impact Summary",
+      "Onshore Wind",
+      "Solar NRP",
+      "anthropogenic effects",
+      "bird populations",
+      "data_na",
+      "datacol_f",
+      "doc_ja",
+      "fac_gms",
+      "fac_landwind",
+      "fac_powertower",
+      "geo_fws8",
+      "loc_Blythe",
+      "loc_Blythe Mesa Solar II",
+      "loc_Blythe Solar 110",
+      "loc_Desert Sunlight 250, LLC",
+      "loc_Desert Sunlight 300, LLC",
+      "loc_Genesis Solar Energy Project",
+      "loc_Ivanpah 1",
+      "loc_Ivanpah 2",
+      "loc_Ivanpah 3",
+      "loc_McCoy Solar Energy Project",
+      "loc_Mojave Solar Project",
+      "loc_Solar Blythe 2",
+      "loc_Solar Blythe LLC",
+      "sis_t",
+      "snrp_t",
+      "solar",
+      "spp_fedte",
+      "spp_otherbird",
+      "spp_raptor",
+      "spp_statete",
+      "spp_waterfowl",
+      "subject_cumeff",
+      "subject_demography",
+      "tagged_ajw",
+      "tech_desktop",
+      "tech_isogen",
+      "tech_sim",
+      "wildlife mortality",
+      "wind",
+      "wis_t"
+    ]
+  },
+  {
+    "key": "J6H4G4VA",
+    "title": "Utilizing high-resolution genetic markers to track population-level exposure of migratory birds to renewable energy development",
+    "abstract": "With new motivation to increase the proportion of energy demands met by zero-carbon sources, there is a greater focus on efforts to assess and mitigate the impacts of renewable energy development on sensitive ecosystems and wildlife, of which birds are of particular interest. One challenge for researchers, due in part to a lack of appropriate tools, has been estimating the effects from such development on individual breeding populations of migratory birds. To help address this, we utilize a newly developed, high-resolution genetic tagging method to rapidly identify the breeding population of origin of carcasses recovered from renewable energy facilities and combine them with maps of genetic variation across geographic space (called ‘genoscapes’) for five species of migratory birds known to be exposed to energy development, to assess the extent of population-level effects on migratory birds. We demonstrate that most avian remains collected were from the largest populations of a given species. In contrast, those remains from smaller, declining populations made up a smaller percentage of the total number of birds assayed. Results suggest that application of this genetic tagging method can successfully define population-level exposure to renewable energy development and may be a powerful tool to inform future siting and mitigation activities associated with renewable energy programs.",
+    "predicted_tags": [
+      "Birds",
+      "Fatality"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Alternative energy",
+      "Animal migration",
+      "Bird genetics",
+      "Birds",
+      "CA",
+      "CSP Solar",
+      "California",
+      "Concentrated Solar Power",
+      "Feathers",
+      "Onshore Wind",
+      "PV Solar",
+      "Population genetics",
+      "data_supp",
+      "datacol_t",
+      "doc_ja",
+      "fac_1axispv",
+      "fac_fixedpv",
+      "fac_parabolictrough",
+      "fac_powertower",
+      "geo_fws8",
+      "loc_Blythe Mesa Solar II",
+      "loc_Desert Sunlight 250, LLC",
+      "loc_Desert Sunlight 300, LLC",
+      "loc_Genesis Solar Energy Project",
+      "loc_Ivanpah 1",
+      "loc_Ivanpah 2",
+      "loc_Ivanpah 3",
+      "loc_McCoy Solar Energy Project",
+      "loc_Mojave Solar Project",
+      "sis_f",
+      "snrp_f",
+      "spp_otherbird",
+      "spp_raptor",
+      "spp_waterfowl",
+      "subject_directmort",
+      "subject_terrother",
+      "tagged_jre",
+      "tech_isogen"
+    ]
+  },
+  {
+    "key": "UUJCKAAY",
+    "title": "Genetic identification of avian samples recovered from solar energy installations",
+    "abstract": "Renewable energy production and development will drastically affect how we meet global energy demands, while simultaneously reducing the impact of climate change. Although the possible effects of renewable energy production (mainly from solar- and wind-energy facilities) on wildlife have been explored, knowledge gaps still exist, and collecting data from wildlife remains (when negative interactions occur) at energy installations can act as a first step regarding the study of species and communities interacting with facilities. In the case of avian species, samples can be collected relatively easily (as compared to other sampling methods), but may only be able to be identified when morphological characteristics are diagnostic for a species. Therefore, many samples that appear as partial remains, or “feather spots”—known to be of avian origin but not readily assignable to species via morphology—may remain unidentified, reducing the efficiency of sample collection and the accuracy of patterns observed. To obtain data from these samples and ensure their identification and inclusion in subsequent analyses, we applied, for the first time, a DNA barcoding approach that uses mitochondrial genetic data to identify unknown avian samples collected at solar facilities to species. We also verified and compared identifications obtained by our genetic method to traditional morphological identifications using a blind test, and discuss discrepancies observed. Our results suggest that this genetic tool can be used to verify, correct, and supplement identifications made in the field and can produce data that allow accurate comparisons of avian interactions across facilities, locations, or technology types. We recommend implementing this genetic approach to ensure that unknown samples collected are efficiently identified and contribute to a better understanding of wildlife impacts at renewable energy projects.",
+    "predicted_tags": [
+      "PV Solar"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Alternative energy",
+      "Bird genetics",
+      "Birds",
+      "CA",
+      "CSP Solar",
+      "Concentrated Solar Power",
+      "DNA barcoding",
+      "Feathers",
+      "Genetics",
+      "Polymerase chain reaction",
+      "Wildlife",
+      "data_supp",
+      "datacol_t",
+      "doc_ja",
+      "fac_gms",
+      "fac_parabolictrough",
+      "fac_powertower",
+      "geo_fws8",
+      "loc_Arlington (Riverside County Solar)_Arlington Solar II",
+      "loc_Blythe Solar 110",
+      "loc_Blythe_Blythe Solar II",
+      "loc_Blythe_Blythe Solar III",
+      "loc_Blythe_Blythe Solar IV Solar",
+      "loc_Genesis Solar Energy Project",
+      "loc_Imperial Solar Energy Center West",
+      "loc_Ivanpah 1",
+      "loc_Ivanpah 2",
+      "loc_Ivanpah 3",
+      "loc_McCoy Solar Energy Project",
+      "loc_Mojave Solar Project",
+      "sis_f",
+      "snrp_f",
+      "spp_otherbird",
+      "subject_directmort",
+      "tagged_jre",
+      "tech_isogen"
+    ]
+  },
+  {
+    "key": "EPZ9DJSU",
+    "title": "The use of solar farms by bats in mosaic landscapes: Implications for conservation",
+    "abstract": "Solar energy is an important renewable energy source. However, the ecological effects of solar farms are largely unknown. Behavioral experiments proved previously that smooth surfaces, such as solar panels act as sensory traps for bats and insects, increasing collision risk, and suggesting that solar farms may affect local ecosystems in a complex way. As the orientation of bats is impeded around smooth surfaces, the exploitation of solar farms as foraging habitats by bats needs research. We surveyed the activity of bats at solar farms and in the neighboring habitats (forests, grasslands, arable fields, settlements and watersides) to evaluate the effects of solar farms on the occurrence and activity of bats and on the composition of bat communities. We conducted bioacoustic surveys at 190 sites in 15 areas of Hungary and recorded nearly 30 000 bat echolocation call sequences. We detected patterns of overall bat activity similar to those in other open habitats such as arable land and grassland indicating that some bat species can exploit this anthropogenic environment. Bat species detected at solar farms also frequently occur in arable land and settlements (Hypsugo savii, Nyctalus noctula and Pipistrellus kuhlii), suggesting that bats adapted to anthropogenic environments exploit solar farms. However, some species of major conservation concern (e.g. Myotis spp. and Barbastella barbastellus) were detected less frequently on solar farms than in other habitats raising implications for mitigation procedures.",
+    "predicted_tags": [
+      "Bats"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Anthropocene",
+      "Anthropogenic effect",
+      "Chiroptera",
+      "Data by request",
+      "Habitat loss",
+      "PV Solar",
+      "Peer Reviewed",
+      "Renewable Energy",
+      "Solar panels",
+      "data_req",
+      "datacol_t",
+      "doc_ja",
+      "fac_fixedpv",
+      "geo_eu",
+      "sis_f",
+      "snrp_f",
+      "spp_bat",
+      "subject_community",
+      "subject_habsuit",
+      "tagged_ajw",
+      "tech_baci",
+      "tech_passacous"
+    ]
+  },
+  {
+    "key": "6XIG8R9V",
+    "title": "Golden Eagle breeding response to utility-scale solar development and prolonged drought in California",
+    "abstract": "Each year from 2012–2016, we conducted helicopter surveys to monitor the distribution, success, and productivity of Golden Eagles (Aquila chrysaetos) breeding within 16 km of California Valley Solar Ranch (CVSR) in San Luis Obispo County, California. This 250-megawatt photovoltaic solar plant was built over 2 yr on 642 ha of disturbed grassland and desert scrub habitat on Carrizo Plain, and was operational in October 2013. Beginning in 2012 coincident with initial CVSR development, the study area and region experienced a severe drought that persisted through the end of the 2016 breeding season. During the study, we detected and monitored 19 variably occupied Golden Eagle breeding territories. We confirmed a similar number of occupied territories in 2012 (15) and 2016 (16), but our ability to reliably confirm pairs declined during the drought and shifting territory dynamics occurred in several areas. Between 2012 and 2015, the proportion of pairs that laid eggs (breeding rate) and fledgling production per occupied territory (productivity) declined by 93–95% (13 pairs laid eggs in 2012; only 1 pair did so in 2015). In 2016, the breeding rate increased sharply again to 63% of occupied territories (87% in 2012) following the return of average rainfall during the preceding winter, but the proportion of pairs that fledged young and productivity rebounded to notably lesser degrees. The eagle breeding rate and productivity trends were strongly correlated with current-year measures of primary plant productivity and rainfall totals from the previous water-year (June–July). Breeding performance metrics for five pairs with territories situated on the periphery of Carrizo Plain and 13 pairs located elsewhere in the study area away from possible development disturbance did not differ statistically. This suggested that CVSR development and initial operation did not adversely affect eagle breeding performance during the study; however, we cannot draw definitive conclusions from this 5-yr study about how CVSR development might have influenced the local eagle breeding population. Instead, we concluded that a severe 5-yr drought dramatically reduced eagle breeding activity in the study area (and region) and confounded our effort to evaluate the effects of the solar development.",
+    "predicted_tags": [
+      "PV Solar"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "CA",
+      "PV Solar",
+      "data_un",
+      "datacol_t",
+      "doc_ja",
+      "fac_1axispv",
+      "fac_gms",
+      "geo_fws8",
+      "geo_us",
+      "loc_California Valley Solar Ranch",
+      "relevance_high",
+      "sis_f",
+      "snrp_f",
+      "spp_raptor",
+      "spp_statete",
+      "subject_demography",
+      "subject_habsuit",
+      "tech_visob"
+    ]
+  },
+  {
+    "key": "FSQBRFIR",
+    "title": "A forensic investigation into the etiology of bat mortality at a wind farm: barotrauma or traumatic injury?",
+    "abstract": "Migrating bats have increased mortality near moving turbine blades at wind farms. The authors evaluated competing hypotheses of barotrauma and traumatic injury to determine the cause. They first examined the utility of lungs from salvaged bat carcasses for histopathologic diagnosis of barotrauma and studied laboratory mice as a model system. Postmortem time, environmental temperature, and freezing of carcasses all affected the development of vascular congestion, hemorrhage, and edema. These common tissue artifacts mimicked the diagnostic criteria of pulmonary barotrauma; therefore, lung tissues from salvaged bats should not be used for barotrauma diagnosis. The authors next compared wind farm (WF) bats to building collision (BC) bats collected near downtown Chicago buildings. WF bats had an increased incidence in fracture cases and specific bone fractures and had more external lacerations than BC bats. WF bats had additional features of traumatic injury, including diaphragmatic hernia, subcutaneous hemorrhage, and bone marrow emboli. In summary, 73% (190 of 262) of WF bats had lesions consistent with traumatic injury. The authors then examined for ruptured tympana, a sensitive marker of barotrauma in humans. BC bats had only 1 case (2%, 1 of 42), but this was attributed to concurrent cranial fractures, whereas WF bats had a 20% (16 of 81) incidence. When cases with concurrent traumatic injury were excluded, this yielded a small fraction (6%, 5 of 81) of WF bats with lesions possibly consistent with barotrauma etiology. Forensic pathology examination of the data strongly suggests that traumatic injury is the major cause of bat mortality at wind farms and, at best, barotrauma is a minor etiology.",
+    "predicted_tags": [
+      "Bats",
+      "Fatality"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Offshore Wind",
+      "Onshore Wind",
+      "fac_allwind",
+      "fac_landwind",
+      "spp_bat",
+      "subject_directmort",
+      "tech_morpho",
+      "tech_phys",
+      "wis_t"
+    ]
+  },
+  {
+    "key": "7XEYUVPG",
+    "title": "Acoustic exposure reveals variation in curtailment effectiveness at reducing bat fatality at wind turbines",
+    "abstract": "As the global transition to renewable energy generation continues, so does the need to reduce wind turbine‐related bat mortality. Curtailing turbine operation to prevent rotor movement at low wind speeds not only lowers risk but also decreases renewable energy production. Adjusting curtailment criteria according to seasonal patterns in bat activity could reduce energy loss, but determining whether the resulting curtailment alternative sufficiently lowered risk to bats would require a more sensitive measure of bat mortality than carcass counts can provide. We deployed turbine‐mounted acoustic bat detectors at two wind energy facilities to (1) explore seasonal and spatial variation in bat activity in and near the rotor‐swept zone of turbines, (2) confirm the efficacy of acoustic exposure to turbine operation as a measure of bat fatality risk, and (3) evaluate seasonal variation in reduction in acoustic exposure among curtailment alternatives with varying cut‐in wind speeds. Biweekly distribution of acoustic bat activity was similar among facilities, and acoustic exposure to rotating turbine blades was closely correlated with bat fatality estimates, corroborating previous studies. Curtailment strategies with higher cut‐in speeds reduced the percentage of acoustic exposure by a consistent margin across biweekly intervals, but differences in the rate of acoustic exposure among strategies were far greater during late summer and early fall, when bat activity levels were highest. In other words, the relative protectiveness of curtailment strategies did not vary greatly throughout the year, but the choice of curtailment strategy during periods of high bat activity could substantially affect bat fatality rates. Small changes in cut‐in speed (e.g., 0.5 m/s) resulted in clear reductions in acoustic exposure that were measurable at biweekly intervals, providing sensitive feedback on curtailment effectiveness. Site‐specific data from turbine‐mounted acoustic detectors could therefore provide more sensitive feedback on curtailment effectiveness than carcass searches, which cannot typically detect differences in fatality rates among curtailment strategies with similar cut‐in speeds. Acoustic exposure also provides useful practical feedback for wind energy facility operators on how best to design curtailment strategies around site‐specific patterns in bat activity and balance the simultaneous goals of generating renewable energy and protecting bats.",
+    "predicted_tags": [
+      "Bats"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Acoustic exposure",
+      "Bats",
+      "Carcass searches",
+      "Curtailment",
+      "Midwest",
+      "New Field Data",
+      "North America",
+      "Onshore Wind",
+      "REWRF Funded"
+    ]
+  },
+  {
+    "key": "UJXGL7C8",
+    "title": "WWRF_Summary_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity",
+    "abstract": "Reducing bat mortality at wind energy facilities is a priority for wind-wildlife stakeholders. Curtailment (shutting down turbines) under certain conditions has proven to be effective in reducing bat fatalities. To date, two curtailment strategies show both promise and limitations. The simplest strategy, “blanket” curtailment during low wind-speed conditions, typically results in reduced collision risk but also results in unnecessary loss of energy production if turbines are shut down when bats are not present. “Smart” curtailment uses other variables, e.g., temperature and real-time acoustic activity measurements, to guide curtailment decisions, but unplanned curtailment resulting in unplanned reductions in power generation can complicate electrical grid management strategies. This study applied an approach previously used for forecasting bird migration based on weather data (BirdCast), and developed models using statistical and machine learning approaches to see if regional scale meteorological variables could predict increases in bat acoustic activity and collision risk to better inform curtailment. Given the scale of movements exhibited by bats during migration, a regional approach to smart curtailment could help identify trends that small-scale smart curtailment algorithms are not able to detect .",
+    "predicted_tags": [
+      "Bats",
+      "Curtailment",
+      "PV Solar"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Bats",
+      "Fatality",
+      "Midwest",
+      "Minimization",
+      "Onshore Wind",
+      "Previous Field Data",
+      "REWRF Funded"
+    ]
+  },
+  {
+    "key": "B4S6KLPY",
+    "title": "Floating solar photovoltaic system",
+    "abstract": "India has done a notable job in terms of deployment of renewable energy-based installations, increasing to almost 3.5 folds in the last 5-6 years, with most of the capacity coming from onshore wind and solar photovoltaic (PV) based installations. India's grid-connected solar PV sector currently is majorly dominated by the ground-based installations (93%1) while the balance is contributed by rooftop based solar PV installations. The cost of installation of utility-scale solar PV in the country has declined by 84% between 2010-2018, making India world's topmost country to achieve the lowest installation cost for utility-scale solar PV. It is well known that solar PV deployment is very land intensive and scaling up the project sizes requires large portion of contiguous land parcels, which becomes challenging in many situations. In order to keep pace of development commensurate with the country's targets for solar capacity additions, alternatives are required to be established and explored. Floating solar PV (FSPV) or floatovoltaics is one such substitute, which has started getting attention globally and is expected to grow strongly over the coming years. It is assessed that the yearly capacity addition may rise from the current installed of 1.314 GWp in 2018 to 4.6 GWp by 2022. At present, China is the leading international market followed by Japan and South Korea. India also has very bright outlooks to develop FSPV projects due to availability of large water bodies. As a technology, Floating Solar PV is in a very nascent stage of development in India. Until now, only a few projects with cumulative capacity of 2.7 MW have been installed. However, over 1.7 GW capacity projects are reported to be in various processes of development. FSPV market appears to crawl forward to make its presence felt in India and the taxes and tariffs discovered through bids have already shown rapid reductions. So far large-to-medium size man-made inland waterbodies seems to have attracted initial interest to install FSPV based power plants, but all these waterbodies were created to serve various purposes like-irrigation, water supply, fishing, hydroelectric, navigation, etc., and this warrants great deal of diligence to balance out various usages of these waterbodies on the basis of accurate information.",
+    "predicted_tags": [],
+    "full_text": "",
+    "ground_truth_tags": [
+      "PV Solar"
+    ]
+  },
+  {
+    "key": "NRCF4LM5",
+    "title": "Eagles enter rotor‐swept zones of wind turbines at rates that vary per turbine",
+    "abstract": "There is increasing pressure on wind energy facilities to manage or mitigate for wildlife collisions. However, little information exists regarding spatial and temporal variation in collision rates, meaning that mitigation is most often a blanket prescription. To address this knowledge gap, we evaluated variation among turbines and months in an aspect of collision risk—probability of entry by an eagle into a rotor-swept zone (hereafter, “probability of entry”). We examined 10,222 eagle flight paths identified and recorded by an automated bird monitoring system at a wind energy facility in Wyoming, USA. Probabilities of entry per turbine–month combination were 4.03 times greater in some months than others, ranging 0.15 to 0.62. The overall probability of entry for the riskiest turbine (i.e., the one with the greatest probability of entry) was 2.39 times greater than the least-risky turbine. Our methodology describes large variation across turbines and months in the probability of entry. If subsequently combined with information on other sources of variation (i.e., weather, topography), this approach can identify risky versus safe situations for eagles under which cost of management, curtailment prescriptions, and collision risk can be simultaneously minimized.",
+    "predicted_tags": [
+      "Birds"
+    ],
+    "full_text": "",
+    "ground_truth_tags": [
+      "Birds",
+      "Curtailment",
+      "Eagles",
+      "Mountain-Prairie",
+      "North America",
+      "REWRF Funded"
+    ]
+  }
+]

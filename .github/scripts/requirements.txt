@@ -1,0 +1,7 @@
+pandas
+pyarrow
+openpyxl
+transformers
+torch
+accelerate
+python-dotenv

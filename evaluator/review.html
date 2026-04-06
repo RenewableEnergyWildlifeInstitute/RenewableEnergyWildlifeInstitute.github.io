@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review — REWI Tag Evaluation Tool</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="has-save-bar">
+  <header>
+    <div class="container">
+      <a href="#" class="logo" onclick="showDocList()">REWI Evaluator <span>Reviewer</span></a>
+      <nav>
+        <span id="reviewer-info" style="font-size:0.8rem; color:var(--gray-500);"></span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Error state -->
+  <div id="error-view" class="container hidden" style="padding-top:3rem; text-align:center;">
+    <div class="card" style="max-width:500px; margin:0 auto;">
+      <h2>Unable to Load</h2>
+      <p id="error-message" style="color:var(--gray-600);"></p>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div id="loading-view" class="container" style="padding-top:3rem; text-align:center;">
+    <p style="color:var(--gray-500);">Loading your assignments...</p>
+  </div>
+
+  <!-- Document list view -->
+  <main class="container hidden" id="doc-list-view">
+    <div class="card">
+      <h2>Your Assigned Documents</h2>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+        <p class="progress-text" id="progress-text"></p>
+      </div>
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <ul class="doc-list" id="doc-list" style="margin-top:1rem;"></ul>
+    </div>
+  </main>
+
+  <!-- Document review view -->
+  <div class="container hidden" id="review-view" style="padding-bottom:80px;">
+    <div style="margin-bottom:1rem;">
+      <button class="btn btn-sm" onclick="showDocList()">&larr; Back to Documents</button>
+    </div>
+
+    <div class="card">
+      <h2 id="review-title" style="font-size:1.25rem;"></h2>
+      <p style="font-size:0.8rem; color:var(--gray-500); margin-bottom:0.5rem;" id="review-key"></p>
+
+      <!-- Abstract -->
+      <div class="collapsible collapsed" id="abstract-section">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">Abstract</div>
+        <div class="collapsible-body" id="review-abstract"></div>
+      </div>
+
+      <!-- Full Text -->
+      <div class="collapsible collapsed" id="fulltext-section">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">Full Text</div>
+        <div class="collapsible-body" id="review-fulltext" style="max-height:500px; white-space:pre-wrap;"></div>
+      </div>
+
+      <!-- Ground Truth toggle -->
+      <div id="gt-section" class="hidden" style="margin-top:0.75rem;">
+        <label style="font-size:0.85rem; display:flex; align-items:center; gap:0.5rem; cursor:pointer; color:var(--gray-600);">
+          <input type="checkbox" id="gt-toggle" onchange="toggleGroundTruth()">
+          Show ground-truth tags for reference
+        </label>
+        <div id="gt-tags" class="hidden" style="margin-top:0.5rem;"></div>
+      </div>
+    </div>
+
+    <!-- Predicted Tags Evaluation -->
+    <div class="card">
+      <h2>Evaluate Predicted Tags</h2>
+      <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:1rem;">
+        For each predicted tag, mark it as correct or incorrect.
+      </p>
+      <div id="eval-tags"></div>
+    </div>
+
+    <!-- Missing Tags -->
+    <div class="card">
+      <h2>Add Missing Tags</h2>
+      <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:1rem;">
+        Add tags the model should have predicted but missed (false negatives).
+      </p>
+      <div id="category-btn-row" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;"></div>
+      <div id="category-tag-panel" style="display:none; border:1px solid var(--gray-200); border-radius:var(--radius); padding:0.75rem; margin-bottom:0.75rem;"></div>
+      <div class="missing-tags-list" id="missing-tags-list"></div>
+    </div>
+  </div>
+
+  <!-- Save bar -->
+  <div class="save-bar hidden" id="save-bar">
+    <div class="save-status" id="save-status">Unsaved changes</div>
+    <div class="btn-group">
+      <button class="btn" id="btn-save" onclick="saveProgress()">Save Progress</button>
+      <button class="btn btn-success" id="btn-submit" onclick="submitReview()">Submit Review</button>
+    </div>
+  </div>
+
+  <script src="js/tags.js"></script>
+  <script src="js/github.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    /* ---- State ---- */
+    let reviewerEmail = '';
+    let assignedKeys = [];
+    let reviewerData = { reviewer_email: '', reviews: [] };
+    let currentDoc = null;
+    let currentEvals = {};     // tag -> 'correct' | 'incorrect'
+    let currentMissing = [];   // array of tag strings
+    let hasUnsavedChanges = false;
+
+    /* ---- Init ---- */
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      reviewerEmail = params.get('reviewer');
+
+      if (!reviewerEmail) {
+        showError('No reviewer email specified. Please use the link provided by your admin.');
+        return;
+      }
+
+      document.getElementById('reviewer-info').textContent = reviewerEmail;
+
+      try {
+        await initForReviewer();
+        const allAssignments = await loadAssignments();
+        assignedKeys = allAssignments[reviewerEmail] || [];
+
+        if (!assignedKeys.length) {
+          showError(`No documents are assigned to ${reviewerEmail}. Please contact your admin.`);
+          return;
+        }
+
+        // Load reviewer's existing evaluations
+        reviewerData = await loadReviewerData(reviewerEmail);
+
+        // Load predictions
+        const allPredictions = await loadPredictions();
+        // Filter to assigned docs only
+        window.allPredictions = allPredictions;
+
+        document.getElementById('loading-view').classList.add('hidden');
+        showDocList();
+      } catch (err) {
+        showError(`Failed to load: ${err.message}. Please check your internet connection or contact your admin.`);
+      }
+    });
+
+    function showError(msg) {
+      document.getElementById('loading-view').classList.add('hidden');
+      document.getElementById('error-view').classList.remove('hidden');
+      document.getElementById('error-message').textContent = msg;
+    }
+
+    /* ---- Document List ---- */
+    function showDocList() {
+      document.getElementById('doc-list-view').classList.remove('hidden');
+      document.getElementById('review-view').classList.add('hidden');
+      document.getElementById('save-bar').classList.add('hidden');
+      currentDoc = null;
+
+      const completedKeys = reviewerData.reviews
+        .filter(r => r.status === 'completed')
+        .map(r => r.key);
+      const inProgressKeys = reviewerData.reviews
+        .filter(r => r.status !== 'completed')
+        .map(r => r.key);
+
+      const total = assignedKeys.length;
+      const done = completedKeys.length;
+      const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+      document.getElementById('progress-text').textContent = `${done} of ${total} documents reviewed`;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+
+      const list = document.getElementById('doc-list');
+      const allPreds = window.allPredictions || [];
+
+      list.innerHTML = assignedKeys.map(key => {
+        const pred = allPreds.find(p => p.key === key);
+        const title = pred ? pred.title : key;
+        const tagCount = pred ? (pred.predicted_tags || []).length : '?';
+
+        let status = 'pending';
+        let badgeClass = 'badge-pending';
+        let badgeText = 'Pending';
+        if (completedKeys.includes(key)) {
+          status = 'completed';
+          badgeClass = 'badge-completed';
+          badgeText = 'Completed';
+        } else if (inProgressKeys.includes(key)) {
+          status = 'in-progress';
+          badgeClass = 'badge-in-progress';
+          badgeText = 'In Progress';
+        }
+
+        return `
+          <li class="doc-item" onclick="openDocument('${escapeHtmlAttr(key)}')">
+            <div>
+              <div class="doc-item-title">${escapeHtml(truncate(title, 120))}</div>
+              <div class="doc-item-meta">${escapeHtml(key)} — ${tagCount} predicted tags</div>
+            </div>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+          </li>
+        `;
+      }).join('');
+    }
+
+    /* ---- Open Document for Review ---- */
+    function openDocument(key) {
+      const allPreds = window.allPredictions || [];
+      const doc = allPreds.find(p => p.key === key);
+      if (!doc) {
+        showToast('Document not found.', 'error');
+        return;
+      }
+
+      currentDoc = doc;
+
+      // Load existing evaluations for this doc
+      const existing = reviewerData.reviews.find(r => r.key === key);
+      if (existing) {
+        currentEvals = { ...existing.evaluations };
+        currentMissing = [...(existing.missing_tags || [])];
+      } else {
+        currentEvals = {};
+        currentMissing = [];
+      }
+      hasUnsavedChanges = false;
+
+      // Switch views
+      document.getElementById('doc-list-view').classList.add('hidden');
+      document.getElementById('review-view').classList.remove('hidden');
+      document.getElementById('save-bar').classList.remove('hidden');
+      updateSaveStatus();
+
+      // Populate document info
+      document.getElementById('review-title').textContent = doc.title || doc.key;
+      document.getElementById('review-key').textContent = `Key: ${doc.key}`;
+
+      // Abstract
+      const abstractSection = document.getElementById('abstract-section');
+      if (doc.abstract) {
+        abstractSection.classList.remove('hidden');
+        document.getElementById('review-abstract').textContent = doc.abstract;
+      } else {
+        abstractSection.classList.add('hidden');
+      }
+
+      // Full text
+      const fulltextSection = document.getElementById('fulltext-section');
+      if (doc.full_text) {
+        fulltextSection.classList.remove('hidden');
+        document.getElementById('review-fulltext').textContent = doc.full_text;
+      } else {
+        fulltextSection.classList.add('hidden');
+      }
+
+      // Ground truth
+      const gtSection = document.getElementById('gt-section');
+      if (doc.ground_truth_tags && doc.ground_truth_tags.length) {
+        gtSection.classList.remove('hidden');
+        document.getElementById('gt-toggle').checked = false;
+        document.getElementById('gt-tags').classList.add('hidden');
+        renderGroundTruthTags();
+      } else {
+        gtSection.classList.add('hidden');
+      }
+
+      // Render evaluation tags
+      openCategoryName = null;
+      renderEvalTags();
+      renderMissingTags();
+      renderCategoryTagGroups();
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    /* ---- Evaluate Tags ---- */
+    function renderEvalTags() {
+      const container = document.getElementById('eval-tags');
+      const tags = currentDoc.predicted_tags || [];
+
+      if (!tags.length) {
+        container.innerHTML = '<p style="color:var(--gray-500); font-size:0.875rem;">No predicted tags for this document.</p>';
+        return;
+      }
+
+      // Group by category
+      const groups = groupTagsByCategory(tags);
+      let html = '';
+
+      for (const [category, catTags] of Object.entries(groups)) {
+        html += `<div class="category-section">`;
+        html += `<div class="category-header">${escapeHtml(category)}</div>`;
+
+        for (const tag of catTags) {
+          const evalState = currentEvals[tag];
+          let rowClass = 'tag-eval';
+          let correctActive = '';
+          let incorrectActive = '';
+
+          if (evalState === 'correct') {
+            rowClass += ' evaluated-correct';
+            correctActive = ' active-correct';
+          } else if (evalState === 'incorrect') {
+            rowClass += ' evaluated-incorrect';
+            incorrectActive = ' active-incorrect';
+          }
+
+          html += `
+            <div class="${rowClass}" id="eval-row-${cssId(tag)}">
+              <span class="tag-name">${escapeHtml(tag)}</span>
+              <button class="tag-eval-btn${correctActive}" onclick="setEval('${escapeHtmlAttr(tag)}', 'correct')" title="Correct">&#10003;</button>
+              <button class="tag-eval-btn${incorrectActive}" onclick="setEval('${escapeHtmlAttr(tag)}', 'incorrect')" title="Incorrect">&#10007;</button>
+            </div>
+          `;
+        }
+        html += `</div>`;
+      }
+
+      // Handle tags not in our dictionary (categorize as "Unknown")
+      const unknownTags = tags.filter(t => !TAG_TO_CATEGORY[t]);
+      if (unknownTags.length) {
+        html += `<div class="category-section"><div class="category-header">Other / Unknown</div>`;
+        for (const tag of unknownTags) {
+          if (Object.keys(groups).some(cat => groups[cat].includes(tag))) continue;
+          const evalState = currentEvals[tag];
+          let rowClass = 'tag-eval';
+          let correctActive = '';
+          let incorrectActive = '';
+          if (evalState === 'correct') { rowClass += ' evaluated-correct'; correctActive = ' active-correct'; }
+          else if (evalState === 'incorrect') { rowClass += ' evaluated-incorrect'; incorrectActive = ' active-incorrect'; }
+
+          html += `
+            <div class="${rowClass}" id="eval-row-${cssId(tag)}">
+              <span class="tag-name">${escapeHtml(tag)}</span>
+              <button class="tag-eval-btn${correctActive}" onclick="setEval('${escapeHtmlAttr(tag)}', 'correct')">&#10003;</button>
+              <button class="tag-eval-btn${incorrectActive}" onclick="setEval('${escapeHtmlAttr(tag)}', 'incorrect')">&#10007;</button>
+            </div>
+          `;
+        }
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function setEval(tag, value) {
+      // Toggle: if already set to this value, unset it
+      if (currentEvals[tag] === value) {
+        delete currentEvals[tag];
+      } else {
+        currentEvals[tag] = value;
+      }
+      hasUnsavedChanges = true;
+      updateSaveStatus();
+      renderEvalTags();
+    }
+
+    /* ---- Ground Truth ---- */
+    function toggleGroundTruth() {
+      const checked = document.getElementById('gt-toggle').checked;
+      document.getElementById('gt-tags').classList.toggle('hidden', !checked);
+    }
+
+    function renderGroundTruthTags() {
+      const tags = currentDoc.ground_truth_tags || [];
+      const container = document.getElementById('gt-tags');
+      container.innerHTML = tags.map(t =>
+        `<span class="tag tag-ground-truth">${escapeHtml(t)}</span>`
+      ).join('');
+    }
+
+    /* ---- Missing Tags ---- */
+    let openCategoryName = null;
+
+    function renderCategoryTagGroups() {
+      const predictedTags = currentDoc ? (currentDoc.predicted_tags || []) : [];
+      const btnRow = document.getElementById('category-btn-row');
+      const panel = document.getElementById('category-tag-panel');
+
+      // Render category buttons
+      btnRow.innerHTML = Object.keys(TAG_DICTIONARY).map(category => {
+        const isOpen = openCategoryName === category;
+        return `<button class="btn btn-sm cat-group-btn${isOpen ? ' cat-group-btn-active' : ''}"
+                        onclick="toggleCategoryPanel('${escapeHtmlAttr(category)}')">${escapeHtml(category)}</button>`;
+      }).join('');
+
+      // Render tag panel for the open category
+      if (!openCategoryName) {
+        panel.style.display = 'none';
+        return;
+      }
+
+      panel.style.display = 'block';
+      const tags = TAG_DICTIONARY[openCategoryName] || [];
+
+      let html = `<div style="font-size:0.75rem; font-weight:600; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.6rem;">${escapeHtml(openCategoryName)}</div>`;
+      html += '<div style="display:flex; flex-wrap:wrap; gap:0.35rem;">';
+      for (const tag of tags) {
+        const isPredicted = predictedTags.includes(tag);
+        const isAdded = currentMissing.includes(tag);
+        const disabled = isPredicted || isAdded;
+        const suffix = isPredicted ? ' (predicted)' : isAdded ? ' (added)' : '';
+        html += `<button class="cat-tag-btn${disabled ? ' disabled' : ''}"
+                         onclick="${disabled ? '' : `addMissingTag('${escapeHtmlAttr(tag)}')`}"
+                         ${disabled ? 'disabled' : ''}>${escapeHtml(tag)}${suffix ? `<span class="cat-tag-suffix"> ${suffix}</span>` : ''}</button>`;
+      }
+      html += '</div>';
+      panel.innerHTML = html;
+    }
+
+    function toggleCategoryPanel(category) {
+      openCategoryName = (openCategoryName === category) ? null : category;
+      renderCategoryTagGroups();
+    }
+
+    function addMissingTag(tag) {
+      if (currentMissing.includes(tag)) return;
+      currentMissing.push(tag);
+      hasUnsavedChanges = true;
+      updateSaveStatus();
+      renderMissingTags();
+      renderCategoryTagGroups();
+    }
+
+    function removeMissingTag(tag) {
+      currentMissing = currentMissing.filter(t => t !== tag);
+      hasUnsavedChanges = true;
+      updateSaveStatus();
+      renderMissingTags();
+      renderCategoryTagGroups();
+    }
+
+    function renderMissingTags() {
+      const container = document.getElementById('missing-tags-list');
+      if (!currentMissing.length) {
+        container.innerHTML = '<span style="font-size:0.8rem; color:var(--gray-400);">No missing tags added yet.</span>';
+        return;
+      }
+      container.innerHTML = currentMissing.map(tag => `
+        <span class="missing-tag-item">
+          <span class="tag tag-missing">${escapeHtml(tag)}</span>
+          <button class="missing-tag-remove" onclick="removeMissingTag('${escapeHtmlAttr(tag)}')" title="Remove">&times;</button>
+        </span>
+      `).join('');
+    }
+
+    /* ---- Save / Submit ---- */
+    function buildCurrentReview(status) {
+      return {
+        key: currentDoc.key,
+        title: currentDoc.title,
+        review_timestamp: new Date().toISOString(),
+        status: status,
+        predicted_tags: currentDoc.predicted_tags || [],
+        evaluations: { ...currentEvals },
+        missing_tags: [...currentMissing]
+      };
+    }
+
+    function updateReviewerData(review) {
+      const idx = reviewerData.reviews.findIndex(r => r.key === review.key);
+      if (idx >= 0) {
+        reviewerData.reviews[idx] = review;
+      } else {
+        reviewerData.reviews.push(review);
+      }
+    }
+
+    async function saveProgress() {
+      if (!currentDoc) return;
+
+      const btn = document.getElementById('btn-save');
+      setButtonLoading(btn, true);
+      updateSaveStatusText('Saving...');
+
+      try {
+        const review = buildCurrentReview('in_progress');
+        updateReviewerData(review);
+        await saveReviewerData(reviewerEmail, reviewerData);
+        hasUnsavedChanges = false;
+        updateSaveStatusText('Saved');
+        showToast('Progress saved.', 'success');
+      } catch (err) {
+        updateSaveStatusText('Save failed');
+        showToast(`Save failed: ${err.message}`, 'error');
+      }
+
+      setButtonLoading(btn, false);
+    }
+
+    async function submitReview() {
+      if (!currentDoc) return;
+
+      // Check all tags are evaluated
+      const tags = currentDoc.predicted_tags || [];
+      const unevaluated = tags.filter(t => !currentEvals[t]);
+      if (unevaluated.length) {
+        showToast(`Please evaluate all predicted tags. ${unevaluated.length} remaining.`, 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('btn-submit');
+      setButtonLoading(btn, true);
+      updateSaveStatusText('Submitting...');
+
+      try {
+        const review = buildCurrentReview('completed');
+        updateReviewerData(review);
+        await saveReviewerData(reviewerEmail, reviewerData);
+        hasUnsavedChanges = false;
+        showToast('Review submitted!', 'success');
+        showDocList();
+      } catch (err) {
+        updateSaveStatusText('Submit failed');
+        showToast(`Submit failed: ${err.message}`, 'error');
+      }
+
+      setButtonLoading(btn, false);
+    }
+
+    function updateSaveStatus() {
+      const el = document.getElementById('save-status');
+      if (hasUnsavedChanges) {
+        el.innerHTML = '<span class="status-dot status-dot-warning"></span> Unsaved changes';
+      } else {
+        el.innerHTML = '<span class="status-dot status-dot-success"></span> All changes saved';
+      }
+    }
+
+    function updateSaveStatusText(text) {
+      document.getElementById('save-status').textContent = text;
+    }
+
+    /* ---- Collapsible ---- */
+    function toggleCollapsible(header) {
+      header.parentElement.classList.toggle('collapsed');
+    }
+
+    /* ---- Utilities ---- */
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function escapeHtmlAttr(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    function truncate(str, len) {
+      return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+
+    function cssId(str) {
+      return str.replace(/[^a-zA-Z0-9]/g, '-');
+    }
+
+    // Warn before leaving with unsaved changes
+    window.addEventListener('beforeunload', (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+  </script>
+</body>
+</html>

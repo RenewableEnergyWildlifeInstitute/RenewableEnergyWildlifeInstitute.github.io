@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REWI Tag Evaluation Tool</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">REWI Evaluator <span>Tag Review Tool</span></a>
+      <nav>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="setup-container">
+      <div class="card" id="welcome-card">
+        <h2>Welcome to the REWI Tag Evaluation Tool</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600);">
+          This tool helps REWI domain experts manually review and evaluate metadata tags
+          predicted by our LLM pipeline.
+        </p>
+
+        <div id="reviewer-prompt" class="hidden">
+          <p style="margin-bottom:1rem; color: var(--gray-600);">
+            Enter your email address to access your assigned documents:
+          </p>
+          <div class="form-group">
+            <label for="reviewer-email">Your Email</label>
+            <input type="email" id="reviewer-email" placeholder="your@email.com">
+          </div>
+          <button class="btn btn-primary" onclick="goToReview()">Start Reviewing</button>
+        </div>
+
+        <div id="no-reviewer" class="hidden">
+          <p style="color: var(--gray-600);">
+            If you received a reviewer link, please use that link to access your assignments.
+            Otherwise, contact your REWI admin.
+          </p>
+          <div style="margin-top:1rem;">
+            <a href="admin.html" class="btn">Go to Admin Setup</a>
+          </div>
+        </div>
+
+        <div id="loading-msg">
+          <p style="color: var(--gray-500);">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/tags.js"></script>
+  <script src="js/github.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const reviewer = params.get('reviewer');
+
+      if (reviewer) {
+        // Redirect to review page with reviewer param
+        window.location.href = `review.html?reviewer=${encodeURIComponent(reviewer)}`;
+        return;
+      }
+
+      // No reviewer param — show email prompt or admin link
+      const loadingMsg = document.getElementById('loading-msg');
+      const reviewerPrompt = document.getElementById('reviewer-prompt');
+      const noReviewer = document.getElementById('no-reviewer');
+
+      // Check if config exists
+      const config = await loadConfig();
+      loadingMsg.classList.add('hidden');
+
+      if (config) {
+        // Config found — show reviewer email entry
+        reviewerPrompt.classList.remove('hidden');
+      } else {
+        // No config — show admin setup prompt
+        noReviewer.classList.remove('hidden');
+      }
+    });
+
+    function goToReview() {
+      const email = document.getElementById('reviewer-email').value.trim();
+      if (!email || !email.includes('@')) {
+        showToast('Please enter a valid email address.', 'error');
+        return;
+      }
+      window.location.href = `review.html?reviewer=${encodeURIComponent(email)}`;
+    }
+
+    // Allow Enter key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && document.activeElement.id === 'reviewer-email') {
+        goToReview();
+      }
+    });
+  </script>
+</body>
+</html>
