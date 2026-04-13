@@ -3,7 +3,7 @@ name: Refresh Zotero Snapshot
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 4 * * *"
+    - cron: "0 9 * * *"
 
 permissions:
   contents: write
