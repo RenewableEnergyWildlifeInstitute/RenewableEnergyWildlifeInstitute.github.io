@@ -234,8 +234,16 @@ class GitHubAPI {
 
     if (response.status === 204 || response.status === 200) return true;
 
+    if (response.status === 403) {
+      throw new Error(
+        'Workflow dispatch failed: 403 — Your PAT is missing the "workflow" scope. ' +
+        'Go to GitHub → Settings → Developer settings → Personal access tokens → ' +
+        'edit your token and enable the "workflow" scope, then save and re-enter it here.'
+      );
+    }
+
     if (response.status === 404) {
-      throw new Error('Workflow not found. Make sure run-model.yml is pushed to the repo and the PAT has "actions" scope.');
+      throw new Error('Workflow not found. Make sure the workflow YAML is pushed to the repo and the PAT has the "workflow" scope.');
     }
 
     const errBody = await response.json().catch(() => ({}));
