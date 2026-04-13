@@ -207,21 +207,21 @@
     <!-- Run Model Tab -->
     <div class="tab-content" id="tab-run-model">
       <div class="card">
-        <h2>Generate Predicted Tags</h2>
+        <h2>Process &amp; Predict Tags</h2>
         <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
-          Trigger the LLM pipeline to generate predicted tags for a document.
-          This launches a GitHub Actions workflow that runs the model, parses its output,
-          and appends the prediction to the evaluator dataset.
+          Process Zotero items, extract full text from PDFs, and generate LLM tag predictions.
+          Cached items in the processed dataset are reused automatically.
+          This launches a GitHub Actions workflow that runs the full pipeline.
         </p>
 
         <div class="form-group">
-          <label for="run-doc-key">Document Key <span style="font-weight:normal; color:var(--gray-400);">(optional — leave blank for random)</span></label>
-          <input type="text" id="run-doc-key" placeholder="e.g., SY8RHE3E">
+          <label for="run-parent-keys">Parent Key(s) <span style="font-weight:normal; color:var(--gray-400);">(space-separated)</span></label>
+          <input type="text" id="run-parent-keys" placeholder="e.g., SY8RHE3E TSMFT3YU">
         </div>
 
         <div class="btn-group">
           <button class="btn btn-primary" id="btn-run-model" onclick="triggerModelRun()">
-            &#9654; Generate Prediction
+            &#9654; Process &amp; Predict
           </button>
         </div>
 
@@ -1729,7 +1729,11 @@
         return;
       }
 
-      const docKey = document.getElementById('run-doc-key').value.trim();
+      const parentKeys = document.getElementById('run-parent-keys').value.trim();
+      if (!parentKeys) {
+        showToast('Enter at least one parent key.', 'error');
+        return;
+      }
       const statusEl = document.getElementById('run-status');
       const btn = document.getElementById('btn-run-model');
 
@@ -1739,10 +1743,10 @@
       statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Dispatching workflow…';
 
       try {
-        const inputs = docKey ? { doc_key: docKey } : {};
+        const inputs = { parent_keys: parentKeys };
         await githubAPI.triggerWorkflowDispatch(WORKFLOW_FILE, 'main', inputs);
 
-        statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Workflow dispatched! Waiting for run to appear…';
+        statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Workflow dispatched! Processing items and generating predictions…';
         showToast('Workflow dispatched successfully.', 'success');
 
         // Poll for the run to appear and track it
@@ -1790,8 +1794,8 @@
 
             if (conclusion === 'success') {
               statusEl.style.color = 'var(--success)';
-              statusEl.innerHTML = '<span class="status-dot status-dot-success"></span> Run completed successfully! Prediction added to dataset.';
-              showToast('Model run completed — prediction added.', 'success');
+              statusEl.innerHTML = '<span class="status-dot status-dot-success"></span> Pipeline completed! Items processed and predictions added.';
+              showToast('Pipeline completed — predictions added.', 'success');
               // Reload predictions so the new entry appears in the Predictions tab
               try {
                 predictions = await loadPredictions();

@@ -1,0 +1,93 @@
+{
+  "Technology Type": [
+    "Land-based Wind",
+    "Offshore Wind",
+    "PV Solar",
+    "CSP Solar",
+    "Geothermal",
+    "Battery",
+    "Transmission",
+    "Tech-Describe"
+  ],
+  "Data Collection": [
+    "New Field Data Collected",
+    "Utilize Previously Collected Data",
+    "No Field Data Used",
+    "Data-describe"
+  ],
+  "FWS Region": [
+    "Northeast",
+    "Southeast",
+    "Midwest",
+    "Mountain-Prairie",
+    "Southwest",
+    "Pacific",
+    "Pacific-Southwest",
+    "Alaska"
+  ],
+  "Continent": [
+    "North America",
+    "South America",
+    "Africa",
+    "Europe",
+    "Asia",
+    "Australia and Pacific Islands",
+    "Antarctica"
+  ],
+  "Taxa Group": [
+    "Birds",
+    "Reptiles",
+    "Amphibians",
+    "Terrestrial Mammals",
+    "Aquatic Mammals",
+    "Bats",
+    "Fish",
+    "Invertebrates",
+    "Soils & Biocrust",
+    "Microclimates",
+    "Vegetation"
+  ],
+  "Special Interest Taxa": [
+    "Migratory Tree Bats",
+    "Prairie Grouse",
+    "Eagles",
+    "Migratory Big Game",
+    "Meso-carnivores",
+    "Pollinators",
+    "Whales",
+    "Burrowing Owl",
+    "Desert Tortoise",
+    "Taxa-Describe"
+  ],
+  "Solar Interaction Summary": [
+    "Population-Level Interactions",
+    "Community-Level Interactions",
+    "Ecosystem-Level Interactions",
+    "Mitigation and On-site Management"
+  ],
+  "Wind Interaction Summary": [
+    "Human Threat Context",
+    "Collisions",
+    "Habitat Impacts",
+    "Siting",
+    "Minimization",
+    "Conservation Offsets"
+  ],
+  "General Purpose": [
+    "Review Paper",
+    "REWI Product or Coauthor",
+    "REWRF Funded",
+    "DOE Funded"
+  ],
+  "Hot Topics": [
+    "Curtailment",
+    "Ecovoltaics",
+    "Fatality",
+    "Vegetation Establishment and Management",
+    "Fencing",
+    "Biodiversity",
+    "Lake Effect",
+    "Environmental Contaminants",
+    "Topic-Describe"
+  ]
+}

@@ -1,18 +1,18 @@
-name: Run Model — Generate Prediction
+name: Run Pipeline — Process & Predict Tags
 
 on:
   workflow_dispatch:
     inputs:
-      doc_key:
-        description: "Specific document key to process (leave empty for random)"
-        required: false
+      parent_keys:
+        description: "Space-separated Zotero parent key(s) to process and predict tags for"
+        required: true
         default: ""
 
 permissions:
   contents: write
 
 jobs:
-  generate-prediction:
+  process-and-predict:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -30,22 +30,24 @@ jobs:
       - name: Install dependencies
         run: pip install -r .github/scripts/requirements.txt
 
-      - name: Generate prediction
+      - name: Run pipeline
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'meta-llama/Llama-3.2-1B-Instruct' }}
+          ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+          ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
         run: |
-          python .github/scripts/generate_prediction.py \
-            ${{ github.event.inputs.doc_key && format('--doc-key {0}', github.event.inputs.doc_key) || '' }}
+          python .github/scripts/process_and_predict.py \
+            --parent-keys ${{ github.event.inputs.parent_keys }}
 
-      - name: Commit updated predictions
+      - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add evaluator/data/predictions.json
+          git add evaluator/data/default_final_output.json evaluator/data/predictions.json
           if git diff --cached --quiet; then
-            echo "No changes to predictions.json"
+            echo "No changes to data files"
           else
-            git commit -m "Add LLM prediction [automated]"
+            git commit -m "Process & predict tags [automated]"
             git push
           fi
