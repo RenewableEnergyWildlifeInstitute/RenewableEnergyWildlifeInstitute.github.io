@@ -1,0 +1,144 @@
+name: Refresh Zotero Snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-zotero-snapshot:
+    runs-on: ubuntu-latest
+    env:
+      ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
+      ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build Zotero snapshot
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const groupId = process.env.ZOTERO_GROUP_ID;
+          const apiKey = process.env.ZOTERO_API_KEY || '';
+
+          if (!groupId) {
+            throw new Error('Missing required repository secret: ZOTERO_GROUP_ID');
+          }
+
+          async function fetchAllItems() {
+            const limit = 100;
+            let start = 0;
+            const all = [];
+            const headers = {};
+            if (apiKey) headers['Zotero-API-Key'] = apiKey;
+
+            while (true) {
+              const url = `https://api.zotero.org/groups/${encodeURIComponent(groupId)}/items?limit=${limit}&start=${start}`;
+              const res = await fetch(url, { headers });
+              if (!res.ok) {
+                const body = await res.text();
+                throw new Error(`Zotero API failed: ${res.status} ${res.statusText} ${body.slice(0, 300)}`);
+              }
+
+              const batch = await res.json();
+              if (!Array.isArray(batch)) {
+                throw new Error('Unexpected Zotero API response format.');
+              }
+
+              all.push(...batch);
+              if (batch.length < limit) break;
+              start += limit;
+
+              // Safety cap to avoid runaway loops.
+              if (start > 20000) break;
+            }
+
+            return all;
+          }
+
+          function trimItem(item) {
+            const d = item && item.data ? item.data : {};
+            const creators = Array.isArray(d.creators)
+              ? d.creators.map(c => ({
+                  firstName: c.firstName || undefined,
+                  lastName: c.lastName || undefined,
+                  name: c.name || undefined,
+                  creatorType: c.creatorType || undefined
+                }))
+              : [];
+
+            const tags = Array.isArray(d.tags)
+              ? d.tags
+                  .map(t => ({ tag: t && t.tag ? String(t.tag) : '' }))
+                  .filter(t => t.tag)
+              : [];
+
+            const note = typeof d.note === 'string' ? d.note.slice(0, 4000) : undefined;
+
+            return {
+              key: item.key,
+              data: {
+                itemType: d.itemType || 'unknown',
+                parentItem: d.parentItem || undefined,
+                title: d.title || undefined,
+                filename: d.filename || undefined,
+                note,
+                date: d.date || undefined,
+                creators,
+                abstractNote: d.abstractNote || undefined,
+                DOI: d.DOI || undefined,
+                url: d.url || undefined,
+                contentType: d.contentType || undefined,
+                linkMode: d.linkMode || undefined,
+                tags
+              }
+            };
+          }
+
+          async function main() {
+            const items = await fetchAllItems();
+            const trimmed = items.map(trimItem);
+
+            const snapshot = {
+              generated_at: new Date().toISOString(),
+              group_id: String(groupId),
+              total_items: trimmed.length,
+              items: trimmed
+            };
+
+            const outPath = path.join(process.cwd(), 'evaluator', 'data', 'zotero_snapshot.json');
+            fs.mkdirSync(path.dirname(outPath), { recursive: true });
+            fs.writeFileSync(outPath, JSON.stringify(snapshot, null, 2) + '\n', 'utf8');
+
+            console.log(`Snapshot written to ${outPath} with ${trimmed.length} items.`);
+          }
+
+          main().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Commit and push snapshot
+        run: |
+          if git diff --quiet -- evaluator/data/zotero_snapshot.json; then
+            echo "No snapshot changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evaluator/data/zotero_snapshot.json
+          git commit -m "chore: refresh zotero snapshot"
+          git push

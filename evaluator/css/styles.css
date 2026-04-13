@@ -864,6 +864,115 @@ tr:hover td { background: var(--gray-50); }
   text-decoration: underline;
 }
 
+/* Zotero dashboard */
+.zotero-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.zotero-page-controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.zotero-parent-card {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  background: white;
+  overflow: hidden;
+}
+
+.zotero-parent-card summary {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
+
+.zotero-parent-card[open] summary {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.zotero-parent-body {
+  padding: 1rem;
+}
+
+.zotero-parent-body h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--gray-900);
+}
+
+.zotero-section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray-500);
+  margin-top: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.zotero-child-card {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+}
+
+.zotero-child-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.zotero-child-meta {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-top: 0.2rem;
+}
+
+.zotero-metric-detail {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--gray-600);
+  line-height: 1.35;
+}
+
+.zotero-metric-detail hr {
+  border: 0;
+  border-top: 1px solid var(--gray-200);
+  margin: 0.4rem 0;
+}
+
+.zotero-json-output {
+  margin-top: 0.75rem;
+  background: var(--gray-900);
+  color: #e5e7eb;
+  border-radius: var(--radius);
+  padding: 0.85rem;
+  max-height: 360px;
+  overflow: auto;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .zotero-page-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 /* Hidden utility */
 .hidden { display: none !important; }
 

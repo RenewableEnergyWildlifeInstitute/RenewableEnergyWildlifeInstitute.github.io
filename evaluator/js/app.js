@@ -2,14 +2,15 @@
  * Core application logic — shared utilities for admin and reviewer views.
  */
 
-/** Load GitHub repo config from localStorage; PAT stays local to the browser */
+/** Load GitHub API config from data/config.json or localStorage fallback */
 async function loadConfig() {
+  // Try localStorage first for speed
   const cached = localStorage.getItem('rewi_config');
   if (cached) {
     try {
       const config = JSON.parse(cached);
-      if (config.owner && config.repo) {
-        githubAPI.configure(config.owner, config.repo, config.token || null);
+      if (config.owner && config.repo && config.token) {
+        githubAPI.configure(config.owner, config.repo, config.token);
         return config;
       }
     } catch { /* ignore bad cache */ }
@@ -17,15 +18,18 @@ async function loadConfig() {
   return null;
 }
 
-/** Save config to localStorage and publish only non-secret repo metadata */
+/** Save config to both localStorage and the repo */
 async function saveConfig(owner, repo, token) {
   const config = { owner, repo, token };
   localStorage.setItem('rewi_config', JSON.stringify(config));
   githubAPI.configure(owner, repo, token);
 
+  // Write config to repo (without the token for safety — token stays in localStorage only)
+  // Actually, per spec, we store a write-enabled token in config.json for reviewers
   await githubAPI.writeFile('evaluator/data/config.json', {
     owner,
-    repo
+    repo,
+    token
   }, 'Update app configuration');
 
   return config;
@@ -45,13 +49,12 @@ async function initForReviewer() {
 
   // Check localStorage first
   const cached = localStorage.getItem('rewi_config');
-  let cachedConfig = null;
   if (cached) {
     try {
-      cachedConfig = JSON.parse(cached);
-      if (cachedConfig.owner && cachedConfig.repo) {
-        githubAPI.configure(cachedConfig.owner, cachedConfig.repo, cachedConfig.token || null);
-        return cachedConfig;
+      const config = JSON.parse(cached);
+      if (config.owner && config.repo && config.token) {
+        githubAPI.configure(config.owner, config.repo, config.token);
+        return config;
       }
     } catch { /* ignore */ }
   }
@@ -101,15 +104,10 @@ async function initForReviewer() {
     config = JSON.parse(new TextDecoder('utf-8').decode(bytes));
   }
 
-  // Cache it locally for subsequent page loads, preserving any local-only token
-  const mergedConfig = {
-    owner: config.owner,
-    repo: config.repo,
-    token: cachedConfig?.token || config.token || null
-  };
-  localStorage.setItem('rewi_config', JSON.stringify(mergedConfig));
-  githubAPI.configure(mergedConfig.owner, mergedConfig.repo, mergedConfig.token);
-  return mergedConfig;
+  // Cache it locally for subsequent page loads
+  localStorage.setItem('rewi_config', JSON.stringify(config));
+  githubAPI.configure(config.owner, config.repo, config.token);
+  return config;
 }
 
 /** Load predictions from the repo */

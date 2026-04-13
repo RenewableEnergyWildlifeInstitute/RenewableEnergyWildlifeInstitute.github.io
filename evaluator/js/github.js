@@ -11,21 +11,16 @@ class GitHubAPI {
     this._shaCache = {}; // path -> sha
   }
 
-  /** Configure the API with owner, repo, and optional PAT */
-  configure(owner, repo, token = null) {
+  /** Configure the API with owner, repo, and PAT */
+  configure(owner, repo, token) {
     this.owner = owner;
     this.repo = repo;
-    this.token = token || null;
+    this.token = token;
   }
 
-  /** Check if the API is configured for authenticated writes */
+  /** Check if the API is configured */
   isConfigured() {
     return !!(this.owner && this.repo && this.token);
-  }
-
-  /** Check if the repo context is configured for public reads */
-  hasRepoContext() {
-    return !!(this.owner && this.repo);
   }
 
   /** Build the API URL for a file path */
@@ -34,20 +29,12 @@ class GitHubAPI {
   }
 
   /** Common headers for API requests */
-  _headers(includeContentType = true) {
-    const headers = {
-      'Accept': 'application/vnd.github.v3+json'
+  _headers() {
+    return {
+      'Authorization': `token ${this.token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
     };
-
-    if (includeContentType) {
-      headers['Content-Type'] = 'application/json';
-    }
-
-    if (this.token) {
-      headers['Authorization'] = `token ${this.token}`;
-    }
-
-    return headers;
   }
 
   /**
@@ -56,10 +43,10 @@ class GitHubAPI {
    * Caches the SHA for subsequent writes.
    */
   async readFile(path) {
-    if (!this.hasRepoContext()) throw new Error('GitHub repo not configured');
+    if (!this.isConfigured()) throw new Error('GitHub API not configured');
 
     const response = await fetch(this._url(path), {
-      headers: this._headers(false)
+      headers: this._headers()
     });
 
     if (response.status === 404) {
@@ -172,10 +159,10 @@ class GitHubAPI {
    * Returns empty array if directory doesn't exist.
    */
   async listFiles(path) {
-    if (!this.hasRepoContext()) throw new Error('GitHub repo not configured');
+    if (!this.isConfigured()) throw new Error('GitHub API not configured');
 
     const response = await fetch(this._url(path), {
-      headers: this._headers(false)
+      headers: this._headers()
     });
 
     if (response.status === 404) return [];
