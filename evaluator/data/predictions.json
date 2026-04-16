@@ -25635,5 +25635,18 @@
       "North America",
       "South America"
     ]
+  },
+  {
+    "key": "TSMFT3YU",
+    "child_key": "6KGMXBBX",
+    "child_title": "",
+    "title": "Laws in Order: An Inventory of State Renewable Energy Siting Policies",
+    "abstract": "This report identifies which government entity or entities in each state or territory have the jurisdictional authority to make siting and permitting decisions about large scale wind and solar projects. The report also covers established timelines for siting and permitting processes, requirements for public involvement in those processes, and the availability of permitting guides and model ordinances designed to assist local jurisdictions.  It details state renewable energy siting policies and permitting authorities across the United States, profiling all 50 states plus Puerto Rico. The report release also includes an interactive map that allows users to easily explore each state’s authorities and policy features. The map, hosted by DOE, includes high-level information on each state's siting and permitting processes and link directly to the profiles in the report.",
+    "ground_truth_tags": [],
+    "predicted_tags": [
+      "North America"
+    ],
+    "predicted_date": "2026-04-13",
+    "model_id": "jme-datasci/rewi-tagger"
   }
 ]

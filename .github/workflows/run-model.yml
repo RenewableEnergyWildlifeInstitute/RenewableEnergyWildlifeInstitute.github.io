@@ -7,12 +7,94 @@ on:
         description: "Space-separated Zotero parent key(s) to process and predict tags for"
         required: true
         default: ""
+      runner_type:
+        description: "Where to run: 'self-hosted' (GPU runner must be online) or 'github' (GitHub-hosted CPU fallback)"
+        required: false
+        default: "github"
+        type: choice
+        options:
+          - github
+          - self-hosted
 
 permissions:
   contents: write
 
 jobs:
-  process-and-predict:
+  # Primary path: runs on your self-hosted GPU runner (EC2 g4dn.xlarge or local Mac).
+  # Selected via the Runner toggle in the admin UI, or runner_type=self-hosted when
+  # triggering manually from GitHub Actions. Runner must be online before dispatching.
+  process-and-predict-self-hosted:
+    if: inputs.runner_type == 'self-hosted'
+    runs-on: self-hosted
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select local Python
+        run: |
+          set -euo pipefail
+          PYTHON_BIN=""
+          if command -v python3.11 >/dev/null 2>&1; then
+            PYTHON_BIN="$(command -v python3.11)"
+          elif command -v python3 >/dev/null 2>&1; then
+            PYTHON_BIN="$(command -v python3)"
+          else
+            echo "No python3 interpreter found on self-hosted runner."
+            exit 1
+          fi
+          echo "PYTHON_BIN=$PYTHON_BIN" >> "$GITHUB_ENV"
+          "$PYTHON_BIN" --version
+
+      - name: Install dependencies
+        run: |
+          "$PYTHON_BIN" -m pip install --upgrade pip
+          "$PYTHON_BIN" -m pip install -r .github/scripts/requirements.txt
+
+      - name: Check accelerator availability
+        run: |
+          "$PYTHON_BIN" - <<'PY'
+          import platform
+          try:
+              import torch
+              mps_available = hasattr(torch.backends, "mps") and torch.backends.mps.is_available()
+              print(f"platform={platform.platform()}")
+              print(f"machine={platform.machine()}")
+              print(f"torch_version={torch.__version__}")
+              print(f"cuda_available={torch.cuda.is_available()}")
+              print(f"mps_available={mps_available}")
+          except Exception as exc:
+              print(f"torch_check_failed={exc}")
+              raise
+          PY
+
+      - name: Run pipeline
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'meta-llama/Llama-3.2-1B-Instruct' }}
+          ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+          ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
+        run: |
+          "$PYTHON_BIN" .github/scripts/process_and_predict.py \
+            --parent-keys "${{ github.event.inputs.parent_keys }}"
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add evaluator/data/default_final_output.json evaluator/data/predictions.json
+          if git diff --cached --quiet; then
+            echo "No changes to data files"
+          else
+            git commit -m "Process & predict tags [self-hosted]"
+            git push
+          fi
+
+  # Fallback path: runs on GitHub-hosted CPU.
+  # Default when no runner_type is specified — sponsors can use this without any AWS setup.
+  process-and-predict-fallback:
+    if: inputs.runner_type != 'self-hosted'
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -38,7 +120,7 @@ jobs:
           ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
         run: |
           python .github/scripts/process_and_predict.py \
-            --parent-keys ${{ github.event.inputs.parent_keys }}
+            --parent-keys "${{ github.event.inputs.parent_keys }}"
 
       - name: Commit updated data
         run: |
@@ -48,6 +130,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to data files"
           else
-            git commit -m "Process & predict tags [automated]"
+            git commit -m "Process & predict tags [fallback]"
             git push
           fi

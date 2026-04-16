@@ -69,8 +69,30 @@ class GitHubAPI {
     const data = await response.json();
     this._shaCache[path] = data.sha;
 
+    let encodedContent = typeof data.content === 'string' ? data.content : null;
+
+    // The Contents API may omit inline content for larger files. Fall back to the
+    // Git Blobs API using the SHA returned above so large JSON datasets still load.
+    if (!encodedContent && data.sha) {
+      const blobUrl = `${this.baseUrl}/repos/${this.owner}/${this.repo}/git/blobs/${data.sha}`;
+      const blobResponse = await fetch(blobUrl, {
+        headers: this._headers()
+      });
+
+      if (!blobResponse.ok) {
+        throw new Error(`GitHub blob API error: ${blobResponse.status} ${blobResponse.statusText}`);
+      }
+
+      const blobData = await blobResponse.json();
+      encodedContent = blobData.content;
+    }
+
+    if (!encodedContent) {
+      throw new Error(`GitHub API returned no file content for ${path}`);
+    }
+
     // Decode base64 content
-    const content = atob(data.content.replace(/\n/g, ''));
+    const content = atob(encodedContent.replace(/\n/g, ''));
     // Handle UTF-8 properly
     const bytes = new Uint8Array(content.length);
     for (let i = 0; i < content.length; i++) {
@@ -235,10 +257,31 @@ class GitHubAPI {
     if (response.status === 204 || response.status === 200) return true;
 
     if (response.status === 403) {
+      const errBody = await response.json().catch(() => ({}));
+      const apiMessage = errBody.message || '';
+      const tokenScopes = response.headers.get('X-OAuth-Scopes') || '';
+      const acceptedPerms = response.headers.get('X-Accepted-GitHub-Permissions') || '';
+
+      // Fine-grained PATs do not use classic "workflow" scope.
+      if (/resource not accessible by personal access token/i.test(apiMessage)) {
+        throw new Error(
+          'Workflow dispatch failed: 403 — This token cannot run Actions for this repo. ' +
+          'If using a fine-grained PAT, grant this repository access and set Actions = Read and write ' +
+          '(and Contents = Read and write). If using a classic PAT, include repo + workflow scopes. ' +
+          (acceptedPerms ? `GitHub accepted permissions header: ${acceptedPerms}` : '')
+        );
+      }
+
+      if (/saml|sso/i.test(apiMessage)) {
+        throw new Error('Workflow dispatch failed: 403 — Your PAT is not authorized for SSO on this org. Authorize the token for the organization and try again.');
+      }
+
       throw new Error(
-        'Workflow dispatch failed: 403 — Your PAT is missing the "workflow" scope. ' +
-        'Go to GitHub → Settings → Developer settings → Personal access tokens → ' +
-        'edit your token and enable the "workflow" scope, then save and re-enter it here.'
+        'Workflow dispatch failed: 403 — Access denied by GitHub API. ' +
+        (apiMessage ? `API message: ${apiMessage}. ` : '') +
+        (tokenScopes
+          ? `Token scopes seen by GitHub: ${tokenScopes}. For classic PATs, include repo + workflow.`
+          : 'For fine-grained PATs, grant repo access with Actions write permissions; for classic PATs, include repo + workflow.')
       );
     }
 

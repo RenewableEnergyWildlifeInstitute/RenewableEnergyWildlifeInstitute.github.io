@@ -170,10 +170,10 @@
 
       const completedKeys = reviewerData.reviews
         .filter(r => r.status === 'completed')
-        .map(r => r.key);
+        .map(r => getReviewDocumentKey(r));
       const inProgressKeys = reviewerData.reviews
         .filter(r => r.status !== 'completed')
-        .map(r => r.key);
+        .map(r => getReviewDocumentKey(r));
 
       const total = assignedKeys.length;
       const done = completedKeys.length;
@@ -186,9 +186,12 @@
       const allPreds = window.allPredictions || [];
 
       list.innerHTML = assignedKeys.map(key => {
-        const pred = allPreds.find(p => p.key === key);
+        const pred = allPreds.find(p => predictionMatchesDocumentKey(p, key));
         const title = pred ? pred.title : key;
         const tagCount = pred ? (pred.predicted_tags || []).length : '?';
+        const meta = pred
+          ? `Parent: ${getPredictionParentKey(pred)}${pred.child_key ? ` | Child: ${pred.child_key}` : ''}`
+          : key;
 
         let status = 'pending';
         let badgeClass = 'badge-pending';
@@ -207,7 +210,7 @@
           <li class="doc-item" onclick="openDocument('${escapeHtmlAttr(key)}')">
             <div>
               <div class="doc-item-title">${escapeHtml(truncate(title, 120))}</div>
-              <div class="doc-item-meta">${escapeHtml(key)} — ${tagCount} predicted tags</div>
+              <div class="doc-item-meta">${escapeHtml(meta)} — ${tagCount} predicted tags</div>
             </div>
             <span class="badge ${badgeClass}">${badgeText}</span>
           </li>
@@ -218,7 +221,7 @@
     /* ---- Open Document for Review ---- */
     function openDocument(key) {
       const allPreds = window.allPredictions || [];
-      const doc = allPreds.find(p => p.key === key);
+      const doc = allPreds.find(p => predictionMatchesDocumentKey(p, key));
       if (!doc) {
         showToast('Document not found.', 'error');
         return;
@@ -227,7 +230,7 @@
       currentDoc = doc;
 
       // Load existing evaluations for this doc
-      const existing = reviewerData.reviews.find(r => r.key === key);
+      const existing = reviewerData.reviews.find(r => getReviewDocumentKey(r) === key);
       if (existing) {
         currentEvals = { ...existing.evaluations };
         currentMissing = [...(existing.missing_tags || [])];
@@ -244,8 +247,8 @@
       updateSaveStatus();
 
       // Populate document info
-      document.getElementById('review-title').textContent = doc.title || doc.key;
-      document.getElementById('review-key').textContent = `Key: ${doc.key}`;
+      document.getElementById('review-title').textContent = doc.title || getPredictionParentKey(doc);
+      document.getElementById('review-key').textContent = `Parent Key: ${getPredictionParentKey(doc)}${doc.child_key ? ` | Child Key: ${doc.child_key}` : ''}`;
 
       // Abstract
       const abstractSection = document.getElementById('abstract-section');
@@ -460,7 +463,10 @@
     /* ---- Save / Submit ---- */
     function buildCurrentReview(status) {
       return {
-        key: currentDoc.key,
+        key: getPredictionDocumentKey(currentDoc),
+        document_key: getPredictionDocumentKey(currentDoc),
+        parent_key: getPredictionParentKey(currentDoc),
+        child_key: currentDoc.child_key || '',
         title: currentDoc.title,
         review_timestamp: new Date().toISOString(),
         status: status,
@@ -471,7 +477,7 @@
     }
 
     function updateReviewerData(review) {
-      const idx = reviewerData.reviews.findIndex(r => r.key === review.key);
+      const idx = reviewerData.reviews.findIndex(r => getReviewDocumentKey(r) === getReviewDocumentKey(review));
       if (idx >= 0) {
         reviewerData.reviews[idx] = review;
       } else {

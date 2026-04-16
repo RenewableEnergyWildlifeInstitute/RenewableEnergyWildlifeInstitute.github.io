@@ -125,7 +125,7 @@ async function loadPredictions() {
     if (cached) predictions = JSON.parse(cached);
   }
 
-  return predictions || [];
+  return Array.isArray(predictions) ? predictions.map(normalizePredictionRecord) : [];
 }
 
 /** Load assignments from the repo */
@@ -163,7 +163,11 @@ async function loadReviewerData(email) {
     if (cached) reviews = JSON.parse(cached);
   }
 
-  return reviews || { reviewer_email: email, reviews: [] };
+  const reviewerData = reviews || { reviewer_email: email, reviews: [] };
+  reviewerData.reviews = Array.isArray(reviewerData.reviews)
+    ? reviewerData.reviews.map(normalizeReviewRecord)
+    : [];
+  return reviewerData;
 }
 
 /** Save a reviewer's evaluations to GitHub */
@@ -260,6 +264,59 @@ function parseTagList(val) {
 
   // Single tag
   return [val.trim()];
+}
+
+function normalizePredictionRecord(record) {
+  const parentKey = String(record?.parent_key || record?.key || '').trim();
+  const childKey = String(record?.child_key || '').trim();
+  const documentKey = String(record?.document_key || childKey || parentKey).trim();
+
+  return {
+    ...record,
+    key: parentKey,
+    parent_key: parentKey,
+    child_key: childKey,
+    document_key: documentKey,
+    title: String(record?.title || record?.child_title || '').trim(),
+    child_title: String(record?.child_title || '').trim(),
+    abstract: typeof record?.abstract === 'string' ? record.abstract : '',
+    full_text: typeof record?.full_text === 'string' ? record.full_text : '',
+    predicted_tags: parseTagList(record?.predicted_tags),
+    ground_truth_tags: parseTagList(record?.ground_truth_tags)
+  };
+}
+
+function normalizeReviewRecord(record) {
+  const parentKey = String(record?.parent_key || '').trim();
+  const childKey = String(record?.child_key || '').trim();
+  const documentKey = String(record?.document_key || childKey || record?.key || parentKey).trim();
+
+  return {
+    ...record,
+    key: documentKey,
+    parent_key: parentKey,
+    child_key: childKey,
+    document_key: documentKey
+  };
+}
+
+function getPredictionDocumentKey(prediction) {
+  return String(prediction?.document_key || prediction?.child_key || prediction?.key || prediction?.parent_key || '').trim();
+}
+
+function getPredictionParentKey(prediction) {
+  return String(prediction?.parent_key || prediction?.key || '').trim();
+}
+
+function getReviewDocumentKey(review) {
+  return String(review?.document_key || review?.child_key || review?.key || review?.parent_key || '').trim();
+}
+
+function predictionMatchesDocumentKey(prediction, documentKey) {
+  const normalizedKey = String(documentKey || '').trim();
+  if (!normalizedKey) return false;
+  return getPredictionDocumentKey(prediction) === normalizedKey
+    || getPredictionParentKey(prediction) === normalizedKey;
 }
 
 /** Group tags by category */

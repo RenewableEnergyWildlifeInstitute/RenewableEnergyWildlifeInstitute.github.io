@@ -219,6 +219,26 @@
           <input type="text" id="run-parent-keys" placeholder="e.g., SY8RHE3E TSMFT3YU">
         </div>
 
+        <div class="form-group">
+          <label>Runner</label>
+          <div class="runner-options">
+            <label class="runner-option" for="runner-github">
+              <input type="radio" name="runner-type" id="runner-github" value="github" checked>
+              <span class="runner-option-text">
+                <span>GitHub-hosted</span>
+                <span class="runner-option-sub">CPU, always available</span>
+              </span>
+            </label>
+            <label class="runner-option" for="runner-self-hosted">
+              <input type="radio" name="runner-type" id="runner-self-hosted" value="self-hosted">
+              <span class="runner-option-text">
+                <span>Self-hosted</span>
+                <span class="runner-option-sub">GPU, runner must be online</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
         <div class="btn-group">
           <button class="btn btn-primary" id="btn-run-model" onclick="triggerModelRun()">
             &#9654; Process &amp; Predict
@@ -259,8 +279,8 @@
         <h2>Upload Predictions Data</h2>
         <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
           Upload a CSV or JSON file containing parsed predictions. Required columns:
-          <code>key</code>, <code>title</code>, <code>abstract</code>, <code>predicted_tags</code>.
-          Optional: <code>full_text</code>, <code>ground_truth_tags</code>.
+          <code>key</code> (parent key), <code>title</code>, <code>abstract</code>, <code>predicted_tags</code>.
+          Optional: <code>child_key</code>, <code>child_title</code>, <code>full_text</code>, <code>ground_truth_tags</code>.
         </p>
         <div class="form-group">
           <input type="file" id="predictions-file" accept=".csv,.json">
@@ -278,7 +298,8 @@
           <table id="predictions-table">
             <thead>
               <tr>
-                <th>Key</th>
+                <th>Parent Key</th>
+                <th>Child Key</th>
                 <th>Title</th>
                 <th>Predicted Tags</th>
                 <th>Ground Truth</th>
@@ -467,6 +488,7 @@
 
         // Lazy-load tab data
         if (tab.dataset.tab === 'run-model') loadRecentRuns();
+        if (tab.dataset.tab === 'data') refreshPredictionsView();
         if (tab.dataset.tab === 'status') loadStatus();
         if (tab.dataset.tab === 'export') loadExportMetrics();
         if (tab.dataset.tab === 'zotero') initZoteroTab();
@@ -1067,6 +1089,8 @@
         renderPredictionsTable();
       } catch (err) {
         console.warn('Could not load predictions:', err);
+        document.getElementById('predictions-summary').textContent = `Failed to load predictions: ${err.message}`;
+        document.getElementById('predictions-tbody').innerHTML = '<tr><td colspan="5" style="color:var(--danger);">Could not load predictions.</td></tr>';
       }
 
       // Load assignments (must happen before renderAssignmentCheckboxes so it can filter)
@@ -1181,6 +1205,8 @@
           if (!record.ground_truth_tags) record.ground_truth_tags = [];
         }
 
+        parsed = parsed.map(normalizePredictionRecord);
+
         // Write to GitHub
         await githubAPI.writeFile(
           'evaluator/data/predictions.json',
@@ -1205,20 +1231,34 @@
       setButtonLoading(document.getElementById('btn-upload'), false);
     }
 
+    async function refreshPredictionsView() {
+      try {
+        predictions = await loadPredictions();
+        renderPredictionsTable();
+      } catch (err) {
+        console.warn('Could not refresh predictions:', err);
+        document.getElementById('predictions-summary').textContent = `Failed to load predictions: ${err.message}`;
+        document.getElementById('predictions-tbody').innerHTML = '<tr><td colspan="5" style="color:var(--danger);">Could not load predictions.</td></tr>';
+      }
+    }
+
     function renderPredictionsTable() {
       const tbody = document.getElementById('predictions-tbody');
       const summary = document.getElementById('predictions-summary');
 
       if (!predictions.length) {
-        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--gray-500);">No predictions loaded.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">No predictions loaded.</td></tr>';
         summary.textContent = 'No predictions loaded yet.';
         return;
       }
 
-      summary.textContent = `${predictions.length} documents loaded.`;
+      const uniqueParents = new Set(predictions.map(p => getPredictionParentKey(p)).filter(Boolean)).size;
+      const withChildKeys = predictions.filter(p => p.child_key).length;
+      summary.textContent = `${predictions.length} prediction record(s) loaded across ${uniqueParents} parent document(s). ${withChildKeys} record(s) include a child key.`;
       tbody.innerHTML = predictions.map(p => `
         <tr>
-          <td><code style="font-size:0.75rem;">${escapeHtml(p.key || '')}</code></td>
+          <td><code style="font-size:0.75rem;">${escapeHtml(getPredictionParentKey(p))}</code></td>
+          <td><code style="font-size:0.75rem;">${escapeHtml(p.child_key || '—')}</code></td>
           <td>${escapeHtml(truncate(p.title || '', 80))}</td>
           <td>${(p.predicted_tags || []).length} tags</td>
           <td>${(p.ground_truth_tags || []).length} tags</td>
@@ -1240,7 +1280,11 @@
         for (const k of keys) assignedKeys.add(k);
       }
 
-      const unassigned = predictions.filter(p => !assignedKeys.has(p.key));
+      const unassigned = predictions.filter(p => {
+        const docKey = getPredictionDocumentKey(p);
+        const parentKey = getPredictionParentKey(p);
+        return !assignedKeys.has(docKey) && !assignedKeys.has(parentKey);
+      });
 
       if (!unassigned.length) {
         container.innerHTML = '<p style="color:var(--gray-500); font-size:0.875rem;">All documents have been assigned.</p>';
@@ -1249,10 +1293,10 @@
 
       container.innerHTML = unassigned.map(p => `
         <div class="doc-checkbox-item">
-          <input type="checkbox" id="doc-${p.key}" value="${escapeHtml(p.key)}">
-          <label for="doc-${p.key}">
-            ${escapeHtml(truncate(p.title || p.key, 100))}
-            <small>${escapeHtml(p.key)} — ${(p.predicted_tags || []).length} predicted tags</small>
+          <input type="checkbox" id="doc-${getPredictionDocumentKey(p)}" value="${escapeHtml(getPredictionDocumentKey(p))}">
+          <label for="doc-${getPredictionDocumentKey(p)}">
+            ${escapeHtml(truncate(p.title || getPredictionParentKey(p), 100))}
+            <small>Parent: ${escapeHtml(getPredictionParentKey(p))}${p.child_key ? ` | Child: ${escapeHtml(p.child_key)}` : ''} — ${(p.predicted_tags || []).length} predicted tags</small>
           </label>
         </div>
       `).join('');
@@ -1333,7 +1377,10 @@
     function showReviewerDocs(email) {
       const keys = assignments[email] || [];
       const predMap = {};
-      for (const p of predictions) predMap[p.key] = p;
+      for (const p of predictions) {
+        predMap[getPredictionDocumentKey(p)] = p;
+        predMap[getPredictionParentKey(p)] = p;
+      }
 
       // Build modal content
       let html = `
@@ -1358,10 +1405,13 @@
       for (const key of keys) {
         const pred = predMap[key];
         const title = pred ? truncate(pred.title || key, 80) : key;
+        const meta = pred
+          ? `Parent: ${getPredictionParentKey(pred)}${pred.child_key ? ` | Child: ${pred.child_key}` : ''}`
+          : key;
         html += `
           <tr>
             <td><code style="font-size:0.75rem;">${escapeHtml(key)}</code></td>
-            <td>${escapeHtml(title)}</td>
+            <td>${escapeHtml(title)}<div style="font-size:0.75rem; color:var(--gray-500); margin-top:0.2rem;">${escapeHtml(meta)}</div></td>
             <td><button class="btn btn-sm btn-danger" onclick="unassignDoc('${escapeHtml(email)}', '${escapeHtml(key)}')">Unassign</button></td>
           </tr>
         `;
@@ -1551,7 +1601,10 @@
       const { keys, completedKeys } = data;
       const completedSet = new Set(completedKeys);
       const predMap = {};
-      for (const p of predictions) predMap[p.key] = p;
+      for (const p of predictions) {
+        predMap[getPredictionDocumentKey(p)] = p;
+        predMap[getPredictionParentKey(p)] = p;
+      }
 
       let html = `
         <div class="reviewer-detail-overlay" id="reviewer-detail-overlay" onclick="if(event.target===this) closeReviewerDetail()">
@@ -1724,6 +1777,14 @@
     let _runPollTimer = null;
 
     async function triggerModelRun() {
+      // Prefer the currently typed Setup values so token updates take effect immediately.
+      const setupOwner = document.getElementById('cfg-owner').value.trim();
+      const setupRepo = document.getElementById('cfg-repo').value.trim();
+      const setupToken = document.getElementById('cfg-token').value.trim();
+      if (setupOwner && setupRepo && setupToken) {
+        githubAPI.configure(setupOwner, setupRepo, setupToken);
+      }
+
       if (!githubAPI.isConfigured()) {
         showToast('Configure GitHub API first (Setup tab).', 'error');
         return;
@@ -1743,10 +1804,12 @@
       statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Dispatching workflow…';
 
       try {
-        const inputs = { parent_keys: parentKeys };
+        const runnerType = document.querySelector('input[name="runner-type"]:checked')?.value || 'github';
+        const inputs = { parent_keys: parentKeys, runner_type: runnerType };
         await githubAPI.triggerWorkflowDispatch(WORKFLOW_FILE, 'main', inputs);
 
-        statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Workflow dispatched! Processing items and generating predictions…';
+        const runnerLabel = runnerType === 'self-hosted' ? 'self-hosted GPU runner' : 'GitHub-hosted runner';
+        statusEl.innerHTML = `<span class="status-dot status-dot-pending"></span> Workflow dispatched on ${runnerLabel}! Processing items and generating predictions…`;
         showToast('Workflow dispatched successfully.', 'success');
 
         // Poll for the run to appear and track it

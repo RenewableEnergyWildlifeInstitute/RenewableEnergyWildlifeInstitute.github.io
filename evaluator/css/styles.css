@@ -195,6 +195,45 @@ main {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+/* Runner selection (admin Run Model tab) */
+.runner-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.runner-option {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0 !important;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: var(--gray-50);
+  cursor: pointer;
+}
+
+.runner-option input[type="radio"] {
+  width: auto;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+.runner-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  line-height: 1.2;
+}
+
+.runner-option-sub {
+  color: var(--gray-500);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
 /* Tables */
 .table-wrap {
   overflow-x: auto;

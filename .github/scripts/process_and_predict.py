@@ -38,6 +38,10 @@ logging.basicConfig(
 )
 log = logging.getLogger("process_and_predict")
 
+# Keep pipeline logs readable by suppressing verbose dependency request logs.
+for noisy_logger in ("httpx", "httpcore", "urllib3", "huggingface_hub"):
+    logging.getLogger(noisy_logger).setLevel(logging.WARNING)
+
 # ---------------------------------------------------------------------------
 # PATHS
 # ---------------------------------------------------------------------------
@@ -50,6 +54,7 @@ TAG_DICT_PATH = REPO_ROOT / "evaluator" / "data" / "tag_dictionary.json"
 MAX_NEW_TOKENS = 120
 FULLTEXT_MIN_LEN = 20
 MAX_PAGES = 15
+MPS_MAX_INPUT_TOKENS = 4096
 
 # ---------------------------------------------------------------------------
 # 1. TAG DICTIONARY
@@ -299,15 +304,34 @@ def load_model():
     hf_token = os.getenv("HF_TOKEN", "").strip() or None
     os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model_dtype = torch.bfloat16
+    if torch.cuda.is_available():
+        device = "cuda"
+        model_dtype = torch.bfloat16
+    elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+        # Apple Silicon GPU path (Metal Performance Shaders).
+        device = "mps"
+        model_dtype = torch.float16
+    else:
+        device = "cpu"
+        model_dtype = torch.float32
 
-    log.info(f"Loading model: {model_id} on {device} …")
+    log.info(f"Loading model: {model_id} on {device} (dtype={model_dtype}) …")
     try:
         tokenizer = AutoTokenizer.from_pretrained(model_id, token=hf_token)
+        model_kwargs = {
+            "dtype": model_dtype,
+            "token": hf_token,
+        }
+        if device == "mps":
+            # Avoid SDPA on Apple Silicon for long prompts; it can try to allocate
+            # enormous temporary attention buffers and fail despite modest model size.
+            model_kwargs["attn_implementation"] = "eager"
         model = AutoModelForCausalLM.from_pretrained(
-            model_id, device_map="auto", dtype=model_dtype, token=hf_token
+            model_id,
+            **model_kwargs,
         )
+        if device in ("cuda", "mps"):
+            model = model.to(device)
     except OSError as exc:
         msg = str(exc)
         if "gated repo" in msg.lower() or "401" in msg:
@@ -321,6 +345,10 @@ def load_model():
         raise
     tokenizer.pad_token_id = tokenizer.eos_token_id
     tokenizer.padding_side = "left"
+    if getattr(model, "generation_config", None) is not None:
+        # These defaults can trigger warnings when do_sample=False.
+        model.generation_config.temperature = None
+        model.generation_config.top_p = None
 
     pipe = pipeline(
         "text-generation",
@@ -328,7 +356,7 @@ def load_model():
         tokenizer=tokenizer,
         dtype=model_dtype,
         trust_remote_code=True,
-        device_map="auto",
+        device=device,
     )
     log.info("Model loaded.")
     return pipe, tokenizer, model_id
@@ -341,9 +369,14 @@ def truncate_prompt(prompt: str, tokenizer, pipe) -> str:
     if not limits:
         return prompt
     ctx = min(limits)
+    model_device = getattr(getattr(pipe, "model", None), "device", None)
+    device_type = getattr(model_device, "type", "cpu")
+    if device_type == "mps":
+        ctx = min(ctx, MPS_MAX_INPUT_TOKENS)
     max_input = max(256, ctx - MAX_NEW_TOKENS - 16)
     ids = tokenizer(prompt, add_special_tokens=False)["input_ids"]
     if len(ids) <= max_input:
+        log.info(f"  Prompt tokens: {len(ids)} (context cap {ctx})")
         return prompt
     trimmed = ids[-max_input:]
     log.info(f"  Truncated prompt tokens {len(ids)} -> {len(trimmed)} (context {ctx})")
