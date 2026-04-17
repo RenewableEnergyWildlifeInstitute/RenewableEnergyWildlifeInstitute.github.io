@@ -1,8 +1,426 @@
 {
-  "generated_at": "2026-04-16T09:36:28.207Z",
+  "generated_at": "2026-04-17T09:37:07.771Z",
   "group_id": "5253055",
   "total_items": 4159,
   "items": [
+    {
+      "key": "XKVX4K76",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Bat activity, insect biomass, and temperature along an elevational gradient",
+        "date": "03/2014",
+        "creators": [
+          {
+            "firstName": "Stacy J.",
+            "lastName": "Wolbert",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Andrew S.",
+            "lastName": "Zellner",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Howard P.",
+            "lastName": "Whidden",
+            "creatorType": "author"
+          }
+        ],
+        "DOI": "10.1656/045.021.0106",
+        "url": "http://www.bioone.org/doi/abs/10.1656/045.021.0106",
+        "tags": []
+      }
+    },
+    {
+      "key": "43T6Z27K",
+      "data": {
+        "itemType": "book",
+        "title": "Generalized additive models",
+        "date": "1990",
+        "creators": [
+          {
+            "firstName": "T",
+            "lastName": "Hastie",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "R",
+            "lastName": "Tibshirani",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "FVBNDT2H",
+      "data": {
+        "itemType": "computerProgram",
+        "title": "scam: Shape constrained additive models",
+        "date": "2022",
+        "creators": [
+          {
+            "firstName": "N.",
+            "lastName": "Pya",
+            "creatorType": "programmer"
+          }
+        ],
+        "url": "https://CRAN.R-project.org/package=scam",
+        "tags": []
+      }
+    },
+    {
+      "key": "A7H8IMD8",
+      "data": {
+        "itemType": "webpage",
+        "title": "Frequently asked questions (FAQs) - U.S. Energy Information Administration (EIA)",
+        "date": "2023",
+        "creators": [
+          {
+            "name": "U S Energy Information Administration",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
+        "url": "https://www.eia.gov/tools/faqs/faq.php",
+        "tags": []
+      }
+    },
+    {
+      "key": "GPIDYLFD",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Habitat alteration or climate: What drives the densities of an invading ungulate?",
+        "date": "2024",
+        "creators": [
+          {
+            "firstName": "Melanie",
+            "lastName": "Dickie",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Robert",
+            "lastName": "Serrouya",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Marcus",
+            "lastName": "Becker",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Craig",
+            "lastName": "DeMars",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Michael J.",
+            "lastName": "Noonan",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Robin",
+            "lastName": "Steenweg",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Stan",
+            "lastName": "Boutin",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Adam T.",
+            "lastName": "Ford",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Anthropogenic habitat alteration and climate change are two well- known contributors to biodiversity loss through changes to species distribution and abundance; yet, disentangling the effects of these two factors is often hindered by their inherent confound across both space and time. We leveraged a contrast in habitat alteration associated with the jurisdictional boundary between two Canadian provinces to evaluate the relative effects of spatial variation in habitat alteration and climate on white-tailed deer (Odocoileus virginianus) densities. White-tailed deer are an invading ungulate across much of North America, whose expansion into Canada's boreal forest is implicated in the decline of boreal caribou (Rangifer tarandus caribou), a species listed as Threatened in Canada. We estimated white-tailed deer densities using 300 remote cameras across 12 replicated 50 km2 landscapes over 5 years. White-tailed deer densities were significantly lower in areas where winter severity was higher. For example, predicted deer densities declined from 1.83 to 0.35 deer/km 2 when winter severity increased from the lowest value to the median value. There was a tendency for densities to increase with increasing habitat alteration; however, the magnitude of this effect was approximately half that of climate. Our findings suggest that climate is the primary driver of white- tailed deer populations; however, understanding the mechanisms underpinning this relationship requires further study of over- winter survival and fecundity. Long- term monitoring at the invasion front is needed to evaluate the drivers of abundance over time, particularly given the unpredictability of climate change and increasing prevalence of extreme weather events.",
+        "DOI": "doi.org/10.1111/gcb.17286",
+        "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/gcb.17286",
+        "tags": []
+      }
+    },
+    {
+      "key": "AHUY2HRL",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Renewables 2021: Analysis and forecast to 2026",
+        "date": "2021",
+        "creators": [
+          {
+            "lastName": "International Energy Agency",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "VQIJT5Q6",
+      "data": {
+        "itemType": "report",
+        "title": "Clean power annual market report 2022",
+        "date": "2023",
+        "creators": [
+          {
+            "lastName": "American Clean Power",
+            "creatorType": "author"
+          }
+        ],
+        "url": "https://cleanpower.org/wp-content/uploads/2023/05/2022-ACP-Annual-Report_Public.pdf",
+        "tags": []
+      }
+    },
+    {
+      "key": "NS8CH2LE",
+      "data": {
+        "itemType": "report",
+        "title": "Bat impact minimization technology: An improved bat deterrent for the full rotor swept area of any wind turbine",
+        "date": "2020",
+        "creators": [
+          {
+            "firstName": "David",
+            "lastName": "Cooper",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Thomas",
+            "lastName": "Green",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Myron F",
+            "lastName": "Miller",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Erick",
+            "lastName": "Rickards",
+            "creatorType": "author"
+          }
+        ],
+        "url": "https://www.osti.gov/servlets/purl/1608253",
+        "tags": []
+      }
+    },
+    {
+      "key": "V6QV9UDJ",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Near-ultraviolet light reduced Sandhill crane (Antigone canadensis) collisions with a power line by 98%",
+        "date": "2019-05-01",
+        "creators": [
+          {
+            "firstName": "James F",
+            "lastName": "Dwyer",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Arun K",
+            "lastName": "Pandey",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Laura A",
+            "lastName": "McHale",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Richard E",
+            "lastName": "Harness",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Midflight collisions with power lines impact 12 of the world’s 15 crane species, including 1 critically endangered species, 3 endangered species, and 5 vulnerable species. Power lines can be fitted with line markers to increase the visibility of wires to reduce collisions, but collisions can persist on marked power lines. For example, hundreds of Sandhill Cranes (Antigone canadensis) die annually in collisions with marked power lines at the Iain Nicolson Audubon Center at Rowe Sanctuary (Rowe), a major migratory stopover location near Gibbon, Nebraska. Mitigation success has been limited because most collisions occur nocturnally when line markers are least visible, even though roughly half the line markers present include glow-in-the-dark stickers. To evaluate an alternative mitigation strategy at Rowe, we used a randomized design to test collision mitigation effects of a pole-mounted near-ultraviolet light (UV-A; 380–395 nm) Avian Collision Avoidance System (ACAS) to illuminate a 258-m power line span crossing the Central Platte River. We observed 48 Sandhill Crane collisions and 217 dangerous flights of Sandhill Crane flocks during 19 nights when the ACAS was off, but just 1 collision and 39 dangerous flights during 19 nights when the ACAS was on. Thus, we documented a 98% decrease in collisions and an 82% decrease in dangerous flights when the ACAS was on. We also found a 32% decrease in the number of evasive maneuvers initiated within 25 m of the power line along the river, and a 71% increase in the number of evasive maneuvers initiated beyond 25 m when the ACAS was on. Sandhill Cranes reacted sooner and with more control, and experienced substantially fewer collisions, when the ACAS was on. Installation of the ACAS on other high-risk spans, and perhaps on other anthropogenic obstacles where birds collide, may offer a new solution to a long-running conservation dilemma.",
+        "DOI": "10.1093/condor/duz008",
+        "url": "https://academic.oup.com/condor/article/doi/10.1093/condor/duz008/5476728",
+        "tags": []
+      }
+    },
+    {
+      "key": "CBSDPJC3",
+      "data": {
+        "itemType": "statute",
+        "creators": [
+          {
+            "name": "U S Fish and Wildlife Service",
+            "creatorType": "author"
+          }
+        ],
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2010-title16/pdf/USCODE-2010-title16-chap5A-subchapII.pdf",
+        "tags": []
+      }
+    },
+    {
+      "key": "7D8LSQIN",
+      "data": {
+        "itemType": "statute",
+        "creators": [
+          {
+            "name": "U S Fish and Wildlife Service",
+            "creatorType": "author"
+          }
+        ],
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2020-title16/pdf/USCODE-2020-title16-chap7-subchapII-sec703.pdf",
+        "tags": []
+      }
+    },
+    {
+      "key": "9FIVMLEQ",
+      "data": {
+        "itemType": "statute",
+        "creators": [
+          {
+            "name": "U S Fish and Wildlife Service",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "WV572YIC",
+      "data": {
+        "itemType": "statute",
+        "creators": [
+          {
+            "name": "U S Fish and Wildlife Service",
+            "creatorType": "author"
+          }
+        ],
+        "url": "https://www.govinfo.gov/content/pkg/FR-2022-11-30/pdf/2022-25998.pdf",
+        "tags": []
+      }
+    },
+    {
+      "key": "P9PQCS9Y",
+      "data": {
+        "itemType": "report",
+        "title": "NedPower Mount Storm Wind Energy Facility post-construction avian and bat monitoring report: April - July 2011",
+        "date": "2010-09-01",
+        "creators": [
+          {
+            "firstName": "David P, Jr",
+            "lastName": "Young",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Saif",
+            "lastName": "Nomani",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Zapata",
+            "lastName": "Courage",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kimberly J",
+            "lastName": "Bay",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "NedPower Mount Storm LLC (NedPower) is conducting a three year post-construction monitoring study of the NedPower Mount Storm Wind Energy Facility (the Project) to study the impacts of the development on birds and bats. The West Virginia Public Service Commission (PSC) certificate of convenience and necessity (certificate) issued to NedPower for development of the Mount Storm site contains two conditions requiring monitoring of post-construction impacts to avian and bat resources for each phase of development. The certificate conditions require that a report be filed with the Commission within 60 days of the completion of each sixmonths of study. Specifically, the conditions of the certificate related to post-construction monitoring are: (1) for a three-year period, NedPower shall conduct six-month post-construction studies for each phase of the project assessing the mortality of both birds and bats; and (2) for a one-year period, NedPower shall conduct six-month post-construction lighting studies at each phase after each phase begins operation.\nThe overall objectives of the monitoring study are to: \n- estimate bird and bat mortality attributable to the project primarily during the migration seasons; \n- provide a general understanding of the factors associated with the timing, extent, distribution, and location of bird and bat casualties' attributable to the project;\nThe first full year of monitoring occurred in 2009. Study reports covering both Phases 1 and 2 of the Project were filed with the PSC in August 2009, February 2010, September 2010, and February 2011 (Young et al. 2009b, 2010a, 2010b, 2011). Based on results from those study periods, and in coordination with the U.S. Fish & Wildlife Service, the 2011 study plan was modified slightly to take advantage of study results and information learned during the previous studies. For example, based on the temporal distribution of casualties in 2009 and 2010, and in light of significant snow fall still on the ground in late March, monitoring in 2011 began in midApril and will continue straight through to mid-October. In addition, the turbine operations study conducted in the fall of 2010 will be repeated in 2011 to verify results, with some slight modifications to automate the turbine treatment. This report is intended to meet reporting obligations for the 2011 spring season and covers the carcass search component and initial carcass removal and search efficiency trials. A report covering the 2011 fall season, which will include more detailed analyses of the effects of weather, bat activity, and turbine operations on bird and bat mortality, will be filed in February 2012.",
+        "tags": []
+      }
+    },
+    {
+      "key": "RBL3QPSF",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Raptor electrocution rates for a utility in the Intermountain Western United States",
+        "date": "04/2010",
+        "creators": [
+          {
+            "firstName": "Robert N",
+            "lastName": "Lehman",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Julie A",
+            "lastName": "Savidge",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Patricia L",
+            "lastName": "Kennedy",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Richard E",
+            "lastName": "Harness",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "We estimated electrocution rates for raptors and common ravens (Corvus corax) for the Moon Lake Electrical Association in northeastern Utah and northwestern Colorado, USA. From July 2001 to May 2003, we conducted mortality searches at randomly selected distribution line segments and poles within 3 regions, but rate estimates (0.0036–0.0112 deaths/pole/yr) may have been biased by the effects of scavengers and by long sampling intervals ( 3 months), which prevented us from determining the cause of death for most birds because of advanced decay. In 2002–2003, we conducted carcass removal experiments in the Rangely Oil Field (ROF) in northwestern Colorado to estimate scavenging effects, and in 2003–2004, we reduced sampling intervals to 1 month and searched for dead birds at all distribution poles in the ROF. The shorter sampling interval nearly tripled the number of birds suitable for necropsy, but we were still unable to establish cause of death for .40% of our sample. Instead of eliminating the unknowns from rate estimates, we estimated minimum annual electrocution rates using only confirmed electrocutions and maximum annual electrocution rates based on all available mortalities, including mortalities without known causes. Golden eagles (Aquila chrysaetos) accounted for 63% of dead birds found in 2003–2004, but they were removed by scavengers at rates well below hawks and owls (6.8% vs. 55.6%). We compared maximum rates for the ROF in 2003–2004 with the rates estimated from a survey conducted at the same poles in 1999 to assess the effects of retrofitting conducted by Moon Lake from 1999 to 2003. Electrocution rates in 2003–2004 were 47% lower than those in 1999. Raptor densities in the ROF did not change during our study, suggesting the reduction was not the result of changes in raptor populations. However, estimates of raptor densities in 1999 were not available, and we cannot be sure that numbers of birds using the oil field in 1999 were similar to those in 2003–2004. Our research emphasizes the difficulties of estimating electrocution rates precisely but suggests that utilities will have the greatest effect on mortality by monitoring power lines at large scales and focusing subsequent mitigation efforts in areas that pose the greatest risk to the greatest number of birds.",
+        "DOI": "10.2193/2008-332",
+        "url": "https://wildlife.onlinelibrary.wiley.com/doi/10.2193/2008-332",
+        "tags": []
+      }
+    },
+    {
+      "key": "VEDI889P",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Carcass removal by scavengers and search accuracy affect bird mortality estimates at power lines",
+        "date": "12/2010",
+        "creators": [
+          {
+            "firstName": "C",
+            "lastName": "Ponce",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "J C",
+            "lastName": "Alonso",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "G",
+            "lastName": "Argandoña",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "A",
+            "lastName": "García Fernández",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "M",
+            "lastName": "Carrasco",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Bird mortality as a result of collisions with power lines has been of increasing concern in recent decades, but the real impact on bird populations requires an experimental assessment of scavenger removal rates and searcher detection errors. Farmland and steppe birds, two of the most threatened avian groups, have been shown to be particularly vulnerable to collision with power lines, but few removal and detectability studies have been developed in cereal farmland habitats, and none in the Mediterranean region. We conducted ﬁve carcass disappearance trials in central Spain by placing 522 corpses of different sizes under power lines, and searching for remains four times during the following month. The inﬂuence of several factors was examined using multivariate approach. The accumulated number of carcasses removed by scavengers increased logarithmically, with 32% removed over the 2-day period after the initial placement, but only 1.5% removed on a daily basis by day 28. Small birds disappeared earlier and at a higher proportion than larger birds. Carcass removal rates were site-dependent, but were not inﬂuenced by carcass density or season. The detection rate increased with the observer’s previous experience and carcass size. Carcass counts at power lines notably underestimate bird casualties. Our 4-week disappearance equations provide a full range of scavenging rates and observer efﬁciency correction factors for a wide range of bird weights. Fortnightly to monthly search frequencies may be adequate to detect medium- to large-sized corpses, but are insufﬁcient for smaller birds. Finally, all personnel participating in carcass searches should be trained previously in this task.",
+        "DOI": "10.1111/j.1469-1795.2010.00387.x",
+        "url": "https://zslpublications.onlinelibrary.wiley.com/doi/10.1111/j.1469-1795.2010.00387.x",
+        "tags": []
+      }
+    },
+    {
+      "key": "TLEQBGXR",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Carrion decomposition and nutrient cycling in a semiarid shrub–steppe ecosystem",
+        "date": "11/2009",
+        "creators": [
+          {
+            "firstName": "Robert R",
+            "lastName": "Parmenter",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "James A",
+            "lastName": "MacMahon",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Vertebrate carrion decomposition and nutrient cycling have both direct and indirect effects on the soil properties, fauna, and ﬂora associated with an animal’s carcass. While few comprehensive quantitative studies have been undertaken, those that have show considerable variability in decomposition processes and rates, their regulating variables, and the resultant ecosystem effects. In this two-part study, decomposition rates of vertebrate species were measured in a semiarid, shrub–steppe environment (Wyoming, USA). First, decomposition loss rates of mass, energy, and nutrients were measured for rat carcasses (Rattus norvegicus) in four seasons and two microsites (surface and underground burrows). Decomposition rates varied signiﬁcantly between microsites (burrow . surface in spring and summer) and among seasons (spring . summer . autumn ’ winter), with mass loss amounts linearly correlated with ambient air temperatures. Energy and nutrient losses were related to phased carcass organ/tissue losses, with energy, K, Na, N, and S being lost more quickly than skeletal components (P, Mg, Ca). Overall, the nutrient loss sequence was K ¼ Na . N ¼ S . P ¼ Mg . Ca. Carcass quality (N concentration) declined through time as a function of decay stage. Second, decomposition rates of 10 vertebrate species (mule deer [Odocoileus hemionus], dog [Canis familiaris], white-tailed jackrabbit [Lepus townsendii], Uinta ground squirrel [Spermophilus armatus], least chipmunk [Tamias minimus], deer mouse [Peromyscus maniculatus], Magpie [Pica hudsonia], Sage Sparrow [Amphispiza belli], terrestrial garter snake [Thamnophis elegans], and northern leopard frog [Lithobates pipiens]) were measured with vertebrate scavengers present or absent. Mass loss rates varied among species and were generally faster in the presence of scavengers. Carcass body mass, N content, or labile/recalcitrant fractions did not correlate with decomposition rate, though surface area to volume ratios of mammal carcasses were positively correlated with wet-mass decomposition rate. Nutrient measures of sub-carcass soils showed soil N, P, and Na increased during decomposition. Increased soil nutrient amounts represented up to 15.6% of the available carcass N, 28.8% of carcass P, and 28.7% of carcass Na. At a landscape scale in the shrub–steppe ecosystem, carrion decomposition constituted ,1% of the nutrient-cycling budget but contributed signiﬁcantly to localized soil nutrient dynamics.",
+        "DOI": "10.1890/08-0972.1",
+        "url": "https://esajournals.onlinelibrary.wiley.com/doi/10.1890/08-0972.1",
+        "tags": []
+      }
+    },
     {
       "key": "BPZWW8JC",
       "data": {
@@ -130284,60 +130702,6 @@
       }
     },
     {
-      "key": "GPIDYLFD",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Habitat Alteration or Climate: What Drives the Densities of an Invading Ungulate",
-        "date": "2023-12-21",
-        "creators": [
-          {
-            "firstName": "Melanie",
-            "lastName": "Dickie",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Robert",
-            "lastName": "Serrouya",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Marcus",
-            "lastName": "Becker",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Craig",
-            "lastName": "DeMars",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Michael J.",
-            "lastName": "Noonan",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Robin",
-            "lastName": "Steenweg",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Stan",
-            "lastName": "Boutin",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Adam T.",
-            "lastName": "Ford",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Anthropogenic habitat alteration and climate change are two well- known contributors to biodiversity loss through changes to species distribution and abundance; yet, disentangling the effects of these two factors is often hindered by their inherent confound across both space and time. We leveraged a contrast in habitat alteration associated with the jurisdictional boundary between two Canadian provinces to evaluate the relative effects of spatial variation in habitat alteration and climate on white-tailed deer (Odocoileus virginianus) densities. White-tailed deer are an invading ungulate across much of North America, whose expansion into Canada's boreal forest is implicated in the decline of boreal caribou (Rangifer tarandus caribou), a species listed as Threatened in Canada. We estimated white-tailed deer densities using 300 remote cameras across 12 replicated 50 km2 landscapes over 5 years. White-tailed deer densities were significantly lower in areas where winter severity was higher. For example, predicted deer densities declined from 1.83 to 0.35 deer/km 2 when winter severity increased from the lowest value to the median value. There was a tendency for densities to increase with increasing habitat alteration; however, the magnitude of this effect was approximately half that of climate. Our findings suggest that climate is the primary driver of white- tailed deer populations; however, understanding the mechanisms underpinning this relationship requires further study of over- winter survival and fecundity. Long- term monitoring at the invasion front is needed to evaluate the drivers of abundance over time, particularly given the unpredictability of climate change and increasing prevalence of extreme weather events.",
-        "DOI": "doi.org/10.1111/gcb.17286",
-        "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/gcb.17286",
-        "tags": []
-      }
-    },
-    {
       "key": "9TQSMNXC",
       "data": {
         "itemType": "attachment",
@@ -130713,72 +131077,6 @@
         "url": "https://vtechworks.lib.vt.edu/bitstreams/44f7b56d-813c-4992-88a1-5ef63b8813ba/download",
         "contentType": "application/pdf",
         "linkMode": "imported_url",
-        "tags": []
-      }
-    },
-    {
-      "key": "XKVX4K76",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Bat Activity, Insect Biomass, and Temperature Along an Elevational Gradient",
-        "date": "03/2014",
-        "creators": [
-          {
-            "firstName": "Stacy J.",
-            "lastName": "Wolbert",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Andrew S.",
-            "lastName": "Zellner",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Howard P.",
-            "lastName": "Whidden",
-            "creatorType": "author"
-          }
-        ],
-        "DOI": "10.1656/045.021.0106",
-        "url": "http://www.bioone.org/doi/abs/10.1656/045.021.0106",
-        "tags": []
-      }
-    },
-    {
-      "key": "FVBNDT2H",
-      "data": {
-        "itemType": "computerProgram",
-        "title": "scam: Shape Constrained Additive Models",
-        "date": "2022",
-        "creators": [
-          {
-            "firstName": "N.",
-            "lastName": "Pya",
-            "creatorType": "programmer"
-          }
-        ],
-        "url": "https://CRAN.R-project.org/package=scam",
-        "tags": []
-      }
-    },
-    {
-      "key": "43T6Z27K",
-      "data": {
-        "itemType": "book",
-        "title": "Generalized Additive Models",
-        "date": "1990",
-        "creators": [
-          {
-            "firstName": "T",
-            "lastName": "Hastie",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "R",
-            "lastName": "Tibshirani",
-            "creatorType": "author"
-          }
-        ],
         "tags": []
       }
     },
@@ -131381,93 +131679,6 @@
       }
     },
     {
-      "key": "WV572YIC",
-      "data": {
-        "itemType": "statute",
-        "creators": [
-          {
-            "lastName": "U. S. Fish and Wildlife Service",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://www.govinfo.gov/content/pkg/FR-2022-11-30/pdf/2022-25998.pdf",
-        "tags": []
-      }
-    },
-    {
-      "key": "NS8CH2LE",
-      "data": {
-        "itemType": "report",
-        "title": "Bat Impact Minimization Technology",
-        "date": "2020",
-        "creators": [
-          {
-            "firstName": "David",
-            "lastName": "Cooper",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Thomas",
-            "lastName": "Green",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Myron F.",
-            "lastName": "Miller",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Erick",
-            "lastName": "Rickards",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://www.osti.gov/servlets/purl/1608253",
-        "tags": []
-      }
-    },
-    {
-      "key": "CBSDPJC3",
-      "data": {
-        "itemType": "statute",
-        "creators": [
-          {
-            "lastName": "U. S. Fish and Wildlife Service",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://www.govinfo.gov/content/pkg/USCODE-2010-title16/pdf/USCODE-2010-title16-chap5A-subchapII.pdf",
-        "tags": []
-      }
-    },
-    {
-      "key": "9FIVMLEQ",
-      "data": {
-        "itemType": "statute",
-        "creators": [
-          {
-            "lastName": "U. S. Fish and Wildlife Service",
-            "creatorType": "author"
-          }
-        ],
-        "tags": []
-      }
-    },
-    {
-      "key": "7D8LSQIN",
-      "data": {
-        "itemType": "statute",
-        "creators": [
-          {
-            "lastName": "U. S. Fish and Wildlife Service",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://www.govinfo.gov/content/pkg/USCODE-2020-title16/pdf/USCODE-2020-title16-chap7-subchapII-sec703.pdf",
-        "tags": []
-      }
-    },
-    {
       "key": "JRB32PP5",
       "data": {
         "itemType": "webpage",
@@ -131494,40 +131705,6 @@
         "url": "http://www.ncbi.nlm.nih.gov/pubmed/28811888",
         "contentType": "text/html",
         "linkMode": "linked_url",
-        "tags": []
-      }
-    },
-    {
-      "key": "V6QV9UDJ",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Near-ultraviolet light reduced Sandhill Crane collisions with a power line by 98%",
-        "date": "2019-05-01",
-        "creators": [
-          {
-            "firstName": "James F",
-            "lastName": "Dwyer",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Arun K",
-            "lastName": "Pandey",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Laura A",
-            "lastName": "McHale",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Richard E",
-            "lastName": "Harness",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Midflight collisions with power lines impact 12 of the world’s 15 crane species, including 1 critically endangered species, 3 endangered species, and 5 vulnerable species. Power lines can be fitted with line markers to increase the visibility of wires to reduce collisions, but collisions can persist on marked power lines. For example, hundreds of Sandhill Cranes (Antigone canadensis) die annually in collisions with marked power lines at the Iain Nicolson Audubon Center at Rowe Sanctuary (Rowe), a major migratory stopover location near Gibbon, Nebraska. Mitigation success has been limited because most collisions occur nocturnally when line markers are least visible, even though roughly half the line markers present include glow-in-the-dark stickers. To evaluate an alternative mitigation strategy at Rowe, we used a randomized design to test collision mitigation effects of a pole-mounted near-ultraviolet light (UV-A; 380–395 nm) Avian Collision Avoidance System (ACAS) to illuminate a 258-m power line span crossing the Central Platte River. We observed 48 Sandhill Crane collisions and 217 dangerous flights of Sandhill Crane flocks during 19 nights when the ACAS was off, but just 1 collision and 39 dangerous flights during 19 nights when the ACAS was on. Thus, we documented a 98% decrease in collisions and an 82% decrease in dangerous flights when the ACAS was on. We also found a 32% decrease in the number of evasive maneuvers initiated within 25 m of the power line along the river, and a 71% increase in the number of evasive maneuvers initiated beyond 25 m when the ACAS was on. Sandhill Cranes reacted sooner and with more control, and experienced substantially fewer collisions, when the ACAS was on. Installation of the ACAS on other high-risk spans, and perhaps on other anthropogenic obstacles where birds collide, may offer a new solution to a long-running conservation dilemma.",
-        "DOI": "10.1093/condor/duz008",
-        "url": "https://academic.oup.com/condor/article/doi/10.1093/condor/duz008/5476728",
         "tags": []
       }
     },
@@ -131566,23 +131743,6 @@
       }
     },
     {
-      "key": "A7H8IMD8",
-      "data": {
-        "itemType": "webpage",
-        "title": "Frequently Asked Questions (FAQs) - U.S. Energy Information Administration (EIA)",
-        "date": "2023",
-        "creators": [
-          {
-            "lastName": "U. S. Energy Information Administration",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Energy Information Administration - EIA - Official Energy Statistics from the U.S. Government",
-        "url": "https://www.eia.gov/tools/faqs/faq.php",
-        "tags": []
-      }
-    },
-    {
       "key": "4J7BJFU2",
       "data": {
         "itemType": "note",
@@ -131593,43 +131753,12 @@
       }
     },
     {
-      "key": "VQIJT5Q6",
-      "data": {
-        "itemType": "report",
-        "title": "Clean Power Annual Market Report 2022",
-        "date": "2023",
-        "creators": [
-          {
-            "lastName": "American Clean Power",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://cleanpower.org/wp-content/uploads/2023/05/2022-ACP-Annual-Report_Public.pdf",
-        "tags": []
-      }
-    },
-    {
       "key": "EPDUHEVY",
       "data": {
         "itemType": "note",
         "parentItem": "MXDYSEMV",
         "note": "<div data-schema-version=\"8\"><p>Gottlieb, I. T. Allison, T., C. Hein, P. Field. 2022. Technology Acceptance Workshop Meeting Proceedings. April 20-29, 2022, online. Available at https://rewi.org/resources/11711/.</p>\n</div>",
         "creators": [],
-        "tags": []
-      }
-    },
-    {
-      "key": "AHUY2HRL",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Renewables 2021 - Analysis and forecast to 2026",
-        "date": "2021",
-        "creators": [
-          {
-            "lastName": "International Energy Agency",
-            "creatorType": "author"
-          }
-        ],
         "tags": []
       }
     },
@@ -131686,40 +131815,6 @@
       }
     },
     {
-      "key": "RBL3QPSF",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Raptor Electrocution Rates for a Utility in the Intermountain Western United States",
-        "date": "04/2010",
-        "creators": [
-          {
-            "firstName": "Robert N.",
-            "lastName": "Lehman",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Julie A.",
-            "lastName": "Savidge",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Patricia L.",
-            "lastName": "Kennedy",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Richard E.",
-            "lastName": "Harness",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "We estimated electrocution rates for raptors and common ravens (Corvus corax) for the Moon Lake Electrical Association in northeastern Utah and northwestern Colorado, USA. From July 2001 to May 2003, we conducted mortality searches at randomly selected distribution line segments and poles within 3 regions, but rate estimates (0.0036–0.0112 deaths/pole/yr) may have been biased by the effects of scavengers and by long sampling intervals ( 3 months), which prevented us from determining the cause of death for most birds because of advanced decay. In 2002–2003, we conducted carcass removal experiments in the Rangely Oil Field (ROF) in northwestern Colorado to estimate scavenging effects, and in 2003–2004, we reduced sampling intervals to 1 month and searched for dead birds at all distribution poles in the ROF. The shorter sampling interval nearly tripled the number of birds suitable for necropsy, but we were still unable to establish cause of death for .40% of our sample. Instead of eliminating the unknowns from rate estimates, we estimated minimum annual electrocution rates using only confirmed electrocutions and maximum annual electrocution rates based on all available mortalities, including mortalities without known causes. Golden eagles (Aquila chrysaetos) accounted for 63% of dead birds found in 2003–2004, but they were removed by scavengers at rates well below hawks and owls (6.8% vs. 55.6%). We compared maximum rates for the ROF in 2003–2004 with the rates estimated from a survey conducted at the same poles in 1999 to assess the effects of retrofitting conducted by Moon Lake from 1999 to 2003. Electrocution rates in 2003–2004 were 47% lower than those in 1999. Raptor densities in the ROF did not change during our study, suggesting the reduction was not the result of changes in raptor populations. However, estimates of raptor densities in 1999 were not available, and we cannot be sure that numbers of birds using the oil field in 1999 were similar to those in 2003–2004. Our research emphasizes the difficulties of estimating electrocution rates precisely but suggests that utilities will have the greatest effect on mortality by monitoring power lines at large scales and focusing subsequent mitigation efforts in areas that pose the greatest risk to the greatest number of birds.",
-        "DOI": "10.2193/2008-332",
-        "url": "https://wildlife.onlinelibrary.wiley.com/doi/10.2193/2008-332",
-        "tags": []
-      }
-    },
-    {
       "key": "TTT4SAMU",
       "data": {
         "itemType": "attachment",
@@ -131749,45 +131844,6 @@
       }
     },
     {
-      "key": "VEDI889P",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Carcass removal by scavengers and search accuracy affect bird mortality estimates at power lines",
-        "date": "12/2010",
-        "creators": [
-          {
-            "firstName": "C.",
-            "lastName": "Ponce",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "J. C.",
-            "lastName": "Alonso",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "G.",
-            "lastName": "Argandoña",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "A.",
-            "lastName": "García Fernández",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "M.",
-            "lastName": "Carrasco",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Bird mortality as a result of collisions with power lines has been of increasing concern in recent decades, but the real impact on bird populations requires an experimental assessment of scavenger removal rates and searcher detection errors. Farmland and steppe birds, two of the most threatened avian groups, have been shown to be particularly vulnerable to collision with power lines, but few removal and detectability studies have been developed in cereal farmland habitats, and none in the Mediterranean region. We conducted ﬁve carcass disappearance trials in central Spain by placing 522 corpses of different sizes under power lines, and searching for remains four times during the following month. The inﬂuence of several factors was examined using multivariate approach. The accumulated number of carcasses removed by scavengers increased logarithmically, with 32% removed over the 2-day period after the initial placement, but only 1.5% removed on a daily basis by day 28. Small birds disappeared earlier and at a higher proportion than larger birds. Carcass removal rates were site-dependent, but were not inﬂuenced by carcass density or season. The detection rate increased with the observer’s previous experience and carcass size. Carcass counts at power lines notably underestimate bird casualties. Our 4-week disappearance equations provide a full range of scavenging rates and observer efﬁciency correction factors for a wide range of bird weights. Fortnightly to monthly search frequencies may be adequate to detect medium- to large-sized corpses, but are insufﬁcient for smaller birds. Finally, all personnel participating in carcass searches should be trained previously in this task.",
-        "DOI": "10.1111/j.1469-1795.2010.00387.x",
-        "url": "https://zslpublications.onlinelibrary.wiley.com/doi/10.1111/j.1469-1795.2010.00387.x",
-        "tags": []
-      }
-    },
-    {
       "key": "WUF3AHGT",
       "data": {
         "itemType": "attachment",
@@ -131798,30 +131854,6 @@
         "creators": [],
         "contentType": "application/pdf",
         "linkMode": "imported_file",
-        "tags": []
-      }
-    },
-    {
-      "key": "TLEQBGXR",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Carrion decomposition and nutrient cycling in a semiarid shrub–steppe ecosystem",
-        "date": "11/2009",
-        "creators": [
-          {
-            "firstName": "Robert R.",
-            "lastName": "Parmenter",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "James A.",
-            "lastName": "MacMahon",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Vertebrate carrion decomposition and nutrient cycling have both direct and indirect effects on the soil properties, fauna, and ﬂora associated with an animal’s carcass. While few comprehensive quantitative studies have been undertaken, those that have show considerable variability in decomposition processes and rates, their regulating variables, and the resultant ecosystem effects. In this two-part study, decomposition rates of vertebrate species were measured in a semiarid, shrub–steppe environment (Wyoming, USA). First, decomposition loss rates of mass, energy, and nutrients were measured for rat carcasses (Rattus norvegicus) in four seasons and two microsites (surface and underground burrows). Decomposition rates varied signiﬁcantly between microsites (burrow . surface in spring and summer) and among seasons (spring . summer . autumn ’ winter), with mass loss amounts linearly correlated with ambient air temperatures. Energy and nutrient losses were related to phased carcass organ/tissue losses, with energy, K, Na, N, and S being lost more quickly than skeletal components (P, Mg, Ca). Overall, the nutrient loss sequence was K ¼ Na . N ¼ S . P ¼ Mg . Ca. Carcass quality (N concentration) declined through time as a function of decay stage. Second, decomposition rates of 10 vertebrate species (mule deer [Odocoileus hemionus], dog [Canis familiaris], white-tailed jackrabbit [Lepus townsendii], Uinta ground squirrel [Spermophilus armatus], least chipmunk [Tamias minimus], deer mouse [Peromyscus maniculatus], Magpie [Pica hudsonia], Sage Sparrow [Amphispiza belli], terrestrial garter snake [Thamnophis elegans], and northern leopard frog [Lithobates pipiens]) were measured with vertebrate scavengers present or absent. Mass loss rates varied among species and were generally faster in the presence of scavengers. Carcass body mass, N content, or labile/recalcitrant fractions did not correlate with decomposition rate, though surface area to volume ratios of mammal carcasses were positively correlated with wet-mass decomposition rate. Nutrient measures of sub-carcass soils showed soil N, P, and Na increased during decomposition. Increased soil nutrient amounts represented up to 15.6% of the available carcass N, 28.8% of carcass P, and 28.7% of carcass Na. At a landscape scale in the shrub–steppe ecosystem, carrion decomposition constituted ,1% of the nutrient-cycling budget but contributed signiﬁcantly to localized soil nutrient dynamics.",
-        "DOI": "10.1890/08-0972.1",
-        "url": "https://esajournals.onlinelibrary.wiley.com/doi/10.1890/08-0972.1",
         "tags": []
       }
     },
@@ -132417,21 +132449,6 @@
         "creators": [],
         "contentType": "application/pdf",
         "linkMode": "imported_file",
-        "tags": []
-      }
-    },
-    {
-      "key": "P9PQCS9Y",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Please file this letter and the enclosed report and circulate the additional six copies to the appropriate parties of the Commission. We also ask that you date stamp the extra copy of the letter we have provided and return it with our messenger. As always, we appreciate your assistance in this matter.",
-        "creators": [
-          {
-            "firstName": "Sandra",
-            "lastName": "Squire",
-            "creatorType": "author"
-          }
-        ],
         "tags": []
       }
     },
