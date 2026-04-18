@@ -1,8 +1,176 @@
 {
-  "generated_at": "2026-04-17T09:37:07.771Z",
+  "generated_at": "2026-04-18T09:21:15.734Z",
   "group_id": "5253055",
-  "total_items": 4159,
+  "total_items": 4163,
   "items": [
+    {
+      "key": "F8N3J3HT",
+      "data": {
+        "itemType": "bookSection",
+        "title": "Counterfactual thinking and impact evaluation in environmental policy",
+        "date": "06/2009",
+        "creators": [
+          {
+            "firstName": "Paul J.",
+            "lastName": "Ferraro",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Matthew",
+            "lastName": "Birnbaum",
+            "creatorType": "editor"
+          },
+          {
+            "firstName": "Per",
+            "lastName": "Mickwitz",
+            "creatorType": "editor"
+          }
+        ],
+        "abstractNote": "Impact evaluations assess the degree to which changes in outcomes can be attributed to an intervention rather than to other factors. Such attribution requires knowing what outcomes would have looked like in the absence of the intervention. This counterfactual world can be inferred only indirectly through evaluation designs that control for confounding factors. Some have argued that environmental policy is different from other social policy fields, and thus attempting to establish causality through identification of counterfactual outcomes is quixotic. This chapter argues that elucidating causal relationships through counterfactual thinking and experimental or quasi‐experimental designs is absolutely critical in environmental policy, and that many opportunities for doing so exist. Without more widespread application of such approaches, little progress will be made on building the evidence base in environmental policy.",
+        "DOI": "10.1002/ev.297",
+        "url": "https://onlinelibrary.wiley.com/doi/10.1002/ev.297",
+        "tags": []
+      }
+    },
+    {
+      "key": "8UTQMIDD",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "F8N3J3HT",
+        "title": "PDF",
+        "filename": "Ferraro - 2009 - Counterfactual thinking and impact evaluation in environmental policy.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "4RP8JNQY",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "VIG27UFC",
+        "title": "PDF",
+        "filename": "_.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "9693CJRI",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "7Q7VJWWE",
+        "title": "Snapshot",
+        "filename": "ES13-00023.html",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1890/ES13-00023.1",
+        "contentType": "text/html",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "2CC2PZD2",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "7Q7VJWWE",
+        "title": "Full Text PDF",
+        "filename": "Wiederholt et al. - 2013 - Moving across the border modeling migratory bat populations.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1890/ES13-00023.1",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "7Q7VJWWE",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Moving across the border: modeling migratory bat populations",
+        "date": "2013",
+        "creators": [
+          {
+            "firstName": "Ruscena",
+            "lastName": "Wiederholt",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Laura",
+            "lastName": "López-Hoffman",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jon",
+            "lastName": "Cline",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Rodrigo A.",
+            "lastName": "Medellín",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Paul",
+            "lastName": "Cryan",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Amy",
+            "lastName": "Russell",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Gary",
+            "lastName": "McCracken",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jay",
+            "lastName": "Diffendorfer",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Darius",
+            "lastName": "Semmens",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The migration of animals across long distances and between multiple habitats presents a major challenge for conservation. For the migratory Mexican free-tailed bat (Tadarida brasiliensis mexicana), these challenges include identifying and protecting migratory routes and critical roosts in two countries, the United States and Mexico. Knowledge and conservation of bat migratory routes is critical in the face of increasing threats from climate change and wind turbines that might decrease migratory survival. We employ a new modeling approach for bat migration, network modeling, to simulate migratory routes between winter habitat in southern Mexico and summer breeding habitat in northern Mexico and the southwestern United States. We use the model to identify key migratory routes and the roosts of greatest conservation value to the overall population. We measure roost importance by the degree to which the overall bat population declined when the roost was removed from the model. The major migratory routes—those with the greatest number of migrants—were between winter habitat in southern Mexico and summer breeding roosts in Texas and the northern Mexican states of Sonora and Nuevo Leon. The summer breeding roosts in Texas, Sonora, and Nuevo Leon were the most important for maintaining population numbers and network structure – these are also the largest roosts. This modeling approach contributes to conservation efforts by identifying the most influential areas for bat populations, and can be used to as a tool to improve our understanding of bat migration for other species. We anticipate this approach will help direct coordination of habitat protection across borders.",
+        "DOI": "10.1890/ES13-00023.1",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1890/ES13-00023.1",
+        "tags": [
+          {
+            "tag": "Mexican free-tailed bats"
+          },
+          {
+            "tag": "Tadarida brasiliensis mexicana"
+          },
+          {
+            "tag": "U.S.–Mexico cross-border migration routes"
+          },
+          {
+            "tag": "bat conservation"
+          },
+          {
+            "tag": "breeding roosts"
+          },
+          {
+            "tag": "migratory patterns"
+          },
+          {
+            "tag": "network models"
+          }
+        ]
+      }
+    },
     {
       "key": "XKVX4K76",
       "data": {
@@ -28,44 +196,6 @@
         ],
         "DOI": "10.1656/045.021.0106",
         "url": "http://www.bioone.org/doi/abs/10.1656/045.021.0106",
-        "tags": []
-      }
-    },
-    {
-      "key": "43T6Z27K",
-      "data": {
-        "itemType": "book",
-        "title": "Generalized additive models",
-        "date": "1990",
-        "creators": [
-          {
-            "firstName": "T",
-            "lastName": "Hastie",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "R",
-            "lastName": "Tibshirani",
-            "creatorType": "author"
-          }
-        ],
-        "tags": []
-      }
-    },
-    {
-      "key": "FVBNDT2H",
-      "data": {
-        "itemType": "computerProgram",
-        "title": "scam: Shape constrained additive models",
-        "date": "2022",
-        "creators": [
-          {
-            "firstName": "N.",
-            "lastName": "Pya",
-            "creatorType": "programmer"
-          }
-        ],
-        "url": "https://CRAN.R-project.org/package=scam",
         "tags": []
       }
     },
