@@ -4,10 +4,10 @@ Unified Zotero Processing + LLM Tag Prediction Pipeline
 ========================================================
 
 Given a list of parent keys, this pipeline:
-  1. Checks default_final_output.json for cached full text
+    1. Checks full_texts.json for cached full text
   2. For uncached keys: fetches from Zotero API, extracts PDF text, cleans it
   3. Sends each document to the LLM for tag prediction
-  4. Saves results to predictions.json with predicted_date and model_id
+    4. Saves results to predictions.json with tag-level prediction history
 
 Designed to run inside a GitHub Actions workflow.
 
@@ -47,14 +47,19 @@ for noisy_logger in ("httpx", "httpcore", "urllib3", "huggingface_hub"):
 # ---------------------------------------------------------------------------
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PREDICTIONS_PATH = REPO_ROOT / "evaluator" / "data" / "predictions.json"
-PROCESSED_PATH = REPO_ROOT / "evaluator" / "data" / "default_final_output.json"
+FULL_TEXTS_DIR = REPO_ROOT / "evaluator" / "data" / "full_texts"
 SNAPSHOT_PATH = REPO_ROOT / "evaluator" / "data" / "zotero_snapshot.json"
 TAG_DICT_PATH = REPO_ROOT / "evaluator" / "data" / "tag_dictionary.json"
 
-MAX_NEW_TOKENS = 120
+MAX_NEW_TOKENS = 60
 FULLTEXT_MIN_LEN = 20
 MAX_PAGES = 15
 MPS_MAX_INPUT_TOKENS = 4096
+DEFAULT_MODEL_ID = "jme-datasci/rewi_tagger"
+DEFAULT_TEMPERATURE = 0.1
+DEFAULT_TOP_P = 0.9
+DEFAULT_REPETITION_PENALTY = 1.1
+PROMPT_SUFFIX = "\nTags: "
 
 # ---------------------------------------------------------------------------
 # 1. TAG DICTIONARY
@@ -77,19 +82,23 @@ def load_allowed_tags() -> tuple[set, dict]:
 # 2. PROCESSED DATASET (CACHE) I/O
 # ---------------------------------------------------------------------------
 
-def load_processed() -> list[dict]:
-    if not PROCESSED_PATH.exists():
+def load_records_for_parent(parent_key: str) -> list[dict]:
+    """Load cached full-text records for a single parent key."""
+    path = FULL_TEXTS_DIR / f"{parent_key}.json"
+    if not path.exists():
         return []
-    with open(PROCESSED_PATH, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data if isinstance(data, list) else []
 
 
-def save_processed(records: list[dict]):
-    PROCESSED_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(PROCESSED_PATH, "w", encoding="utf-8") as f:
+def save_records_for_parent(parent_key: str, records: list[dict]):
+    """Write full-text records for a single parent key to its own JSON file."""
+    FULL_TEXTS_DIR.mkdir(parents=True, exist_ok=True)
+    path = FULL_TEXTS_DIR / f"{parent_key}.json"
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
-    log.info(f"Saved {len(records)} records to {PROCESSED_PATH.name}")
+    log.info(f"Saved {len(records)} record(s) to {path.name}")
 
 # ---------------------------------------------------------------------------
 # 3. ZOTERO SNAPSHOT HELPERS
@@ -300,7 +309,7 @@ def load_model():
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
-    model_id = os.getenv("HF_MODEL_ID", "meta-llama/Llama-3.2-1B-Instruct")
+    model_id = os.getenv("HF_MODEL_ID", DEFAULT_MODEL_ID)
     hf_token = os.getenv("HF_TOKEN", "").strip() or None
     os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
@@ -362,30 +371,61 @@ def load_model():
     return pipe, tokenizer, model_id
 
 
-def truncate_prompt(prompt: str, tokenizer, pipe) -> str:
+def build_prompt(document_text: str) -> str:
+    """Build the model prompt for tag prediction."""
+    return f"{document_text}{PROMPT_SUFFIX}"
+
+
+def truncate_prompt(document_text: str, tokenizer, pipe) -> str:
     model_max = getattr(pipe.model.config, "max_position_embeddings", None)
     tok_limit = getattr(tokenizer, "model_max_length", None)
     limits = [l for l in [model_max, tok_limit] if isinstance(l, int) and 0 < l < 1_000_000]
     if not limits:
-        return prompt
+        return build_prompt(document_text)
     ctx = min(limits)
     model_device = getattr(getattr(pipe, "model", None), "device", None)
     device_type = getattr(model_device, "type", "cpu")
     if device_type == "mps":
         ctx = min(ctx, MPS_MAX_INPUT_TOKENS)
+
+    # Reserve context for generation tokens and a small safety margin.
     max_input = max(256, ctx - MAX_NEW_TOKENS - 16)
-    ids = tokenizer(prompt, add_special_tokens=False)["input_ids"]
-    if len(ids) <= max_input:
-        log.info(f"  Prompt tokens: {len(ids)} (context cap {ctx})")
-        return prompt
-    trimmed = ids[-max_input:]
-    log.info(f"  Truncated prompt tokens {len(ids)} -> {len(trimmed)} (context {ctx})")
-    return tokenizer.decode(trimmed, skip_special_tokens=False)
+
+    suffix_ids = tokenizer(PROMPT_SUFFIX, add_special_tokens=False)["input_ids"]
+    doc_ids = tokenizer(document_text, add_special_tokens=False)["input_ids"]
+
+    reserved = len(suffix_ids)
+    max_doc_tokens = max(1, max_input - reserved)
+
+    if len(doc_ids) <= max_doc_tokens:
+        prompt_tokens = reserved + len(doc_ids)
+        log.info(f"  Prompt tokens: {prompt_tokens} (context cap {ctx})")
+        return build_prompt(document_text)
+
+    trimmed_doc_ids = doc_ids[:max_doc_tokens]
+    trimmed_doc = tokenizer.decode(trimmed_doc_ids, skip_special_tokens=False)
+    log.info(
+        f"  Truncated document tokens {len(doc_ids)} -> {len(trimmed_doc_ids)} "
+        f"(context {ctx}, reserved {reserved})"
+    )
+    return build_prompt(trimmed_doc)
 
 
 def run_inference(pipe, prompt: str) -> str:
     from transformers import GenerationConfig
-    gen_cfg = GenerationConfig(max_new_tokens=MAX_NEW_TOKENS, do_sample=False)
+
+    temperature = float(os.getenv("LLM_TEMPERATURE", str(DEFAULT_TEMPERATURE)))
+    top_p = float(os.getenv("LLM_TOP_P", str(DEFAULT_TOP_P)))
+    repetition_penalty = float(
+        os.getenv("LLM_REPETITION_PENALTY", str(DEFAULT_REPETITION_PENALTY))
+    )
+    gen_cfg = GenerationConfig(
+        max_new_tokens=MAX_NEW_TOKENS,
+        do_sample=True,
+        temperature=temperature,
+        top_p=top_p,
+        repetition_penalty=repetition_penalty,
+    )
     result = pipe(prompt, generation_config=gen_cfg, return_full_text=False)
     return result[0]["generated_text"]
 
@@ -440,7 +480,10 @@ def extract_python_list_tags(text: str) -> list[str]:
 
 def extract_bullet_tags(text: str) -> list[str]:
     pattern = r"^\s*(?:[\*\-\u2022]|\d+[\.)\]])\s+(.+)$"
-    return [m.strip().rstrip(",").strip() for m in re.findall(pattern, text, re.MULTILINE) if m.strip()]
+    candidates = [m.strip().rstrip(",").strip() for m in re.findall(pattern, text, re.MULTILINE) if m.strip()]
+    # Ignore common non-tag artifacts when the model drifts into scraped/forum text.
+    noise_markers = ("posted by", "reply", "comments", "http://", "https://")
+    return [c for c in candidates if not any(n in c.lower() for n in noise_markers)]
 
 
 def extract_comma_tags(text: str) -> list[str]:
@@ -452,10 +495,39 @@ def extract_comma_tags(text: str) -> list[str]:
     return tags
 
 
+def strip_generation_noise(text: str) -> str:
+    """Trim common trailing noise (e.g., forum/comment text) from model output."""
+    if not text:
+        return ""
+    # Cut everything after known noisy section headers/phrases.
+    markers = [
+        r"\n\s*##+\s*comments?\b",
+        r"\n\s*comments?\b",
+        r"\n\s*[\u2022\-*]\s*posted by\b",
+        r"\n\s*posted by\b",
+    ]
+    cut = len(text)
+    for pat in markers:
+        m = re.search(pat, text, flags=re.IGNORECASE)
+        if m:
+            cut = min(cut, m.start())
+    return text[:cut].strip()
+
+
 def parse_llm_output(raw: str) -> list[str]:
     if not isinstance(raw, str) or not raw.strip():
         return []
-    text = raw.strip()
+    text = strip_generation_noise(raw.strip())
+    if not text:
+        return []
+
+    # Prefer the first non-empty line when it looks like a comma-separated tag list.
+    first_non_empty = next((ln.strip() for ln in text.splitlines() if ln.strip()), "")
+    if "," in first_non_empty:
+        tags = extract_comma_tags(first_non_empty)
+        if tags:
+            return tags
+
     if "{" in text:
         tags = extract_json_tags(text)
         if tags:
@@ -478,6 +550,19 @@ def filter_to_allowed(candidates: list[str], lookup: dict[str, str]) -> list[str
             valid.append(lookup[k])
             seen.add(k)
     return valid
+
+
+def has_nonempty_predicted_tags(record: dict) -> bool:
+    tags = record.get("predicted_tags", [])
+    if not isinstance(tags, list) or not tags:
+        return False
+
+    for tag_obj in tags:
+        if isinstance(tag_obj, str) and tag_obj.strip():
+            return True
+        if isinstance(tag_obj, dict) and str(tag_obj.get("tag", "")).strip():
+            return True
+    return False
 
 # ---------------------------------------------------------------------------
 # 8. PREDICTIONS I/O
@@ -520,13 +605,6 @@ def main():
 
     t_start = time.perf_counter()
 
-    # --- Load cached processed dataset ---
-    processed_records = load_processed()
-    cached_by_parent = defaultdict(list)
-    for rec in processed_records:
-        cached_by_parent[rec["parent_key"]].append(rec)
-    log.info(f"Loaded {len(processed_records)} cached records from {PROCESSED_PATH.name}")
-
     # --- Load snapshot for metadata ---
     snapshot = load_snapshot()
     parent_lookup = build_parent_lookup(snapshot)
@@ -537,11 +615,11 @@ def main():
     docs_for_prediction = []
 
     for pk in parent_keys:
-        cached = cached_by_parent.get(pk, [])
+        cached = load_records_for_parent(pk)
         has_text = any(r.get("full_text", "").strip() for r in cached)
 
         if has_text:
-            log.info(f"  {pk}: found in cache with full text — skipping processing")
+            log.info(f"  {pk}: found in per-document cache — skipping processing")
             docs_for_prediction.extend(cached)
         else:
             if pk not in parent_lookup:
@@ -573,13 +651,8 @@ def main():
             parent_item = parent_lookup[pk]
             new_records = process_parent_key(pk, zot, parent_item)
 
-            # Remove any existing stale records for this parent key
-            processed_records = [r for r in processed_records if r["parent_key"] != pk]
-            processed_records.extend(new_records)
+            save_records_for_parent(pk, new_records)
             docs_for_prediction.extend(new_records)
-
-        # Save updated cache
-        save_processed(processed_records)
     else:
         log.info("All keys found in cache — no Zotero API calls needed")
 
@@ -604,6 +677,12 @@ def main():
 
     # --- Run predictions ---
     predictions = load_predictions()
+    before_cleanup = len(predictions)
+    predictions = [p for p in predictions if has_nonempty_predicted_tags(p)]
+    removed_empty = before_cleanup - len(predictions)
+    if removed_empty:
+        log.info(f"Removed {removed_empty} existing record(s) with zero predicted tags")
+
     existing_child_keys = {p.get("child_key") for p in predictions}
     predicted_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -611,8 +690,7 @@ def main():
         child_key = doc.get("child_key", doc.get("parent_key", ""))
         log.info(f"Predicting tags for {child_key} — {doc['title'][:60]}")
 
-        prompt = f"Text: {doc['full_text']}\nTags:"
-        prompt = truncate_prompt(prompt, tokenizer, pipe)
+        prompt = truncate_prompt(doc["full_text"], tokenizer, pipe)
 
         t_infer = time.perf_counter()
         raw_response = run_inference(pipe, prompt)
@@ -625,25 +703,81 @@ def main():
         log.info(f"  LLM tags (raw):   {candidates}")
         log.info(f"  LLM tags (valid): {predicted_tags}")
 
+        if not predicted_tags:
+            log.info(f"  No valid tags predicted for {child_key}; skipping write/update")
+            continue
+
+        # Build predicted_tags with prediction history structure
+        predicted_tags_with_history = [
+            {
+                "tag": tag,
+                "predictions": [
+                    {
+                        "predicted_date": predicted_date,
+                        "model_id": model_id
+                    }
+                ]
+            }
+            for tag in predicted_tags
+        ]
+
         entry = {
-            "key": doc["parent_key"],
+            "parent_key": doc["parent_key"],
             "child_key": child_key,
-            "child_title": "",
             "title": doc["title"],
             "abstract": doc["abstract"],
             "ground_truth_tags": [],
-            "predicted_tags": predicted_tags,
-            "predicted_date": predicted_date,
-            "model_id": model_id,
+            "predicted_tags": predicted_tags_with_history,
         }
 
-        # Update or append
+        # Update or append with merge logic
         if child_key in existing_child_keys:
             log.info(f"  Updating existing prediction for {child_key}")
-            predictions = [
-                p if p.get("child_key") != child_key else entry
-                for p in predictions
-            ]
+            # Find existing record
+            existing_record = next((p for p in predictions if p.get("child_key") == child_key), None)
+            if existing_record:
+                # Merge predicted_tags with prediction history
+                existing_tags_dict = {}
+                for tag_obj in existing_record.get("predicted_tags", []):
+                    # Backward compatibility: support legacy string tags if any remain.
+                    if isinstance(tag_obj, str):
+                        existing_tags_dict[tag_obj] = {
+                            "tag": tag_obj,
+                            "predictions": []
+                        }
+                    elif isinstance(tag_obj, dict) and tag_obj.get("tag"):
+                        existing_tags_dict[tag_obj["tag"]] = tag_obj
+
+                history_updates = 0
+                
+                for new_tag_obj in predicted_tags_with_history:
+                    tag_name = new_tag_obj["tag"]
+                    if tag_name in existing_tags_dict:
+                        # Tag already exists: append this run if not already present.
+                        tag_history = existing_tags_dict[tag_name].setdefault("predictions", [])
+                        already_recorded = any(
+                            h.get("predicted_date") == predicted_date and h.get("model_id") == model_id
+                            for h in tag_history
+                        )
+                        if not already_recorded:
+                            log.info(f"    Tag '{tag_name}' already predicted; appending {model_id} on {predicted_date}")
+                            tag_history.append({
+                                "predicted_date": predicted_date,
+                                "model_id": model_id
+                            })
+                            history_updates += 1
+                    else:
+                        # New tag: add with single prediction
+                        log.info(f"    New tag '{tag_name}' added")
+                        existing_tags_dict[tag_name] = new_tag_obj
+                        history_updates += 1
+                
+                # Only bump top-level metadata when this run is recorded in tag history.
+                if history_updates > 0:
+                    existing_record["predicted_tags"] = list(existing_tags_dict.values())
+                    log.info(f"  Recorded {history_updates} tag-history update(s)")
+                else:
+                    log.info("  No new tag-history updates; leaving record metadata unchanged")
         else:
             predictions.append(entry)
             existing_child_keys.add(child_key)

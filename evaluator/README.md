@@ -7,7 +7,7 @@ A static GitHub Pages tool for REWI domain experts to manually review and evalua
 ```
 evaluator/
 ├── index.html              # Entry point — routes to admin or reviewer view
-├── admin.html              # Admin dashboard (setup, upload, assign, export)
+├── admin.html              # Admin dashboard (setup, monitor, assign, export)
 ├── review.html             # Reviewer interface (evaluate tags per document)
 ├── js/
 │   ├── app.js              # Core logic, config loading, CSV parsing
@@ -17,7 +17,7 @@ evaluator/
 ├── css/
 │   └── styles.css          # Custom styles
 ├── data/                   # Data directory (read/written via GitHub API)
-│   ├── config.json         # App config (repo owner, repo name, PAT)
+│   ├── config.json         # App config (repo owner, repo name; no PAT)
 │   ├── predictions.json    # Uploaded predictions data
 │   ├── assignments.json    # Reviewer-to-document assignments
 │   └── reviews/            # Per-reviewer evaluation files
@@ -63,25 +63,13 @@ evaluator/
    - Click **Save Configuration**
 4. Change the admin passphrase to something secure.
 
-### 3. Upload Predictions Data
+### 3. Predictions Data
 
-1. Go to the **Predictions** tab in the admin dashboard.
-2. Upload a CSV or JSON file. Required columns:
-   - `key` — unique document identifier (Zotero key)
-   - `title` — document title
-   - `predicted_tags` — list of predicted tags (JSON array, semicolon-separated, or comma-separated)
-3. Optional columns:
-   - `abstract` — document abstract
-   - `full_text` — full text of the document
-   - `ground_truth_tags` — existing ground-truth tags
-4. Click **Upload & Save to Repo**.
+Predictions are created and maintained by the model pipeline and stored in:
 
-**Example CSV:**
-```csv
-key,title,abstract,predicted_tags,ground_truth_tags
-ABC123,"Wind Farm Impact Study","This study examines...","['Land-based Wind', 'Birds', 'Collisions']","['Land-based Wind', 'Birds']"
-DEF456,"Solar Panel Effects","An analysis of...","PV Solar; Vegetation; Pollinators","PV Solar; Vegetation"
-```
+- `evaluator/data/predictions.json`
+
+The admin dashboard **does not** support manual prediction uploads.
 
 ### 4. Assign Reviewers
 
@@ -148,12 +136,12 @@ The admin Zotero tab supports a snapshot-first loading flow to avoid browser sto
 
 ## Security Considerations
 
-- **PAT Storage**: The PAT is stored in `data/config.json` in the repo so that reviewers can write data without their own GitHub accounts. This is acceptable for an internal research tool.
+- **PAT Storage**: The PAT is stored only in browser `localStorage` on the device where setup is performed. It is **not** written to `data/config.json`.
+- **Committed config**: `data/config.json` contains only `owner` and `repo`.
 - **Scope the PAT narrowly**: Use a fine-grained token with **only Contents read/write access** to this single repository.
-- **Rotate regularly**: Set a 90-day expiration and create a new token when it expires. Update the config via the admin dashboard.
-- **Private repo recommended**: If the repo is private, the config file (and PAT) won't be publicly accessible.
-- **Admin passphrase**: The admin passphrase is stored in the admin's browser localStorage. Change it from the default immediately after setup.
-- **No server-side code**: The entire tool runs client-side. The PAT is used directly from the browser to call the GitHub API. There is no backend that could be compromised.
+- **Rotate regularly**: Set a 90-day expiration and create a new token when it expires. Re-enter it in admin setup on each device that needs write access.
+- **Admin passphrase**: The admin passphrase is stored in the admin's browser `localStorage`. Change it from the default immediately after setup.
+- **No server-side code**: The entire tool runs client-side. The PAT is used directly from the browser to call the GitHub API.
 
 ## Data Format
 
@@ -200,6 +188,6 @@ Each reviewer's evaluations are stored in `data/reviews/{sanitized_email}.json`:
 ## Troubleshooting
 
 - **"Cannot load app configuration"**: The admin hasn't completed setup yet, or the config.json is empty.
-- **"Rate limit exceeded"**: GitHub API allows 5,000 requests/hour for authenticated users. Wait for the reset time shown in the error.
+- **"Rate limit exceeded"**: Authenticated requests allow 5,000 requests/hour; unauthenticated requests are much lower. Configure a PAT in admin setup for write operations and higher limits.
 - **"Write conflict"**: Another reviewer or the admin modified the same file simultaneously. Try saving again — the app fetches the latest version before writing.
 - **Reviewer sees no documents**: The admin hasn't assigned documents to their email, or used a different email address.

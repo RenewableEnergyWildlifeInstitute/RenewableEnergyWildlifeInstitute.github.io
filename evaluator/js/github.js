@@ -11,16 +11,21 @@ class GitHubAPI {
     this._shaCache = {}; // path -> sha
   }
 
-  /** Configure the API with owner, repo, and PAT */
+  /** Configure the API with owner, repo, and optional PAT */
   configure(owner, repo, token) {
     this.owner = owner;
     this.repo = repo;
-    this.token = token;
+    this.token = token || null;
   }
 
-  /** Check if the API is configured */
+  /** Check if owner/repo are configured */
   isConfigured() {
-    return !!(this.owner && this.repo && this.token);
+    return !!(this.owner && this.repo);
+  }
+
+  /** Check if an auth token is available */
+  hasToken() {
+    return !!this.token;
   }
 
   /** Build the API URL for a file path */
@@ -30,11 +35,20 @@ class GitHubAPI {
 
   /** Common headers for API requests */
   _headers() {
-    return {
-      'Authorization': `token ${this.token}`,
+    const headers = {
       'Accept': 'application/vnd.github.v3+json',
       'Content-Type': 'application/json'
     };
+    if (this.token) {
+      headers['Authorization'] = `token ${this.token}`;
+    }
+    return headers;
+  }
+
+  _requireToken(action = 'perform this action') {
+    if (!this.hasToken()) {
+      throw new Error(`GitHub token required to ${action}. Enter a PAT in admin setup on this browser.`);
+    }
   }
 
   /**
@@ -113,6 +127,7 @@ class GitHubAPI {
    */
   async writeFile(path, content, message) {
     if (!this.isConfigured()) throw new Error('GitHub API not configured');
+    this._requireToken('write files');
 
     // Always fetch the latest SHA before writing to avoid conflicts
     let sha = null;
@@ -203,6 +218,7 @@ class GitHubAPI {
    */
   async deleteFile(path, message) {
     if (!this.isConfigured()) throw new Error('GitHub API not configured');
+    this._requireToken('delete files');
 
     // Get current SHA
     const response = await fetch(this._url(path), {
@@ -246,6 +262,7 @@ class GitHubAPI {
    */
   async triggerWorkflowDispatch(workflowFile, ref = 'main', inputs = {}) {
     if (!this.isConfigured()) throw new Error('GitHub API not configured');
+    this._requireToken('dispatch workflows');
 
     const url = `${this.baseUrl}/repos/${this.owner}/${this.repo}/actions/workflows/${workflowFile}/dispatches`;
     const response = await fetch(url, {
@@ -300,6 +317,7 @@ class GitHubAPI {
    */
   async getWorkflowRuns(workflowFile, perPage = 5) {
     if (!this.isConfigured()) throw new Error('GitHub API not configured');
+    this._requireToken('read workflow runs');
 
     const url = `${this.baseUrl}/repos/${this.owner}/${this.repo}/actions/workflows/${workflowFile}/runs?per_page=${perPage}`;
     const response = await fetch(url, { headers: this._headers() });
@@ -316,6 +334,7 @@ class GitHubAPI {
    */
   async getWorkflowRun(runId) {
     if (!this.isConfigured()) throw new Error('GitHub API not configured');
+    this._requireToken('read workflow run details');
 
     const url = `${this.baseUrl}/repos/${this.owner}/${this.repo}/actions/runs/${runId}`;
     const response = await fetch(url, { headers: this._headers() });

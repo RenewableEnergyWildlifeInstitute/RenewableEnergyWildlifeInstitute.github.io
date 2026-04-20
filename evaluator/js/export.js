@@ -170,7 +170,7 @@ function exportCSV(allReviewerData, predictionsMap = {}) {
       `"${(r.title || '').replace(/"/g, '""')}"`,
       r.status,
       r.review_timestamp,
-      `"${(r.predicted_tags || []).join('; ')}"`,
+      `"${extractTagNames(r.predicted_tags).join('; ')}"`,
       `"${correct.join('; ')}"`,
       `"${incorrect.join('; ')}"`,
       `"${(r.missing_tags || []).join('; ')}"`,

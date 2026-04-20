@@ -9,8 +9,8 @@ async function loadConfig() {
   if (cached) {
     try {
       const config = JSON.parse(cached);
-      if (config.owner && config.repo && config.token) {
-        githubAPI.configure(config.owner, config.repo, config.token);
+      if (config.owner && config.repo) {
+        githubAPI.configure(config.owner, config.repo, config.token || null);
         return config;
       }
     } catch { /* ignore bad cache */ }
@@ -18,18 +18,16 @@ async function loadConfig() {
   return null;
 }
 
-/** Save config to both localStorage and the repo */
+/** Save config to localStorage and persist only non-secret fields to the repo */
 async function saveConfig(owner, repo, token) {
   const config = { owner, repo, token };
   localStorage.setItem('rewi_config', JSON.stringify(config));
   githubAPI.configure(owner, repo, token);
 
-  // Write config to repo (without the token for safety — token stays in localStorage only)
-  // Actually, per spec, we store a write-enabled token in config.json for reviewers
+  // Persist only owner/repo in the repo. PAT must remain local-only.
   await githubAPI.writeFile('evaluator/data/config.json', {
     owner,
-    repo,
-    token
+    repo
   }, 'Update app configuration');
 
   return config;
@@ -52,8 +50,8 @@ async function initForReviewer() {
   if (cached) {
     try {
       const config = JSON.parse(cached);
-      if (config.owner && config.repo && config.token) {
-        githubAPI.configure(config.owner, config.repo, config.token);
+      if (config.owner && config.repo) {
+        githubAPI.configure(config.owner, config.repo, config.token || null);
         return config;
       }
     } catch { /* ignore */ }
@@ -105,9 +103,19 @@ async function initForReviewer() {
   }
 
   // Cache it locally for subsequent page loads
-  localStorage.setItem('rewi_config', JSON.stringify(config));
-  githubAPI.configure(config.owner, config.repo, config.token);
-  return config;
+  // Preserve local token if one already exists on this device.
+  const existingLocal = localStorage.getItem('rewi_config');
+  let localToken = null;
+  if (existingLocal) {
+    try {
+      localToken = JSON.parse(existingLocal).token || null;
+    } catch { /* ignore */ }
+  }
+  const mergedConfig = { ...config, token: localToken };
+
+  localStorage.setItem('rewi_config', JSON.stringify(mergedConfig));
+  githubAPI.configure(mergedConfig.owner, mergedConfig.repo, mergedConfig.token || null);
+  return mergedConfig;
 }
 
 /** Load predictions from the repo */
@@ -126,6 +134,78 @@ async function loadPredictions() {
   }
 
   return Array.isArray(predictions) ? predictions.map(normalizePredictionRecord) : [];
+}
+
+const fullTextRecordPromises = new Map();
+
+function getFullTextStorageKey(parentKey) {
+  return `rewi_full_text_${parentKey}`;
+}
+
+async function loadFullTextRecordsForParent(parentKey) {
+  const normalizedParentKey = String(parentKey || '').trim();
+  if (!normalizedParentKey) return [];
+
+  if (fullTextRecordPromises.has(normalizedParentKey)) {
+    return fullTextRecordPromises.get(normalizedParentKey);
+  }
+
+  const loader = (async () => {
+    const storageKey = getFullTextStorageKey(normalizedParentKey);
+    const cached = localStorage.getItem(storageKey);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          return parsed.map(normalizePredictionRecord);
+        }
+      } catch {
+        localStorage.removeItem(storageKey);
+      }
+    }
+
+    const response = await fetch(`data/full_texts/${encodeURIComponent(normalizedParentKey)}.json?t=${Date.now()}`, {
+      cache: 'no-store'
+    });
+
+    if (response.status === 404) {
+      return [];
+    }
+
+    if (!response.ok) {
+      throw new Error(`Could not load full text for ${normalizedParentKey}`);
+    }
+
+    const records = await response.json();
+    const normalizedRecords = Array.isArray(records)
+      ? records.map(normalizePredictionRecord)
+      : [];
+
+    localStorage.setItem(storageKey, JSON.stringify(normalizedRecords));
+    return normalizedRecords;
+  })().catch(err => {
+    fullTextRecordPromises.delete(normalizedParentKey);
+    throw err;
+  });
+
+  fullTextRecordPromises.set(normalizedParentKey, loader);
+  return loader;
+}
+
+async function loadFullTextRecordForPrediction(prediction) {
+  const parentKey = getPredictionParentKey(prediction);
+  const childKey = String(prediction?.child_key || '').trim();
+  const documentKey = getPredictionDocumentKey(prediction);
+
+  const candidates = [documentKey, childKey, parentKey].filter(Boolean);
+  const records = await loadFullTextRecordsForParent(parentKey);
+
+  for (const key of candidates) {
+    const record = records.find(r => r.child_key === key || r.parent_key === key || r.document_key === key);
+    if (record) return record;
+  }
+
+  return records[0] || null;
 }
 
 /** Load assignments from the repo */
@@ -266,6 +346,22 @@ function parseTagList(val) {
   return [val.trim()];
 }
 
+/**
+ * Extract tag names from predicted_tags.
+ * Handles both old format (array of strings) and new format (array of objects with {tag, predictions}).
+ */
+function extractTagNames(predictedTags) {
+  if (!predictedTags || !Array.isArray(predictedTags)) return [];
+  
+  // Handle new structure: array of {tag, predictions: [...]} objects
+  if (predictedTags.length > 0 && typeof predictedTags[0] === 'object' && 'tag' in predictedTags[0]) {
+    return predictedTags.map(t => t.tag);
+  }
+  
+  // Handle old structure: array of strings (for backward compatibility)
+  return predictedTags;
+}
+
 function normalizePredictionRecord(record) {
   const parentKey = String(record?.parent_key || record?.key || '').trim();
   const childKey = String(record?.child_key || '').trim();
@@ -281,7 +377,7 @@ function normalizePredictionRecord(record) {
     child_title: String(record?.child_title || '').trim(),
     abstract: typeof record?.abstract === 'string' ? record.abstract : '',
     full_text: typeof record?.full_text === 'string' ? record.full_text : '',
-    predicted_tags: parseTagList(record?.predicted_tags),
+    predicted_tags: record?.predicted_tags || [],
     ground_truth_tags: parseTagList(record?.ground_truth_tags)
   };
 }

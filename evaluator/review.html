@@ -188,7 +188,8 @@
       list.innerHTML = assignedKeys.map(key => {
         const pred = allPreds.find(p => predictionMatchesDocumentKey(p, key));
         const title = pred ? pred.title : key;
-        const tagCount = pred ? (pred.predicted_tags || []).length : '?';
+        const tagNames = pred ? extractTagNames(pred.predicted_tags) : [];
+        const tagCount = tagNames.length;
         const meta = pred
           ? `Parent: ${getPredictionParentKey(pred)}${pred.child_key ? ` | Child: ${pred.child_key}` : ''}`
           : key;
@@ -219,7 +220,7 @@
     }
 
     /* ---- Open Document for Review ---- */
-    function openDocument(key) {
+    async function openDocument(key) {
       const allPreds = window.allPredictions || [];
       const doc = allPreds.find(p => predictionMatchesDocumentKey(p, key));
       if (!doc) {
@@ -265,7 +266,8 @@
         fulltextSection.classList.remove('hidden');
         document.getElementById('review-fulltext').textContent = doc.full_text;
       } else {
-        fulltextSection.classList.add('hidden');
+        fulltextSection.classList.remove('hidden');
+        document.getElementById('review-fulltext').textContent = 'Loading full text...';
       }
 
       // Ground truth
@@ -285,6 +287,35 @@
       renderMissingTags();
       renderCategoryTagGroups();
 
+      if (!doc.full_text || !doc.abstract) {
+        try {
+          const fullTextRecord = await loadFullTextRecordForPrediction(doc);
+          if (currentDoc !== doc) return;
+
+          const fetchedAbstract = String(fullTextRecord?.abstract || '').trim();
+          const fetchedFullText = String(fullTextRecord?.full_text || '').trim();
+
+          if (!doc.abstract && fetchedAbstract) {
+            doc.abstract = fetchedAbstract;
+            abstractSection.classList.remove('hidden');
+            document.getElementById('review-abstract').textContent = fetchedAbstract;
+          }
+
+          if (fetchedFullText) {
+            doc.full_text = fetchedFullText;
+            fulltextSection.classList.remove('hidden');
+            document.getElementById('review-fulltext').textContent = fetchedFullText;
+          } else if (!doc.full_text) {
+            fulltextSection.classList.add('hidden');
+            document.getElementById('review-fulltext').textContent = '';
+          }
+        } catch (err) {
+          if (currentDoc !== doc) return;
+          fulltextSection.classList.remove('hidden');
+          document.getElementById('review-fulltext').textContent = `Could not load full text: ${err.message}`;
+        }
+      }
+
       // Scroll to top
       window.scrollTo(0, 0);
     }
@@ -292,7 +323,7 @@
     /* ---- Evaluate Tags ---- */
     function renderEvalTags() {
       const container = document.getElementById('eval-tags');
-      const tags = currentDoc.predicted_tags || [];
+      const tags = extractTagNames(currentDoc.predicted_tags) || [];
 
       if (!tags.length) {
         container.innerHTML = '<p style="color:var(--gray-500); font-size:0.875rem;">No predicted tags for this document.</p>';
@@ -389,7 +420,7 @@
     let openCategoryName = null;
 
     function renderCategoryTagGroups() {
-      const predictedTags = currentDoc ? (currentDoc.predicted_tags || []) : [];
+      const predictedTags = extractTagNames(currentDoc ? currentDoc.predicted_tags : null) || [];
       const btnRow = document.getElementById('category-btn-row');
       const panel = document.getElementById('category-tag-panel');
 
@@ -511,7 +542,7 @@
       if (!currentDoc) return;
 
       // Check all tags are evaluated
-      const tags = currentDoc.predicted_tags || [];
+      const tags = extractTagNames(currentDoc.predicted_tags) || [];
       const unevaluated = tags.filter(t => !currentEvals[t]);
       if (unevaluated.length) {
         showToast(`Please evaluate all predicted tags. ${unevaluated.length} remaining.`, 'warning');

@@ -132,7 +132,7 @@ function validateAgainstSnapshot(processedRows, snapshotKeys) {
 function main() {
   const args = parseArgs(process.argv);
   const snapshotPath = args.snapshot || 'evaluator/data/zotero_snapshot.json';
-  const processedPath = args.processed || 'evaluator/data/default_final_output.json';
+  const processedPath = args.processed || 'evaluator/data/full_texts.json';
   const shouldWrite = Boolean(args.write);
 
   const snapshot = readJson(snapshotPath);

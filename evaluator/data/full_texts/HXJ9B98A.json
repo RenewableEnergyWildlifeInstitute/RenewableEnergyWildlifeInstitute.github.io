@@ -1,0 +1,9 @@
+[
+  {
+    "parent_key": "HXJ9B98A",
+    "child_key": "W569CVCL",
+    "title": "North American regional reanalysis",
+    "abstract": "The NCEP (see appendix C for a list of acronyms) NARR is a long-term, dynamically consistent, high-resolution, high-frequency, atmospheric and land surface hydrology dataset for the North American domain. It covers the 25-yr period of 1979-2003 and is being continued in near-real time as the R-CDAS. Essential components of the system used to generate NARR are the lateral boundaries from and the data used for the NCEP-DOE Global Reanalysis, the NCEP Eta Model and its Data Assimilation System, a recent version of the Noah land-surface model, and the use of numerous datasets additional to or improved compared to those of the global reanalyses. In particular, NARR has successfully assimilated high-quality and detailed precipitation observations into the atmospheric analysis. Consequently, the forcing to the land-surface model component of the system is more accurate than in previous reanalyses, so that NARR provides a much-improved analysis of land hydrology and land-atmosphere interaction. The overall atmospheric circulation throughout the troposphere has been substantially improved as well.\nExploration of a regional reanalysis effort as a follow up to the NCEP-NCAR Global Reanalysis project was recommended by the November 1997 meeting of the advisory committee of the project. Opinion was expressed by the committee that \"the proposed regional reanalysis is an exciting new idea which has considerable potential value, particularly if the RDAS is significantly better than the global reanalysis at capturing the regional hydrological cycle, the diurnal cycle and other important features of weather and climate variability.\"",
+    "full_text": ""
+  }
+]

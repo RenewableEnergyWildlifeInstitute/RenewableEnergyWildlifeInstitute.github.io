@@ -12,7 +12,10 @@
         "Pollinators"
       ],
       "evaluations": {},
-      "missing_tags": []
+      "missing_tags": [],
+      "parent_key": "",
+      "child_key": "",
+      "document_key": "DEF456"
     },
     {
       "key": "J6H4G4VA",
@@ -24,7 +27,10 @@
         "Fatality"
       ],
       "evaluations": {},
-      "missing_tags": []
+      "missing_tags": [],
+      "parent_key": "",
+      "child_key": "",
+      "document_key": "J6H4G4VA"
     },
     {
       "key": "6XIG8R9V",
@@ -37,7 +43,10 @@
       "evaluations": {},
       "missing_tags": [
         "Birds"
-      ]
+      ],
+      "parent_key": "",
+      "child_key": "",
+      "document_key": "6XIG8R9V"
     },
     {
       "key": "SY8RHE3E",
@@ -60,7 +69,10 @@
         "Eagles",
         "Collisions",
         "Human Threat Context"
-      ]
+      ],
+      "parent_key": "",
+      "child_key": "",
+      "document_key": "SY8RHE3E"
     },
     {
       "key": "EPZ9DJSU",
@@ -75,6 +87,50 @@
       },
       "missing_tags": [
         "PV Solar"
+      ],
+      "parent_key": "",
+      "child_key": "",
+      "document_key": "EPZ9DJSU"
+    },
+    {
+      "key": "SF6WU3S8",
+      "document_key": "SF6WU3S8",
+      "parent_key": "SY8RHE3E",
+      "child_key": "SF6WU3S8",
+      "title": "Vulnerability of avian populations to renewable energy production",
+      "review_timestamp": "2026-04-20T14:43:39.473Z",
+      "status": "in_progress",
+      "predicted_tags": [
+        {
+          "tag": "Birds",
+          "predictions": [
+            {
+              "predicted_date": "2026-04-11",
+              "model_id": "jme-datasci/rewi-tagger"
+            }
+          ]
+        },
+        {
+          "tag": "North America",
+          "predictions": [
+            {
+              "predicted_date": "2026-04-11",
+              "model_id": "jme-datasci/rewi-tagger"
+            }
+          ]
+        }
+      ],
+      "evaluations": {
+        "PV Solar": "correct",
+        "Birds": "correct",
+        "Fatality": "correct"
+      },
+      "missing_tags": [
+        "Land-based Wind",
+        "North America",
+        "Eagles",
+        "Collisions",
+        "Human Threat Context"
       ]
     }
   ]
