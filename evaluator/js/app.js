@@ -125,12 +125,17 @@ async function loadPredictions() {
 
   try {
     predictions = await githubAPI.readFile('evaluator/data/predictions.json');
-    if (predictions) {
-      localStorage.setItem('rewi_predictions', JSON.stringify(predictions));
-    }
   } catch (err) {
     console.warn('Failed to load predictions from GitHub, using cache:', err);
     if (cached) predictions = JSON.parse(cached);
+  }
+
+  if (predictions) {
+    try {
+      localStorage.setItem('rewi_predictions', JSON.stringify(predictions));
+    } catch (storageErr) {
+      console.warn('Could not cache predictions in localStorage (quota exceeded?):', storageErr);
+    }
   }
 
   return Array.isArray(predictions) ? predictions.map(normalizePredictionRecord) : [];
