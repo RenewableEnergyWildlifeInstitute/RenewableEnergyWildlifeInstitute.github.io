@@ -1,8 +1,409 @@
 {
-  "generated_at": "2026-04-20T09:40:25.240Z",
+  "generated_at": "2026-04-28T20:18:32.232Z",
   "group_id": "5253055",
-  "total_items": 4163,
+  "total_items": 4175,
   "items": [
+    {
+      "key": "2FVDBW4E",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "K5QMX9Y8",
+        "title": "Full Text PDF",
+        "filename": "Nain and Anctil - 2026 - Do solar panels contain PFAS.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://link-springer-com.utk.idm.oclc.org/content/pdf/10.1557%2Fs43581-026-00156-7.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "K5QMX9Y8",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Do solar panels contain PFAS?",
+        "date": "2026-04-15",
+        "creators": [
+          {
+            "firstName": "Preeti",
+            "lastName": "Nain",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Annick",
+            "lastName": "Anctil",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The presence and potential leaching of PFAS (Per- and Polyfluoroalkyl Substances) from solar panels are increasingly mentioned in news articles, raising public concerns. Such concerns may slow the adoption of photovoltaic (PV) technology, despite its central role in the renewable energy sector. The limited transparency from manufacturers about fluorinated materials used in PV modules, along with the scarcity of publicly available testing data, contributes to uncertainty and speculation. This perspective aims to clarify the current state of PFAS presence in solar PV. Although certain fluoropolymers are used in PV manufacturing, the scientific consensus on their toxicity indicates they should not be classified as PFAS. Portraying fluoropolymers as toxic PFAS unnecessarily amplifies concerns and unfairly undermines the perceived environmental sustainability of PV technology.",
+        "DOI": "10.1557/s43581-026-00156-7",
+        "url": "https://doi.org/10.1557/s43581-026-00156-7",
+        "tags": [
+          {
+            "tag": "environmental impact"
+          },
+          {
+            "tag": "hazard"
+          },
+          {
+            "tag": "renewable"
+          },
+          {
+            "tag": "sustainability"
+          },
+          {
+            "tag": "waste management"
+          }
+        ]
+      }
+    },
+    {
+      "key": "YKQ7T8J2",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Evaluation method and module design for cost-effective compliance with irradiance guidelines to maintain soil quality in solar parks",
+        "date": "2025",
+        "creators": [
+          {
+            "firstName": "Ilkay",
+            "lastName": "Cesar",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Bas B. Van",
+            "lastName": "Aken",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Ground mounted solar parks lead to changes in the micro-climate under and between the PV tables. In particular, the vegetation on the soil is, in various degrees, shaded from direct sunlight and indirect, diffuse light. Also, the changes in precipitation distribution, air temperature and wind speed will affect the conditions. This leads to varying conditions for the vegetation affecting photosynthesis, which on the longer term influences the soil quality. To ensure sufficient light for photosynthesis, initial thresholds for irradiance have been drafted by TNO and Wageningen University and Research for the climate conditions in the Netherlands. Based on these rules, we present for the first time a method to evaluate the trade-off between soil irradiance and energy yield, related to table configuration and module choice, for utility-scale solar parks. Irradiance on the ground has either passed around the PV tables, passed through the gaps between panels or is transmitted between the solar cells in the panels. This leads to an optimisation of the module transparency and the size and relative position of the PV tables, when minimising the costs and at the same time complying with these irradiance criteria. To illustrate this optimisation, we have simulated the annual energy yield and ground irradiance and calculated the effect on the levelised cost of electricity. We present two solar park designs, that have the same ground irradiance distribution. One design is installed with partially transparent, bifacial modules, the other with gaps between the opaque, bifacial modules. Although the transparent bifacial modules have a somewhat lower module power, this system produces more kWh per hectare and has a lower levelised cost of electricity. The present paper shows that the partial transparency of bifacial modules is a key feature to maintain the soil ecology, and profitability, thus contributing to societal acceptance.",
+        "DOI": "10.1051/epjpv/2025003",
+        "url": "https://www.epj-pv.org/articles/epjpv/abs/2025/01/pv20240054/pv20240054.html",
+        "tags": []
+      }
+    },
+    {
+      "key": "NZXKY46T",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "YKQ7T8J2",
+        "title": "Full Text PDF",
+        "filename": "Cesar and Aken - 2025 - Evaluation method and module design for cost-effective compliance with irradiance guidelines to main.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://www.epj-pv.org/articles/epjpv/pdf/2025/01/pv20240054.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "Y7TRFIK3",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Evidence of absence regression: a binomial N-mixture model for estimating fatalities at wind energy facilities",
+        "date": "2021",
+        "creators": [
+          {
+            "firstName": "Trent",
+            "lastName": "McDonald",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kimberly",
+            "lastName": "Bay",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jared",
+            "lastName": "Studyvin",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jesse",
+            "lastName": "Leckband",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Amber",
+            "lastName": "Schorg",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jennifer",
+            "lastName": "McIvor",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Estimating bird and bat fatalities caused by wind-turbine facilities is challenging when carcasses are rare and produce counts that are either exactly or very near zero. The rarity of found carcasses is exacerbated when live members of a particular species are rare and when carcasses degrade quickly, are removed by scavengers, or are not detected by observers. With few observed carcass counts, common statistical methods like logistic, Poisson, or negative binomial regression are unreliable (statistically biased) and often fail to provide answers (i.e., fail to converge). Here, we propose a binomial N-mixture model that estimates fatality rates as well as the total number of carcasses when rates are expanded. Our model extends the “evidence of absence” model by relating carcass deposition rates to study covariates and by incorporating terms that naturally scale counts from facilities of different sizes. Our model, which we call Evidence of Absence Regression (EoAR), can estimate the total number of birds or bats killed at a single wind energy facility or a fleet of wind energy facilities based on covariate values. Furthermore, with accurate prior distributions the model’s results are extremely robust to sparse data and unobserved combinations of covariate values. In this paper, we describe the model, show its low bias and high precision via computer simulation, and apply it to bat carcass counts observed at 21 wind energy facilities in Iowa.",
+        "url": "https://www.jstor.org/stable/27092263",
+        "tags": []
+      }
+    },
+    {
+      "key": "SW38GRHP",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "KZSSCSS7",
+        "title": "PDF",
+        "filename": "McDonald et al. - 2021 - Evidence of absence regression a binomial N-mixture model for estimating fatalities at wind energy.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "KZSSCSS7",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Evidence of absence regression: a binomial N-mixture model for estimating fatalities at wind energy facilities",
+        "date": "2021",
+        "creators": [
+          {
+            "firstName": "Trent",
+            "lastName": "McDonald",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kimberly",
+            "lastName": "Bay",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jared",
+            "lastName": "Studyvin",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jesse",
+            "lastName": "Leckband",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Amber",
+            "lastName": "Schorg",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jennifer",
+            "lastName": "McIvor",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Estimating bird and bat fatalities caused by wind-turbine facilities is challenging when carcasses are rare and produce counts that are either exactly or very near zero. The rarity of found carcasses is exacerbated when live members of a particular species are rare and when carcasses degrade quickly, are removed by scavengers, or are not detected by observers. With few observed carcass counts, common statistical methods like logistic, Poisson, or negative binomial regression are unreliable (statistically biased) and often fail to provide answers (i.e., fail to converge). Here, we propose a binomial N-mixture model that estimates fatality rates as well as the total number of carcasses when rates are expanded. Our model extends the “evidence of absence” model by relating carcass deposition rates to study covariates and by incorporating terms that naturally scale counts from facilities of different sizes. Our model, which we call Evidence of Absence Regression (EoAR), can estimate the total number of birds or bats killed at a single wind energy facility or a fleet of wind energy facilities based on covariate values. Furthermore, with accurate prior distributions the model's results are extremely robust to sparse data and unobserved combinations of covariate values. In this paper, we describe the model, show its low bias and high precision via computer simulation, and apply it to bat carcass counts observed at 21 wind energy facilities in Iowa.",
+        "DOI": "10.1002/eap.2408",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/eap.2408",
+        "tags": [
+          {
+            "tag": "N-mixture"
+          },
+          {
+            "tag": "carcasses"
+          },
+          {
+            "tag": "evidence of absence"
+          },
+          {
+            "tag": "rare events"
+          },
+          {
+            "tag": "wind turbines"
+          }
+        ]
+      }
+    },
+    {
+      "key": "YNJZWZ9D",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Estimating wind-turbine-caused bird and bat fatality when zero carcasses are observed",
+        "date": "2015",
+        "creators": [
+          {
+            "firstName": "Manuela M. P.",
+            "lastName": "Huso",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Daniel",
+            "lastName": "Dalthorp",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "David",
+            "lastName": "Dail",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Lisa",
+            "lastName": "Madsen",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Many wind-power facilities in the United States have established effective monitoring programs to determine turbine-caused fatality rates of birds and bats, but estimating the number of fatalities of rare species poses special difficulties. The loss of even small numbers of individuals may adversely affect fragile populations, but typically, few (if any) carcasses are observed during monitoring. If monitoring design results in only a small proportion of carcasses detected, then finding zero carcasses may give little assurance that the number of actual fatalities is small. Fatality monitoring at wind-power facilities commonly involves conducting experiments to estimate the probability (g) an individual will be observed, accounting for the possibilities that it falls in an unsearched area, is scavenged prior to detection, or remains undetected even when present. When g < 1, the total carcass count (X) underestimates the total number of fatalities (M). Total counts can be 0 when M is small or when M is large and g ≪1. Distinguishing these two cases is critical when estimating fatality of a rare species. Observing no individuals during searches may erroneously be interpreted as evidence of absence. We present an approach that uses Bayes' theorem to construct a posterior distribution for M, i.e., P(M | X, ĝ), reflecting the observed carcass count and previously estimated g. From this distribution, we calculate two values important to conservation: the probability that M is below a predetermined limit and the upper bound (M*) of the 100(1 − α)% credible interval for M. We investigate the dependence of M* on α, g, and the prior distribution of M, asking what value of g is required to attain a desired M* for a given α. We found that when g < −0.15, M* was clearly influenced by the mean and variance of ĝ and the choice of prior distribution for M, but the influence of these factors is minimal when g > −0.45. Further, we develop extensions for temporal replication that can inform prior distributions of M and methods for combining information across several areas or time periods. We apply the method to data collected at a wind-power facility where scheduled searches yielded X = 0 raptor carcasses.",
+        "DOI": "10.1890/14-0764.1",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1890/14-0764.1",
+        "tags": [
+          {
+            "tag": "Bayes' theorem"
+          },
+          {
+            "tag": "Detection probability"
+          },
+          {
+            "tag": "Endangered species"
+          },
+          {
+            "tag": "Posterior"
+          },
+          {
+            "tag": "Prior"
+          },
+          {
+            "tag": "Rare species"
+          },
+          {
+            "tag": "Wind energy"
+          },
+          {
+            "tag": "program_wind"
+          },
+          {
+            "tag": "superpopulation"
+          }
+        ]
+      }
+    },
+    {
+      "key": "FBXIIA6S",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "XKXCMN8M",
+        "title": "PDF",
+        "filename": "Liu et al. - 2026 - Soil erosion and erosion-induced lateral soil organic carbon loss associated with photovoltaic devel.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "XKXCMN8M",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Soil erosion and erosion-induced lateral soil organic carbon loss associated with photovoltaic development across China",
+        "date": "07/2026",
+        "creators": [
+          {
+            "firstName": "Xian",
+            "lastName": "Liu",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Liming",
+            "lastName": "Jiang",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Tingbin",
+            "lastName": "Zhang",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Guihua",
+            "lastName": "Yi",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Xianglong",
+            "lastName": "Ma",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The rapid expansion of photovoltaic (PV) solar farms across terrestrial ecosystems has raised concerns about its ecological impacts on soil erosion and lateral soil organic carbon (SOC) loss. Quantitative assessments at the national scale remain limited, particularly under varying management measures and hydroclimatic conditions. This study applies a scenario-based modeling framework, integrating multi-source remote sensing and the RUSLE model, to quantify potential lateral SOC responses to PV development across China. Results reveal pronounced spatial heterogeneity in soil erosion patterns that vary with land-use type and management intensity. PV projects in forested regions showed the greatest increase in soil erosion, resulting in higher potential lateral SOC loss. In contrast, those in cropland regions exhibited soil erosion mitigation and reduced lateral SOC loss under effective management measures. Under mean annual rainfall, efficient management measures decreased potential lateral SOC loss by nearly 50% relative to pre-construction conditions, whereas the absence of management led to a 65%–140% increase. While extreme rainfall without management amplified potential lateral SOC loss fluxes by two to five times, high-efficiency management measures limited this increase to within 20% in most regions, effectively maintaining soil carbon stability. The findings emphasize that incorporating targeted management measures into environmental impact assessments is essential for balancing renewable energy expansion with ecosystem carbon sustainability, providing a quantitative foundation for national-scale sustainable PV land management.",
+        "DOI": "10.1016/j.catena.2026.110133",
+        "url": "https://linkinghub.elsevier.com/retrieve/pii/S0341816226003437",
+        "tags": []
+      }
+    },
+    {
+      "key": "D9RUUQAA",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "CS6Y56QP",
+        "title": "ScienceDirect Snapshot",
+        "filename": "S0301479726006481.html",
+        "note": "",
+        "creators": [],
+        "url": "https://www.sciencedirect.com/science/article/pii/S0301479726006481",
+        "contentType": "text/html",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "S9I3PV84",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "CS6Y56QP",
+        "title": "ScienceDirect Full Text PDF",
+        "filename": "Czechowski et al. - 2026 - Birds of prey and photovoltaic installations in an intensively managed agricultural landscape year-.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://pdf.sciencedirectassets.com/272592/1-s2.0-S0301479726X20011/1-s2.0-S0301479726006481/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG4aCXVzLWVhc3QtMSJGMEQCIFxC4fNp3o82T4XfcybLMZfuTHirCay%2FXPcLzYb32GAcAiBHBrzrLuqx1cbzgk%2FNpyDXjv%2B0JOSBqgMTnE7joIL5PiqzBQg3EAUaDDA1OTAwMzU0Njg2NSIMHA24k%2BXm3yFwqpleKpAFkINIWchVWZf%2FXvtFwkn6WpCiuIQOv2HR1JB310fNNzoj%2FyqXzaKNR%2FaKWz5ca0RV2pHZcOk5OSy8Sldf3cYnFYUGV1ht2ZCu2GSNl4K7JW4coB3lVsbXoTSmC%2BpNLgkcwZnFbyjVwpyyfwhC%2FRa4DqJE2VpDAyGVfJnT%2FxUL4YSMM9lkvSaWXi7X5nGS0ALDGXE2gbvZaNG7jx6cfGvyYK24UgTYaehPsbFRu8pvPPt%2FOee1zdnTgiuo9yX%2FvpGCEBgOKqamL3JH5Fo8vcNBavV0%2BFbuldbFPbrUtvf2VfPW3wu%2FORn4hlDQflCabqr4QoFwTaqvY7sqwwkrwySAWkeyMiZ8Iz4KYXU6%2FHlkjV51FDQkq2onHbef3CWkTGt66V6OG4YaasiY6tb3UaV8utv1rFZZETdN3dmdA3QkLGjh7mjDGZrYaiyEMBZqyIrBmR2XWQKMI%2BgYHNEQrzkWI4o5ZTUgKHqsBLGyKeSpLlvpqcFxG2fOSoPrVCqOw%2BnTY9iak%2FWFgGiRkeL0Avh3mNIBzTQ8lzaTGX%2FoQF41339maOAl%2BbLwnGIS7cCpI9eJy1hqjkHKKwL7yd67wLI%2FLnG%2BAXvcM6ZNjBvUmq3waSHyzfsy0kkkZenCsK68rO%2BP6aFVPGs3XKgG%2BUOg8CXozEbxj%2BPD2a2I5Sm%2FILrr4isRbIexz6MP7d6QweYsG89L%2Br7zEs%2Fzntj4Xq99xgytm9o%2FlTVENL9q0aIszBysG%2FjSwazZOmHfOvC1MpAaylvFRRowWRflkePnGq4c8e%2Fbp3vAlKvD7gPdZ%2Fg19ynxN3uOctzhB0MbzfsKi4dauwDvWTDL4liGO2WmGM26nr0YVQ5jrtxXdk6%2BAHhL3h1DViQwt4WezwY6sgGFPJBLEP9FTV0QVBlQOdUdfaNBz6%2FZAwzMrKQsMNYSNyGiknf7ryHt8jIG%2FZw8POdQ3HJUPBkpEaTMb57jJyLnmxOpgPlmPS5nGT%2ByvmKW%2BpqW2mitRvFHzJ8oQYvHRHhlXqOCI8jtepzMGNfGRHw0b491Ecd%2BYFbsONuAVfIlxAf00kViQoHgBHkUSJtSG4QrOyBuWPYkL5ryYGLRfIMSz6prGsybZn8kouwiMGX5FH%2Fc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260421T143208Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY5R6JZ3CZ%2F20260421%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a28ebbb8258cec88f40e46356eccd27119bfb0a11dfde6eb17b178d385ce55bb&hash=9490ced11440030157ba7d3775e96d21bfcbb54257236c799b75fe4529940e9a&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0301479726006481&tid=spdf-1e2e9704-eefb-4059-a083-7ae6f8c6a2fc&sid=5904807a74dd544bdc3b12469cf123291a87gxrqa&type=client&tsoh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&rh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&ua=1b105d000104525c05&rr=9efd18ac7a7d5da7&cc=us",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "CS6Y56QP",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Birds of prey and photovoltaic installations in an intensively managed agricultural landscape: year-round habitat use across different habitats",
+        "date": "2026-03-15",
+        "creators": [
+          {
+            "firstName": "Paweł",
+            "lastName": "Czechowski",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Olaf",
+            "lastName": "Ciebiera",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Piotr",
+            "lastName": "Zduniak",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The rapid expansion of photovoltaic farms in agricultural landscapes has raised increasing concerns about their ecological effects, yet most existing studies have focused on lower trophic levels, with little attention given to top predators. Raptors play a crucial role in ecosystem functioning due to their position at the top of the food chain; however, their responses to large-scale solar infrastructure remain poorly understood. In this study, we evaluated the impact of a large-scale (59 ha, 25 MW) photovoltaic farm complex located in an intensively managed agricultural landscape on raptor communities throughout the annual cycle. Surveys conducted across four habitat types, including photovoltaic areas, permanent grasslands, arable fields, and roadside verges, recorded 971 raptor observations representing eight species. Photovoltaic areas consistently supported higher raptor abundance, species richness, and Shannon diversity than other habitats, particularly during the breeding season, post-breeding dispersal, and autumn migration. These patterns are likely driven by the availability of small mammal prey, especially common voles, as well as by photovoltaic infrastructure that provides perching and hunting sites, enhancing foraging efficiency. Our findings suggest that large photovoltaic farms can serve as important refuges for raptors and their prey within heavily modified agricultural landscapes, thereby supporting farmland biodiversity and maintaining ecosystem stability.",
+        "DOI": "10.1016/j.jenvman.2026.129188",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0301479726006481",
+        "tags": [
+          {
+            "tag": "Birds of prey"
+          },
+          {
+            "tag": "Conservation"
+          },
+          {
+            "tag": "Farmland"
+          },
+          {
+            "tag": "Solar plants"
+          },
+          {
+            "tag": "Space management"
+          }
+        ]
+      }
+    },
     {
       "key": "F8N3J3HT",
       "data": {
@@ -37152,68 +37553,6 @@
         "tags": [
           {
             "tag": "program_wind"
-          }
-        ]
-      }
-    },
-    {
-      "key": "YNJZWZ9D",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Estimating wind-turbine-caused bird and bat fatality when zero carcasses are observed",
-        "date": "2015",
-        "creators": [
-          {
-            "firstName": "Manuela M. P.",
-            "lastName": "Huso",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Dan",
-            "lastName": "Dalthorp",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "David",
-            "lastName": "Dail",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Lisa",
-            "lastName": "Madsen",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Many wind-power facilities in the United States have established effective monitoring programs to determine turbine-caused fatality rates of birds and bats, but estimating the number of fatalities of rare species poses special difficulties. The loss of even small numbers of individuals may adversely affect fragile populations, but typically, few (if any) carcasses are observed during monitoring. If monitoring design results in only a small proportion of carcasses detected, then finding zero carcasses may give little assurance that the number of actual fatalities is small. Fatality monitoring at wind-power facilities commonly involves conducting experiments to estimate the probability (g) an individual will be observed, accounting for the possibilities that it falls in an unsearched area, is scavenged prior to detection, or remains undetected even when present. When g < 1, the total carcass count (X) underestimates the total number of fatalities (M). Total counts can be 0 when M is small or when M is large and g ≪1. Distinguishing these two cases is critical when estimating fatality of a rare species. Observing no individuals during searches may erroneously be interpreted as evidence of absence. We present an approach that uses Bayes' theorem to construct a posterior distribution for M, i.e., P(M | X, ĝ), reflecting the observed carcass count and previously estimated g. From this distribution, we calculate two values important to conservation: the probability that M is below a predetermined limit and the upper bound (M*) of the 100(1 − α)% credible interval for M. We investigate the dependence of M* on α, g, and the prior distribution of M, asking what value of g is required to attain a desired M* for a given α. We found that when g < −0.15, M* was clearly influenced by the mean and variance of ĝ and the choice of prior distribution for M, but the influence of these factors is minimal when g > −0.45. Further, we develop extensions for temporal replication that can inform prior distributions of M and methods for combining information across several areas or time periods. We apply the method to data collected at a wind-power facility where scheduled searches yielded X = 0 raptor carcasses.",
-        "DOI": "10.1890/14-0764.1",
-        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1890/14-0764.1",
-        "tags": [
-          {
-            "tag": "Bayes' theorem"
-          },
-          {
-            "tag": "Detection probability"
-          },
-          {
-            "tag": "Endangered species"
-          },
-          {
-            "tag": "Posterior"
-          },
-          {
-            "tag": "Prior"
-          },
-          {
-            "tag": "Rare species"
-          },
-          {
-            "tag": "Wind energy"
-          },
-          {
-            "tag": "program_wind"
-          },
-          {
-            "tag": "superpopulation"
           }
         ]
       }
