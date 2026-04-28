@@ -134,18 +134,17 @@ jobs:
         run: |
           node .github/scripts/validate_processed_dataset.js \
             --snapshot evaluator/data/zotero_snapshot.json \
-            --processed evaluator/data/full_texts.json \
-            --write
+            --processed evaluator/data/full_texts
 
       - name: Commit and push snapshot
         run: |
-          if git diff --quiet -- evaluator/data/zotero_snapshot.json evaluator/data/full_texts.json; then
+          if git diff --quiet -- evaluator/data/zotero_snapshot.json evaluator/data/full_texts; then
             echo "No snapshot or processed dataset changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add evaluator/data/zotero_snapshot.json evaluator/data/full_texts.json
+          git add evaluator/data/zotero_snapshot.json evaluator/data/full_texts
           git commit -m "chore: refresh zotero snapshot and validate processed dataset"
           git push

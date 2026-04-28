@@ -72,7 +72,7 @@ jobs:
       - name: Run pipeline
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'meta-llama/Llama-3.2-1B-Instruct' }}
+          HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'jme-datasci/rewi-tagger' }}
           ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
           ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
         run: |
@@ -115,7 +115,7 @@ jobs:
       - name: Run pipeline
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'meta-llama/Llama-3.2-1B-Instruct' }}
+          HF_MODEL_ID: ${{ secrets.HF_MODEL_ID || 'jme-datasci/rewi-tagger' }}
           ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
           ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
         run: |

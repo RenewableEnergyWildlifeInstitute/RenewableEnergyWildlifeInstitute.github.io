@@ -4,7 +4,7 @@ Unified Zotero Processing + LLM Tag Prediction Pipeline
 ========================================================
 
 Given a list of parent keys, this pipeline:
-    1. Checks full_texts.json for cached full text
+        1. Checks per-parent full_texts files for cached full text
   2. For uncached keys: fetches from Zotero API, extracts PDF text, cleans it
   3. Sends each document to the LLM for tag prediction
     4. Saves results to predictions.json with tag-level prediction history
@@ -55,7 +55,7 @@ MAX_NEW_TOKENS = 60
 FULLTEXT_MIN_LEN = 20
 MAX_PAGES = 15
 MPS_MAX_INPUT_TOKENS = 4096
-DEFAULT_MODEL_ID = "jme-datasci/rewi_tagger"
+DEFAULT_MODEL_ID = "jme-datasci/rewi-tagger"
 DEFAULT_TEMPERATURE = 0.1
 DEFAULT_TOP_P = 0.9
 DEFAULT_REPETITION_PENALTY = 1.1

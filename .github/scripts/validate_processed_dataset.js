@@ -24,6 +24,48 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
+function loadProcessedRows(processedPath) {
+  const stat = fs.statSync(processedPath);
+
+  if (stat.isFile()) {
+    const processed = readJson(processedPath);
+    if (!Array.isArray(processed)) {
+      throw new Error(`Processed file must be a JSON array: ${processedPath}`);
+    }
+
+    return {
+      rows: processed,
+      sourceType: 'file',
+      fileCount: 1
+    };
+  }
+
+  if (!stat.isDirectory()) {
+    throw new Error(`Processed path must be a file or directory: ${processedPath}`);
+  }
+
+  const files = fs
+    .readdirSync(processedPath)
+    .filter((name) => name.toLowerCase().endsWith('.json'))
+    .sort();
+
+  const rows = [];
+  for (const fileName of files) {
+    const fullPath = path.join(processedPath, fileName);
+    const payload = readJson(fullPath);
+    if (!Array.isArray(payload)) {
+      throw new Error(`Processed file must contain a JSON array: ${fullPath}`);
+    }
+    rows.push(...payload);
+  }
+
+  return {
+    rows,
+    sourceType: 'directory',
+    fileCount: files.length
+  };
+}
+
 function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
@@ -132,17 +174,15 @@ function validateAgainstSnapshot(processedRows, snapshotKeys) {
 function main() {
   const args = parseArgs(process.argv);
   const snapshotPath = args.snapshot || 'evaluator/data/zotero_snapshot.json';
-  const processedPath = args.processed || 'evaluator/data/full_texts.json';
+  const processedPath = args.processed || 'evaluator/data/full_texts';
   const shouldWrite = Boolean(args.write);
 
   const snapshot = readJson(snapshotPath);
-  const processed = readJson(processedPath);
+  const processedPayload = loadProcessedRows(processedPath);
+  const processedRows = processedPayload.rows;
 
   if (!snapshot || !Array.isArray(snapshot.items)) {
     throw new Error(`Snapshot file must contain an 'items' array: ${snapshotPath}`);
-  }
-  if (!Array.isArray(processed)) {
-    throw new Error(`Processed file must be a JSON array: ${processedPath}`);
   }
 
   const snapshotKeys = new Set(
@@ -151,8 +191,8 @@ function main() {
       .filter(Boolean)
   );
 
-  const { mergedRows, duplicateRowsMerged } = mergeDuplicateChildRows(processed);
-  if (shouldWrite && duplicateRowsMerged > 0) {
+  const { mergedRows, duplicateRowsMerged } = mergeDuplicateChildRows(processedRows);
+  if (shouldWrite && processedPayload.sourceType === 'file' && duplicateRowsMerged > 0) {
     writeJson(processedPath, mergedRows);
   }
 
@@ -161,7 +201,9 @@ function main() {
   console.log(
     JSON.stringify(
       {
-        processed_rows_before: processed.length,
+        processed_source: processedPayload.sourceType,
+        processed_files_scanned: processedPayload.fileCount,
+        processed_rows_before: processedRows.length,
         processed_rows_after: mergedRows.length,
         duplicate_rows_merged: duplicateRowsMerged,
         missing_parent_keys: uniqueMissingParent.length,

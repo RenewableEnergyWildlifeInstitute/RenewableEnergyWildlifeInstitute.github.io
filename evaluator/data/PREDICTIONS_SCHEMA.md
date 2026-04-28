@@ -3,6 +3,8 @@
 ## Overview
 The `predictions.json` file stores model predictions for each document, including full prediction history with dates and model IDs. Each prediction record represents the accumulated prediction history for a single child document.
 
+Reviewer evaluations are stored separately in `evaluator/data/reviews/*.json`. The predictions file remains the model output record of truth with prediction history.
+
 ## Record Structure
 
 ```json
@@ -46,7 +48,7 @@ The `predictions.json` file stores model predictions for each document, includin
 - **child_key** (string): Unique identifier for the child document/item
 - **title** (string): Document title for display in the reviewer interface
 - **abstract** (string): Document abstract (optional)
-- **ground_truth_tags** (array): Array of verified/ground truth tag strings (populated by reviewers)
+- **ground_truth_tags** (array): Optional array for curated/approved tags. This field is initialized as `[]` by the pipeline and is not automatically written by the reviewer UI.
 - **predicted_tags** (array): Array of tag objects with prediction history (see below)
 
 ### Predicted Tags Objects
@@ -59,13 +61,15 @@ Each tag object represents a single tag and its complete prediction history:
 
 ## Deduplication & History Behavior
 
-When the pipeline runs and encounters a document (identified by child_key):
+When the pipeline runs and encounters a document (identified by `child_key`):
 
 1. **First run**: Creates a new prediction record with all predicted tags, each with a single prediction entry (date + model_id)
 
 2. **Subsequent runs**:
    - **New tags**: Added to the record with a single prediction entry
    - **Existing tags**: The new prediction (date + model_id) is APPENDED to the predictions array for that tag
+
+The pipeline also de-duplicates prediction history entries for a tag by `predicted_date` + `model_id` so identical reruns do not create duplicate history rows.
 
 ### Example: Tag History Across Runs
 
@@ -121,3 +125,9 @@ const tagNames = extractTagNames(predictedTags);
 ```
 
 This maintains backward compatibility and keeps the UI logic clean.
+
+## Current Default Model
+
+Unless overridden by `HF_MODEL_ID`, the pipeline/workflow default model is:
+
+- `jme-datasci/rewi-tagger`

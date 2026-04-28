@@ -57,7 +57,7 @@ evaluator/
 2. Enter the default passphrase: `rewi-admin`
 3. In the **Setup** tab:
    - Enter the repository **Owner** (e.g., `RenewableEnergyWildlifeInstitute`)
-   - Enter the repository **Name** (e.g., `UVA-Capstone-Su-25`)
+   - Enter the repository **Name** (e.g., `RenewableEnergyWildlifeInstitute.github.io`)
    - Paste the **Personal Access Token**
    - Click **Test Connection** to verify
    - Click **Save Configuration**
@@ -68,6 +68,8 @@ evaluator/
 Predictions are created and maintained by the model pipeline and stored in:
 
 - `evaluator/data/predictions.json`
+
+By default, pipeline inference uses `jme-datasci/rewi-tagger` unless `HF_MODEL_ID` is overridden in repository secrets.
 
 The admin dashboard **does not** support manual prediction uploads.
 
@@ -144,6 +146,10 @@ The admin Zotero tab supports a snapshot-first loading flow to avoid browser sto
 - **No server-side code**: The entire tool runs client-side. The PAT is used directly from the browser to call the GitHub API.
 
 ## Data Format
+
+Predictions schema details are documented in:
+
+- [evaluator/data/PREDICTIONS_SCHEMA.md](data/PREDICTIONS_SCHEMA.md)
 
 Each reviewer's evaluations are stored in `data/reviews/{sanitized_email}.json`:
 
