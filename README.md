@@ -124,7 +124,7 @@ The evaluator app setup and reviewer workflow are documented in `evaluator/READM
 
 ## Additional Documentation
 
-- [Workflow Operations Guide](.github/README.md): workflow operations and troubleshooting
+- [Workflow Operations Guide](.github/OPERATIONS.md): workflow operations and troubleshooting
 - [Evaluator App Guide](evaluator/README.md): evaluator UI setup and reviewer/admin usage
 - [Predictions Schema](evaluator/data/PREDICTIONS_SCHEMA.md): structure and history model for `predictions.json`
 
