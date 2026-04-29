@@ -31,7 +31,7 @@ jobs:
 
       - name: Commit and push explorer snapshot
         run: |
-          if git diff --quiet -- docs/rewi_community_explorer.html evaluator/data/community_explorer_snapshot.json; then
+          if [ -z "$(git status --porcelain -- docs/rewi_community_explorer.html evaluator/data/community_explorer_snapshot.json)" ]; then
             echo "No community explorer changes to commit."
             exit 0
           fi
