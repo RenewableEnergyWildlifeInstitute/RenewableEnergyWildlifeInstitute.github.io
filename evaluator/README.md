@@ -142,7 +142,7 @@ The admin dashboard includes a **Community Explorer** tab that can build and pub
 
 ### What it produces
 
-- Published page: `docs/rewi_community_explorer.html`
+- Published page: `evaluator/rewi_community_explorer.html`
 - Metadata for admin tab: `evaluator/data/community_explorer_snapshot.json`
 
 ### Data and method

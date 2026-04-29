@@ -188,7 +188,7 @@
             &#9654; Build &amp; Publish Snapshot
           </button>
           <button class="btn" onclick="refreshEmbeddedCommunityExplorer()">Refresh Embedded Explorer</button>
-          <a class="btn" id="community-explorer-link" href="../docs/rewi_community_explorer.html" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
+          <a class="btn" id="community-explorer-link" href="rewi_community_explorer.html" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
         </div>
         <div id="community-explorer-status" style="margin-top:1rem; font-size:0.875rem; color:var(--gray-500);"></div>
       </div>
@@ -201,7 +201,7 @@
         <iframe
           id="community-explorer-embed"
           title="Community Explorer"
-          src="../docs/rewi_community_explorer.html"
+          src="rewi_community_explorer.html"
           style="width:100%; height:70vh; min-height:560px; border:1px solid var(--gray-200); border-radius:8px; background:#fff;"
           loading="lazy"
         ></iframe>
@@ -2850,7 +2850,7 @@
     function refreshEmbeddedCommunityExplorer() {
       const frame = document.getElementById('community-explorer-embed');
       if (!frame) return;
-      frame.src = `../docs/rewi_community_explorer.html?t=${Date.now()}`;
+      frame.src = `rewi_community_explorer.html?t=${Date.now()}`;
     }
 
     async function loadCommunityExplorerSnapshotMeta() {

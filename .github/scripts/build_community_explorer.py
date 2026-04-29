@@ -3,7 +3,7 @@
 
 This script reads the Zotero snapshot, runs document-community detection on
 lemmatized titles + abstracts, then writes:
-1) docs/rewi_community_explorer.html (published explorer)
+1) evaluator/rewi_community_explorer.html (published explorer)
 2) evaluator/data/community_explorer_snapshot.json (admin metadata)
 """
 
@@ -29,7 +29,7 @@ from nltk.stem import WordNetLemmatizer
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SNAPSHOT_PATH = REPO_ROOT / "evaluator" / "data" / "zotero_snapshot.json"
-OUTPUT_HTML_PATH = REPO_ROOT / "docs" / "rewi_community_explorer.html"
+OUTPUT_HTML_PATH = REPO_ROOT / "evaluator" / "rewi_community_explorer.html"
 OUTPUT_META_PATH = REPO_ROOT / "evaluator" / "data" / "community_explorer_snapshot.json"
 
 BANNED_TERMS = {"et", "al", "pdf"}
@@ -463,7 +463,7 @@ def main() -> None:
         "bigram_communities": int(len(bigram_data)),
         "community_build_status": "skipped" if skip_reason else "ok",
         "community_build_note": skip_reason,
-        "published_html": "docs/rewi_community_explorer.html",
+        "published_html": "evaluator/rewi_community_explorer.html",
     }
     OUTPUT_META_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_META_PATH.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")

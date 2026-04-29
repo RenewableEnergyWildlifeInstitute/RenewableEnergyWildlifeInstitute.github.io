@@ -9,5 +9,5 @@
   "bigram_communities": 20,
   "community_build_status": "ok",
   "community_build_note": null,
-  "published_html": "docs/rewi_community_explorer.html"
+  "published_html": "evaluator/rewi_community_explorer.html"
 }
