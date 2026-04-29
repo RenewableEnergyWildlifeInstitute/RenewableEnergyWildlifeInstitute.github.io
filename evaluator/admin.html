@@ -42,6 +42,7 @@
     <div class="tabs">
       <button class="tab active" data-tab="setup">Setup</button>
       <button class="tab" data-tab="zotero">Zotero Dashboard</button>
+      <button class="tab" data-tab="community-explorer">Community Explorer</button>
       <button class="tab" data-tab="run-model">Run Model</button>
       <button class="tab" data-tab="data">Predictions</button>
       <button class="tab" data-tab="assign">Assignments</button>
@@ -171,6 +172,54 @@
           </div>
           <button class="btn btn-primary" onclick="lookupZoteroItem()">Get Info</button>
           <pre id="zotero-lookup-output" class="zotero-json-output hidden"></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Community Explorer Tab -->
+    <div class="tab-content" id="tab-community-explorer">
+      <div class="card">
+        <h2>Community Explorer Snapshot</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Build and publish a monthly community explorer snapshot using lemmatized titles and abstracts from the latest Zotero snapshot.
+        </p>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-run-community-explorer" onclick="triggerCommunityExplorerBuild()">
+            &#9654; Build &amp; Publish Snapshot
+          </button>
+          <a class="btn" id="community-explorer-link" href="../docs/rewi_community_explorer.html" target="_blank" rel="noopener noreferrer">
+            Open Published Explorer
+          </a>
+        </div>
+        <div id="community-explorer-status" style="margin-top:1rem; font-size:0.875rem; color:var(--gray-500);"></div>
+      </div>
+
+      <div class="card">
+        <h2>Latest Snapshot Metadata</h2>
+        <div id="community-explorer-meta" style="color:var(--gray-600); font-size:0.875rem;">Loading...</div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Community Explorer Runs</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Status of the most recent community explorer builds.
+        </p>
+        <button class="btn btn-sm" onclick="loadCommunityExplorerRuns()" style="margin-bottom:0.75rem;">Refresh</button>
+        <div class="table-wrap">
+          <table id="community-runs-table">
+            <thead>
+              <tr>
+                <th>Run #</th>
+                <th>Status</th>
+                <th>Started</th>
+                <th>Duration</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody id="community-runs-tbody">
+              <tr><td colspan="5" style="color:var(--gray-500);">Click Refresh to load runs.</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -565,6 +614,7 @@
 
         // Lazy-load tab data
         if (tab.dataset.tab === 'run-model') loadRecentRuns();
+        if (tab.dataset.tab === 'community-explorer') initCommunityExplorerTab();
         if (tab.dataset.tab === 'data') refreshPredictionsView();
         if (tab.dataset.tab === 'status') loadStatus();
         if (tab.dataset.tab === 'export') loadExportMetrics();
@@ -2772,8 +2822,189 @@
       }
     }
 
+    /* ---- Community Explorer ---- */
+    const COMMUNITY_WORKFLOW_FILE = 'community-explorer.yml';
+    let _communityPollTimer = null;
+
+    async function initCommunityExplorerTab() {
+      await Promise.all([
+        loadCommunityExplorerSnapshotMeta(),
+        loadCommunityExplorerRuns()
+      ]);
+    }
+
+    async function loadCommunityExplorerSnapshotMeta() {
+      const el = document.getElementById('community-explorer-meta');
+      if (!el) return;
+
+      el.textContent = 'Loading...';
+      try {
+        const response = await fetch(`data/community_explorer_snapshot.json?t=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) {
+          el.innerHTML = 'No community explorer snapshot metadata found yet. Run <strong>Build &amp; Publish Snapshot</strong> first.';
+          return;
+        }
+
+        const meta = await response.json();
+        const generatedAt = meta.generated_at ? new Date(meta.generated_at).toLocaleString() : 'Unknown';
+        const month = meta.snapshot_month || 'Unknown';
+        const docs = Number.isFinite(meta.document_count) ? meta.document_count : 'Unknown';
+        const mode = meta.mode || 'Unknown';
+        const uni = Number.isFinite(meta.unigram_communities) ? meta.unigram_communities : 'Unknown';
+        const bi = Number.isFinite(meta.bigram_communities) ? meta.bigram_communities : 'Unknown';
+
+        el.innerHTML = [
+          `<strong>Generated:</strong> ${escapeHtml(generatedAt)}`,
+          `<strong>Snapshot month:</strong> ${escapeHtml(String(month))}`,
+          `<strong>Documents analyzed:</strong> ${escapeHtml(String(docs))}`,
+          `<strong>Mode:</strong> ${escapeHtml(String(mode))}`,
+          `<strong>Communities:</strong> ${escapeHtml(String(uni))} unigram, ${escapeHtml(String(bi))} bigram`,
+        ].join('<br>');
+      } catch (err) {
+        el.textContent = `Could not load snapshot metadata: ${err.message}`;
+      }
+    }
+
+    async function triggerCommunityExplorerBuild() {
+      // Prefer currently typed Setup values so token updates apply immediately.
+      const setupOwner = document.getElementById('cfg-owner').value.trim();
+      const setupRepo = document.getElementById('cfg-repo').value.trim();
+      const setupToken = document.getElementById('cfg-token').value.trim();
+      if (setupOwner && setupRepo && setupToken) {
+        githubAPI.configure(setupOwner, setupRepo, setupToken);
+      }
+
+      if (!githubAPI.isConfigured()) {
+        showToast('Configure GitHub API first (Setup tab).', 'error');
+        return;
+      }
+
+      const statusEl = document.getElementById('community-explorer-status');
+      const btn = document.getElementById('btn-run-community-explorer');
+      setButtonLoading(btn, true);
+      statusEl.style.color = 'var(--gray-500)';
+      statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Dispatching community explorer workflow...';
+
+      try {
+        await githubAPI.triggerWorkflowDispatch(COMMUNITY_WORKFLOW_FILE, 'main', {});
+        statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Workflow dispatched. Building and publishing snapshot...';
+        showToast('Community explorer workflow dispatched.', 'success');
+        startCommunityExplorerPolling(statusEl);
+      } catch (err) {
+        statusEl.style.color = 'var(--danger)';
+        statusEl.textContent = `Error: ${err.message}`;
+        showToast(`Dispatch failed: ${err.message}`, 'error');
+      }
+
+      setButtonLoading(btn, false);
+    }
+
+    function startCommunityExplorerPolling(statusEl) {
+      if (_communityPollTimer) clearInterval(_communityPollTimer);
+
+      let attempts = 0;
+      const maxAttempts = 120;
+
+      _communityPollTimer = setInterval(async () => {
+        attempts++;
+        if (attempts > maxAttempts) {
+          clearInterval(_communityPollTimer);
+          _communityPollTimer = null;
+          statusEl.innerHTML = 'Polling timed out. Check <strong>Recent Community Explorer Runs</strong>.';
+          return;
+        }
+
+        try {
+          const data = await githubAPI.getWorkflowRuns(COMMUNITY_WORKFLOW_FILE, 1);
+          const runs = data.workflow_runs || [];
+          if (!runs.length) return;
+
+          const run = runs[0];
+          const status = run.status;
+          const conclusion = run.conclusion;
+
+          if (status === 'queued') {
+            statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Run is queued...';
+          } else if (status === 'in_progress') {
+            statusEl.innerHTML = '<span class="status-dot status-dot-pending"></span> Run is in progress...';
+          } else if (status === 'completed') {
+            clearInterval(_communityPollTimer);
+            _communityPollTimer = null;
+
+            if (conclusion === 'success') {
+              statusEl.style.color = 'var(--success)';
+              statusEl.innerHTML = '<span class="status-dot status-dot-success"></span> Community explorer snapshot published successfully.';
+              showToast('Community explorer snapshot published.', 'success');
+              await loadCommunityExplorerSnapshotMeta();
+            } else {
+              statusEl.style.color = 'var(--danger)';
+              statusEl.innerHTML = `<span class="status-dot status-dot-danger"></span> Run finished with conclusion: <strong>${conclusion || 'unknown'}</strong>. <a href="${run.html_url}" target="_blank" rel="noopener noreferrer">View logs</a>`;
+              showToast(`Run finished: ${conclusion}`, 'error');
+            }
+
+            loadCommunityExplorerRuns();
+          }
+        } catch {
+          // Transient error: keep polling.
+        }
+      }, 5000);
+    }
+
+    async function loadCommunityExplorerRuns() {
+      const tbody = document.getElementById('community-runs-tbody');
+      if (!tbody) return;
+
+      if (!githubAPI.isConfigured()) {
+        tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">Configure GitHub API first.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">Loading...</td></tr>';
+
+      try {
+        const data = await githubAPI.getWorkflowRuns(COMMUNITY_WORKFLOW_FILE, 10);
+        const runs = data.workflow_runs || [];
+
+        if (!runs.length) {
+          tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">No runs found yet.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = runs.map(run => {
+          const started = run.created_at ? new Date(run.created_at).toLocaleString() : '—';
+          let duration = '—';
+          if (run.created_at && run.updated_at && run.status === 'completed') {
+            const ms = new Date(run.updated_at) - new Date(run.created_at);
+            const secs = Math.round(ms / 1000);
+            duration = secs < 60 ? `${secs}s` : `${Math.floor(secs / 60)}m ${secs % 60}s`;
+          }
+
+          let statusBadge;
+          if (run.status === 'completed') {
+            statusBadge = run.conclusion === 'success'
+              ? '<span class="badge badge-completed">Success</span>'
+              : `<span class="badge badge-danger">${escapeHtml(run.conclusion || 'failed')}</span>`;
+          } else {
+            statusBadge = `<span class="badge badge-pending">${escapeHtml(run.status)}</span>`;
+          }
+
+          return `
+            <tr>
+              <td><code style="font-size:0.75rem;">#${run.run_number}</code></td>
+              <td>${statusBadge}</td>
+              <td style="font-size:0.8rem;">${started}</td>
+              <td style="font-size:0.8rem;">${duration}</td>
+              <td><a href="${run.html_url}" target="_blank" rel="noopener noreferrer" style="font-size:0.8rem;">View</a></td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5" style="color:var(--danger);">Error: ${escapeHtml(err.message)}</td></tr>`;
+      }
+    }
+
     /* ---- Run Model ---- */
-    const WORKFLOW_FILE = 'run-model.yml';
+    const RUN_MODEL_WORKFLOW_FILE = 'run-model.yml';
     let _runPollTimer = null;
 
     async function triggerModelRun() {
@@ -2806,7 +3037,7 @@
       try {
         const runnerType = document.querySelector('input[name="runner-type"]:checked')?.value || 'github';
         const inputs = { parent_keys: parentKeys, runner_type: runnerType };
-        await githubAPI.triggerWorkflowDispatch(WORKFLOW_FILE, 'main', inputs);
+        await githubAPI.triggerWorkflowDispatch(RUN_MODEL_WORKFLOW_FILE, 'main', inputs);
 
         const runnerLabel = runnerType === 'self-hosted' ? 'self-hosted GPU runner' : 'GitHub-hosted runner';
         statusEl.innerHTML = `<span class="status-dot status-dot-pending"></span> Workflow dispatched on ${runnerLabel}! Processing items and generating predictions…`;
@@ -2839,7 +3070,7 @@
         }
 
         try {
-          const data = await githubAPI.getWorkflowRuns(WORKFLOW_FILE, 1);
+          const data = await githubAPI.getWorkflowRuns(RUN_MODEL_WORKFLOW_FILE, 1);
           const runs = data.workflow_runs || [];
           if (!runs.length) return;
 
@@ -2889,7 +3120,7 @@
       tbody.innerHTML = '<tr><td colspan="5" style="color:var(--gray-500);">Loading…</td></tr>';
 
       try {
-        const data = await githubAPI.getWorkflowRuns(WORKFLOW_FILE, 10);
+        const data = await githubAPI.getWorkflowRuns(RUN_MODEL_WORKFLOW_FILE, 10);
         const runs = data.workflow_runs || [];
 
         if (!runs.length) {

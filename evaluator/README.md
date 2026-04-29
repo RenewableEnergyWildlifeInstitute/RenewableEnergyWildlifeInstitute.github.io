@@ -136,6 +136,29 @@ The admin Zotero tab supports a snapshot-first loading flow to avoid browser sto
 - Secrets are available only inside GitHub Actions jobs.
 - The workflow uses those secrets server-side and commits a snapshot JSON that the page can safely read.
 
+## Community Explorer Snapshot (Monthly)
+
+The admin dashboard includes a **Community Explorer** tab that can build and publish a monthly topic-community snapshot.
+
+### What it produces
+
+- Published page: `docs/rewi_community_explorer.html`
+- Metadata for admin tab: `evaluator/data/community_explorer_snapshot.json`
+
+### Data and method
+
+- Source: `evaluator/data/zotero_snapshot.json` (parent bibliographic items)
+- Text used: **titles + abstracts**
+- Preprocessing: lowercase, cleanup, and **lemmatization** (WordNet + POS tagging)
+- Community detection: TF-IDF document graph + Louvain/greedy modularity
+- Explorer modes: unigram and bigram community cards
+
+### Automation
+
+- Workflow: `.github/workflows/community-explorer.yml`
+- Schedule: monthly (`0 6 1 * *`)
+- Manual run: from Admin tab via **Build & Publish Snapshot**
+
 ## Security Considerations
 
 - **PAT Storage**: The PAT is stored only in browser `localStorage` on the device where setup is performed. It is **not** written to `data/config.json`.
