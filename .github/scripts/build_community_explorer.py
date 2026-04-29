@@ -40,6 +40,7 @@ GENERIC_STOP_TERMS = {
 
 UNIGRAM_MAX_COMMUNITIES = 17
 BIGRAM_MAX_COMMUNITIES = 27
+MIN_DOCS_FOR_COMMUNITIES = 10
 
 PALETTE = [
     "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",
@@ -110,15 +111,15 @@ def get_wordnet_pos(treebank_tag: str):
 
 def clean_text(value: str) -> str:
     value = value.lower()
-    value = re.sub(r"[^a-z0-9\\s]", " ", value)
-    value = re.sub(r"\\s+", " ", value)
+    value = re.sub(r"[^a-z0-9\s]", " ", value)
+    value = re.sub(r"\s+", " ", value)
     return value.strip()
 
 
 def lemmatize_text(text: str, lemmatizer: WordNetLemmatizer) -> str:
     if not text:
         return ""
-    tokens = re.findall(r"\\b[a-z]+\\b", text.lower())
+    tokens = re.findall(r"\b[a-z]+\b", text.lower())
     tokens = [t for t in tokens if not t.isdigit() and len(t) > 2]
     if not tokens:
         return ""
@@ -133,7 +134,7 @@ def lemmatize_text(text: str, lemmatizer: WordNetLemmatizer) -> str:
 def build_author_stop_terms(df: pd.DataFrame) -> set[str]:
     author_terms: set[str] = set()
     for value in df["authors_raw"].dropna().astype(str):
-        for token in re.findall(r"\\b[a-z]{3,}\\b", value.lower()):
+        for token in re.findall(r"\b[a-z]{3,}\b", value.lower()):
             author_terms.add(token)
     return author_terms
 
@@ -348,10 +349,10 @@ def main() -> None:
 
     lemmatizer = WordNetLemmatizer()
 
-    metadata_title_pattern = r"^(?:\\s*(?:pdf|full\\s+text|snapshot|sciencedirect\\s+snapshot)\\s*)+$"
+    metadata_title_pattern = r"^(?:\s*(?:pdf|full\s+text|snapshot|sciencedirect\s+snapshot)\s*)+$"
 
     df = df.copy()
-    df["text_raw"] = (df["title"].fillna("") + " " + df["abstract"].fillna("")).str.replace(r"\\s+", " ", regex=True).str.strip()
+    df["text_raw"] = (df["title"].fillna("") + " " + df["abstract"].fillna("")).str.replace(r"\s+", " ", regex=True).str.strip()
     df["text_clean"] = df["text_raw"].map(clean_text)
     df["text_lemma"] = df["text_clean"].map(lambda x: lemmatize_text(x, lemmatizer))
 
@@ -359,55 +360,75 @@ def main() -> None:
     metadata_mask = df["title"].str.lower().str.match(metadata_title_pattern, na=False)
     df = df[~metadata_mask].copy()
 
-    if len(df) < 10:
-        raise RuntimeError("Not enough records for community detection after filtering")
+    skip_reason = None
+    if len(df) < MIN_DOCS_FOR_COMMUNITIES:
+        skip_reason = (
+            "Not enough records for stable community detection after filtering "
+            f"(found {len(df)}, need at least {MIN_DOCS_FOR_COMMUNITIES})"
+        )
 
     author_stop_terms = build_author_stop_terms(df)
     topic_stop_terms = BANNED_TERMS | GENERIC_STOP_TERMS | author_stop_terms
 
-    unigram_vectorizer = TfidfVectorizer(
-        stop_words="english",
-        ngram_range=(1, 1),
-        max_features=5000,
-        min_df=2,
-        token_pattern=r"\\b[a-z]{3,}\\b",
-    )
-    unigram_matrix_raw = unigram_vectorizer.fit_transform(df["text_lemma"])
-    unigram_matrix = pd.DataFrame(unigram_matrix_raw.toarray(), columns=unigram_vectorizer.get_feature_names_out())
+    unigram_summary = pd.DataFrame()
+    unigram_assignments: dict[int, int] = {}
+    df_u = df.copy()
 
-    unigram_nonzero_mask = unigram_matrix.sum(axis=1) > 0
-    df_u = df.loc[unigram_nonzero_mask].reset_index(drop=True)
-    unigram_matrix = unigram_matrix.loc[unigram_nonzero_mask].reset_index(drop=True)
+    bigram_summary = pd.DataFrame()
+    bigram_assignments: dict[int, int] = {}
+    df_b = df.copy()
 
-    unigram_summary, unigram_assignments = run_document_topic_communities(
-        text_series=df_u["title"].fillna(df_u["key"]),
-        matrix=unigram_matrix,
-        topic_stop_terms=topic_stop_terms,
-        min_similarity=0.20,
-        k_neighbors=15,
-    )
+    if skip_reason is None:
+        try:
+            unigram_vectorizer = TfidfVectorizer(
+                stop_words="english",
+                ngram_range=(1, 1),
+                max_features=5000,
+                min_df=2,
+                token_pattern=r"\b[a-z]{3,}\b",
+            )
+            unigram_matrix_raw = unigram_vectorizer.fit_transform(df["text_lemma"])
+            unigram_matrix = pd.DataFrame(unigram_matrix_raw.toarray(), columns=unigram_vectorizer.get_feature_names_out())
 
-    bigram_vectorizer = TfidfVectorizer(
-        stop_words="english",
-        ngram_range=(2, 2),
-        max_features=5000,
-        min_df=3,
-        token_pattern=r"\\b[a-z]{3,}\\b",
-    )
-    bigram_matrix_raw = bigram_vectorizer.fit_transform(df["text_lemma"])
-    bigram_matrix = pd.DataFrame(bigram_matrix_raw.toarray(), columns=bigram_vectorizer.get_feature_names_out())
+            unigram_nonzero_mask = unigram_matrix.sum(axis=1) > 0
+            df_u = df.loc[unigram_nonzero_mask].reset_index(drop=True)
+            unigram_matrix = unigram_matrix.loc[unigram_nonzero_mask].reset_index(drop=True)
 
-    bigram_nonzero_mask = bigram_matrix.sum(axis=1) > 0
-    df_b = df.loc[bigram_nonzero_mask].reset_index(drop=True)
-    bigram_matrix = bigram_matrix.loc[bigram_nonzero_mask].reset_index(drop=True)
+            unigram_summary, unigram_assignments = run_document_topic_communities(
+                text_series=df_u["title"].fillna(df_u["key"]),
+                matrix=unigram_matrix,
+                topic_stop_terms=topic_stop_terms,
+                min_similarity=0.20,
+                k_neighbors=15,
+            )
+        except ValueError as exc:
+            skip_reason = f"Unable to build unigram features: {exc}"
 
-    bigram_summary, bigram_assignments = run_document_topic_communities(
-        text_series=df_b["title"].fillna(df_b["key"]),
-        matrix=bigram_matrix,
-        topic_stop_terms=topic_stop_terms,
-        min_similarity=0.16,
-        k_neighbors=12,
-    )
+    if skip_reason is None:
+        try:
+            bigram_vectorizer = TfidfVectorizer(
+                stop_words="english",
+                ngram_range=(2, 2),
+                max_features=5000,
+                min_df=3,
+                token_pattern=r"\b[a-z]{3,}\b",
+            )
+            bigram_matrix_raw = bigram_vectorizer.fit_transform(df["text_lemma"])
+            bigram_matrix = pd.DataFrame(bigram_matrix_raw.toarray(), columns=bigram_vectorizer.get_feature_names_out())
+
+            bigram_nonzero_mask = bigram_matrix.sum(axis=1) > 0
+            df_b = df.loc[bigram_nonzero_mask].reset_index(drop=True)
+            bigram_matrix = bigram_matrix.loc[bigram_nonzero_mask].reset_index(drop=True)
+
+            bigram_summary, bigram_assignments = run_document_topic_communities(
+                text_series=df_b["title"].fillna(df_b["key"]),
+                matrix=bigram_matrix,
+                topic_stop_terms=topic_stop_terms,
+                min_similarity=0.16,
+                k_neighbors=12,
+            )
+        except ValueError as exc:
+            skip_reason = f"Unable to build bigram features: {exc}"
 
     unigram_title_map = collect_community_titles(unigram_assignments, df_u["title"].fillna(df_u["key"])) if unigram_assignments else {}
     bigram_title_map = collect_community_titles(bigram_assignments, df_b["title"].fillna(df_b["key"])) if bigram_assignments else {}
@@ -438,6 +459,8 @@ def main() -> None:
         "filtered_metadata_like_titles": int(metadata_mask.sum()),
         "unigram_communities": int(len(unigram_data)),
         "bigram_communities": int(len(bigram_data)),
+        "community_build_status": "skipped" if skip_reason else "ok",
+        "community_build_note": skip_reason,
         "published_html": "docs/rewi_community_explorer.html",
     }
     OUTPUT_META_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -445,6 +468,8 @@ def main() -> None:
 
     print(f"Wrote explorer HTML: {OUTPUT_HTML_PATH}")
     print(f"Wrote metadata JSON: {OUTPUT_META_PATH}")
+    if skip_reason:
+        print(f"Community detection skipped: {skip_reason}")
 
 
 if __name__ == "__main__":

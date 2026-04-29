@@ -2852,6 +2852,8 @@
         const mode = meta.mode || 'Unknown';
         const uni = Number.isFinite(meta.unigram_communities) ? meta.unigram_communities : 'Unknown';
         const bi = Number.isFinite(meta.bigram_communities) ? meta.bigram_communities : 'Unknown';
+        const buildStatus = meta.community_build_status || 'Unknown';
+        const buildNote = meta.community_build_note || '';
 
         el.innerHTML = [
           `<strong>Generated:</strong> ${escapeHtml(generatedAt)}`,
@@ -2859,6 +2861,8 @@
           `<strong>Documents analyzed:</strong> ${escapeHtml(String(docs))}`,
           `<strong>Mode:</strong> ${escapeHtml(String(mode))}`,
           `<strong>Communities:</strong> ${escapeHtml(String(uni))} unigram, ${escapeHtml(String(bi))} bigram`,
+          `<strong>Build status:</strong> ${escapeHtml(String(buildStatus))}`,
+          buildNote ? `<strong>Build note:</strong> ${escapeHtml(String(buildNote))}` : '',
         ].join('<br>');
       } catch (err) {
         el.textContent = `Could not load snapshot metadata: ${err.message}`;
