@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-29T16:06:19.593083+00:00",
+  "generated_at": "2026-04-29T16:12:07.002960+00:00",
   "snapshot_month": "2026-04",
   "source": "evaluator/data/zotero_snapshot.json",
   "mode": "titles_abstracts_lemmatized",
   "document_count": 1900,
   "filtered_metadata_like_titles": 0,
-  "unigram_communities": 19,
-  "bigram_communities": 20,
+  "unigram_communities": 16,
+  "bigram_communities": 21,
   "community_build_status": "ok",
   "community_build_note": null,
   "published_html": "evaluator/rewi_community_explorer.html"
