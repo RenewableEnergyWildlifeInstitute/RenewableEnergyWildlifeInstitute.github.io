@@ -38,8 +38,8 @@ GENERIC_STOP_TERMS = {
     "sciencedirect", "pubmed", "sage", "report", "proceedings", "proceeding",
 }
 
-UNIGRAM_MAX_COMMUNITIES = 17
-BIGRAM_MAX_COMMUNITIES = 27
+UNIGRAM_MAX_COMMUNITIES = 50
+BIGRAM_MAX_COMMUNITIES = 50
 MIN_DOCS_FOR_COMMUNITIES = 10
 
 PALETTE = [
@@ -359,6 +359,8 @@ def main() -> None:
     df = df[df["text_lemma"].str.len() > 0].copy()
     metadata_mask = df["title"].str.lower().str.match(metadata_title_pattern, na=False)
     df = df[~metadata_mask].copy()
+    # Keep a contiguous index so downstream boolean masks align reliably.
+    df = df.reset_index(drop=True)
 
     skip_reason = None
     if len(df) < MIN_DOCS_FOR_COMMUNITIES:
@@ -391,7 +393,7 @@ def main() -> None:
             unigram_matrix = pd.DataFrame(unigram_matrix_raw.toarray(), columns=unigram_vectorizer.get_feature_names_out())
 
             unigram_nonzero_mask = unigram_matrix.sum(axis=1) > 0
-            df_u = df.loc[unigram_nonzero_mask].reset_index(drop=True)
+            df_u = df.loc[unigram_nonzero_mask.to_numpy()].reset_index(drop=True)
             unigram_matrix = unigram_matrix.loc[unigram_nonzero_mask].reset_index(drop=True)
 
             unigram_summary, unigram_assignments = run_document_topic_communities(
@@ -417,7 +419,7 @@ def main() -> None:
             bigram_matrix = pd.DataFrame(bigram_matrix_raw.toarray(), columns=bigram_vectorizer.get_feature_names_out())
 
             bigram_nonzero_mask = bigram_matrix.sum(axis=1) > 0
-            df_b = df.loc[bigram_nonzero_mask].reset_index(drop=True)
+            df_b = df.loc[bigram_nonzero_mask.to_numpy()].reset_index(drop=True)
             bigram_matrix = bigram_matrix.loc[bigram_nonzero_mask].reset_index(drop=True)
 
             bigram_summary, bigram_assignments = run_document_topic_communities(

@@ -187,11 +187,24 @@
           <button class="btn btn-primary" id="btn-run-community-explorer" onclick="triggerCommunityExplorerBuild()">
             &#9654; Build &amp; Publish Snapshot
           </button>
-          <a class="btn" id="community-explorer-link" href="../docs/rewi_community_explorer.html" target="_blank" rel="noopener noreferrer">
-            Open Published Explorer
-          </a>
+          <button class="btn" onclick="refreshEmbeddedCommunityExplorer()">Refresh Embedded Explorer</button>
+          <a class="btn" id="community-explorer-link" href="../docs/rewi_community_explorer.html" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
         </div>
         <div id="community-explorer-status" style="margin-top:1rem; font-size:0.875rem; color:var(--gray-500);"></div>
+      </div>
+
+      <div class="card">
+        <h2>Explorer Preview</h2>
+        <p style="margin-bottom:1rem; color: var(--gray-600); font-size: 0.875rem;">
+          Live embedded view of the published explorer snapshot.
+        </p>
+        <iframe
+          id="community-explorer-embed"
+          title="Community Explorer"
+          src="../docs/rewi_community_explorer.html"
+          style="width:100%; height:70vh; min-height:560px; border:1px solid var(--gray-200); border-radius:8px; background:#fff;"
+          loading="lazy"
+        ></iframe>
       </div>
 
       <div class="card">
@@ -2831,6 +2844,13 @@
         loadCommunityExplorerSnapshotMeta(),
         loadCommunityExplorerRuns()
       ]);
+      refreshEmbeddedCommunityExplorer();
+    }
+
+    function refreshEmbeddedCommunityExplorer() {
+      const frame = document.getElementById('community-explorer-embed');
+      if (!frame) return;
+      frame.src = `../docs/rewi_community_explorer.html?t=${Date.now()}`;
     }
 
     async function loadCommunityExplorerSnapshotMeta() {
@@ -2940,6 +2960,7 @@
               statusEl.innerHTML = '<span class="status-dot status-dot-success"></span> Community explorer snapshot published successfully.';
               showToast('Community explorer snapshot published.', 'success');
               await loadCommunityExplorerSnapshotMeta();
+              refreshEmbeddedCommunityExplorer();
             } else {
               statusEl.style.color = 'var(--danger)';
               statusEl.innerHTML = `<span class="status-dot status-dot-danger"></span> Run finished with conclusion: <strong>${conclusion || 'unknown'}</strong>. <a href="${run.html_url}" target="_blank" rel="noopener noreferrer">View logs</a>`;
