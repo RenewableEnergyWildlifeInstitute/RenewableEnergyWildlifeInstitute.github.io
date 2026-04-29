@@ -5,6 +5,7 @@ This script reads the Zotero snapshot, runs document-community detection on
 lemmatized titles + abstracts, then writes:
 1) evaluator/rewi_community_explorer.html (published explorer)
 2) evaluator/data/community_explorer_snapshot.json (admin metadata)
+3) evaluator/data/community_explorer_assignments.csv (parent-level assignments)
 """
 
 from __future__ import annotations
@@ -31,6 +32,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 SNAPSHOT_PATH = REPO_ROOT / "evaluator" / "data" / "zotero_snapshot.json"
 OUTPUT_HTML_PATH = REPO_ROOT / "evaluator" / "rewi_community_explorer.html"
 OUTPUT_META_PATH = REPO_ROOT / "evaluator" / "data" / "community_explorer_snapshot.json"
+OUTPUT_ASSIGNMENTS_CSV_PATH = REPO_ROOT / "evaluator" / "data" / "community_explorer_assignments.csv"
 
 BANNED_TERMS = {"et", "al", "pdf"}
 GENERIC_STOP_TERMS = {
@@ -348,6 +350,7 @@ def main() -> None:
         raise RuntimeError("No parent records with title/abstract were found in zotero_snapshot.json")
 
     lemmatizer = WordNetLemmatizer()
+    all_parent_df = df.copy()
 
     metadata_title_pattern = r"^(?:\s*(?:pdf|full\s+text|snapshot|sciencedirect\s+snapshot)\s*)+$"
 
@@ -435,6 +438,25 @@ def main() -> None:
     unigram_title_map = collect_community_titles(unigram_assignments, df_u["title"].fillna(df_u["key"])) if unigram_assignments else {}
     bigram_title_map = collect_community_titles(bigram_assignments, df_b["title"].fillna(df_b["key"])) if bigram_assignments else {}
 
+    unigram_key_assignments: dict[str, int] = {}
+    for row_idx, community_id in unigram_assignments.items():
+        if row_idx < len(df_u):
+            key = str(df_u.iloc[row_idx]["key"])
+            unigram_key_assignments[key] = int(community_id)
+
+    bigram_key_assignments: dict[str, int] = {}
+    for row_idx, community_id in bigram_assignments.items():
+        if row_idx < len(df_b):
+            key = str(df_b.iloc[row_idx]["key"])
+            bigram_key_assignments[key] = int(community_id)
+
+    assignments_df = all_parent_df[["key", "title"]].copy()
+    assignments_df["unigram_community"] = assignments_df["key"].map(unigram_key_assignments).astype("Int64")
+    assignments_df["bigram_community"] = assignments_df["key"].map(bigram_key_assignments).astype("Int64")
+    assignments_df = assignments_df.rename(columns={"key": "parent_key"})
+    OUTPUT_ASSIGNMENTS_CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
+    assignments_df.to_csv(OUTPUT_ASSIGNMENTS_CSV_PATH, index=False, encoding="utf-8")
+
     unigram_data = build_community_json(unigram_summary, unigram_title_map, "unigram")[:UNIGRAM_MAX_COMMUNITIES]
     bigram_data = build_community_json(bigram_summary, bigram_title_map, "bigram")[:BIGRAM_MAX_COMMUNITIES]
 
@@ -464,12 +486,14 @@ def main() -> None:
         "community_build_status": "skipped" if skip_reason else "ok",
         "community_build_note": skip_reason,
         "published_html": "evaluator/rewi_community_explorer.html",
+        "assignments_csv": "evaluator/data/community_explorer_assignments.csv",
     }
     OUTPUT_META_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_META_PATH.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
 
     print(f"Wrote explorer HTML: {OUTPUT_HTML_PATH}")
     print(f"Wrote metadata JSON: {OUTPUT_META_PATH}")
+    print(f"Wrote assignments CSV: {OUTPUT_ASSIGNMENTS_CSV_PATH}")
     if skip_reason:
         print(f"Community detection skipped: {skip_reason}")
 

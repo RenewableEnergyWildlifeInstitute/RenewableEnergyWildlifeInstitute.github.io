@@ -144,6 +144,7 @@ The admin dashboard includes a **Community Explorer** tab that can build and pub
 
 - Published page: `evaluator/rewi_community_explorer.html`
 - Metadata for admin tab: `evaluator/data/community_explorer_snapshot.json`
+- Assignments export: `evaluator/data/community_explorer_assignments.csv` (`parent_key`, `title`, `unigram_community`, `bigram_community`)
 
 ### Data and method
 

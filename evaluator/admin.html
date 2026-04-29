@@ -209,6 +209,11 @@
 
       <div class="card">
         <h2>Latest Snapshot Metadata</h2>
+        <div class="btn-group" style="margin-bottom:0.75rem;">
+          <a class="btn btn-sm" id="community-assignments-export" href="data/community_explorer_assignments.csv" download="community_explorer_assignments.csv">
+            Export Assignments CSV
+          </a>
+        </div>
         <div id="community-explorer-meta" style="color:var(--gray-600); font-size:0.875rem;">Loading...</div>
       </div>
 
@@ -2855,6 +2860,7 @@
 
     async function loadCommunityExplorerSnapshotMeta() {
       const el = document.getElementById('community-explorer-meta');
+      const exportLink = document.getElementById('community-assignments-export');
       if (!el) return;
 
       el.textContent = 'Loading...';
@@ -2874,6 +2880,10 @@
         const bi = Number.isFinite(meta.bigram_communities) ? meta.bigram_communities : 'Unknown';
         const buildStatus = meta.community_build_status || 'Unknown';
         const buildNote = meta.community_build_note || '';
+        const assignmentsPath = (meta.assignments_csv || 'evaluator/data/community_explorer_assignments.csv').replace(/^evaluator\//, '');
+        if (exportLink) {
+          exportLink.href = `${assignmentsPath}?t=${Date.now()}`;
+        }
 
         el.innerHTML = [
           `<strong>Generated:</strong> ${escapeHtml(generatedAt)}`,
@@ -2885,6 +2895,9 @@
           buildNote ? `<strong>Build note:</strong> ${escapeHtml(String(buildNote))}` : '',
         ].join('<br>');
       } catch (err) {
+        if (exportLink) {
+          exportLink.href = `data/community_explorer_assignments.csv?t=${Date.now()}`;
+        }
         el.textContent = `Could not load snapshot metadata: ${err.message}`;
       }
     }
