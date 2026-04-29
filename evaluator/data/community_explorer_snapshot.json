@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T16:12:07.002960+00:00",
+  "generated_at": "2026-04-29T16:20:29.114629+00:00",
   "snapshot_month": "2026-04",
   "source": "evaluator/data/zotero_snapshot.json",
   "mode": "titles_abstracts_lemmatized",
@@ -9,5 +9,6 @@
   "bigram_communities": 21,
   "community_build_status": "ok",
   "community_build_note": null,
-  "published_html": "evaluator/rewi_community_explorer.html"
+  "published_html": "evaluator/rewi_community_explorer.html",
+  "assignments_csv": "evaluator/data/community_explorer_assignments.csv"
 }
