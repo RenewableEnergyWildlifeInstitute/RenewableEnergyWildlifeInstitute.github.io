@@ -1,8 +1,258 @@
 {
-  "generated_at": "2026-05-01T09:38:06.891Z",
+  "generated_at": "2026-05-02T09:30:16.575Z",
   "group_id": "5253055",
-  "total_items": 4175,
+  "total_items": 4184,
   "items": [
+    {
+      "key": "P7TDE5K9",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "34RH44H4",
+        "title": "Full Text PDF",
+        "filename": "Guest et al. - 2026 - Species-specific acoustic responses by bats to ultrasonic stimuli used for reducing bat-wind turbine.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://peerj.com/articles/21231.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "34RH44H4",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Species-specific acoustic responses by bats to ultrasonic stimuli used for reducing bat-wind turbine interactions",
+        "date": "2026-04-28",
+        "creators": [
+          {
+            "firstName": "Emma E.",
+            "lastName": "Guest",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Sara P.",
+            "lastName": "Weaver",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Amanda Marie",
+            "lastName": "Hale",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Brogan Page",
+            "lastName": "Morton",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Cris Daniel",
+            "lastName": "Hein",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Sarah Rebecah",
+            "lastName": "Fritts",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "An unintended consequence of wind energy generation is bat fatalities caused by wind turbine blade strikes. One potential approach to reduce collision risk is to use ultrasound to create an uncomfortable or disorienting airspace around wind turbine blades. Ultrasonic deterrents (UDs) have produced mixed results in experimental field studies at commercial wind energy facilities, with effectiveness varying by species and location. It is possible that some species can alter their normal echolocation characteristics to counter the signal of UDs. Our broad objective was to maximize the effectiveness of a UD by comparing changes in echolocation characteristics during three UD frequency emissions among species, between seasons, and between sex. We hypothesized that UD emissions with frequencies most similar to each species’ echolocation characteristics would be more likely to alter the bats’ echolocation, and bat responses would vary between seasons and sex for each species. We released wild-captured bats into a 60 m × 10 m × 4.4 m (length × width × height) flight cage located in San Marcos, Texas, USA, from July to October 2020 and March to May 2021 and monitored echolocation frequencies with ultrasonic microphones. We conducted trials on Brazilian free-tailed bats (Tadarida brasiliensis; n = 54), cave myotis (Myotis velifer; n = 44), red bats (Lasiurus blossevilli, Lasiurus borealis; n = 41), evening bats (Nycticeius humeralis; n = 32), and tricolored bats (Perimyotis subflavus; n = 8). We found that species with high-frequency echolocation calls altered their echolocation signatures more commonly during high-frequency UD emissions, whereas low-frequency bats altered their echolocation signatures more commonly during low-frequency UD emissions. Additionally, echolocation responses varied between seasons and sexes for several species. Variations in responses may be dependent on species migratory status, differences in mating behavior and mating season, hormonal differences between sexes and seasons, and/or constraints on echolocation adaptability. Our results offer insights into the variable effectiveness of UDs at reducing bat fatalities at wind turbines and provide information for potential adjustments to UDs for improved success.",
+        "DOI": "10.7717/peerj.21231",
+        "url": "https://peerj.com/articles/21231",
+        "tags": []
+      }
+    },
+    {
+      "key": "RPXPVRT5",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "QZP4LUHL",
+        "title": "Full Text PDF",
+        "filename": "Wieringa et al. - 2021 - Predicting migration routes for three species of migratory bats using species distribution models.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://peerj.com/articles/11177.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "QZP4LUHL",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Predicting migration routes for three species of migratory bats using species distribution models",
+        "date": "2021-04-16",
+        "creators": [
+          {
+            "firstName": "Jamin G.",
+            "lastName": "Wieringa",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Bryan C.",
+            "lastName": "Carstens",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "H. Lisle",
+            "lastName": "Gibbs",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Understanding seasonal variation in the distribution and movement patterns of migratory species is essential to monitoring and conservation efforts. While there are many species of migratory bats in North America, little is known about their seasonal movements. In terms of conservation, this is important because the bat fatalities from wind energy turbines are significant and may fluctuate seasonally. Here we describe seasonally resolved distributions for the three species that are most impacted by wind farms (Lasiurus borealis (eastern red bat), L. cinereus (hoary bat) and Lasionycteris noctivagans (silver-haired bat)) and use these distributions to infer their most likely migratory pathways. To accomplish this, we collected 2,880 occurrence points from the Global Biodiversity Information Facility over five decades in North America to model species distributions on a seasonal basis and used an ensemble approach for modeling distributions. This dataset included 1,129 data points for L. borealis, 917 for L. cinereus and 834 for L. noctivagans. The results suggest that all three species exhibit variation in distributions from north to south depending on season, with each species showing potential migratory pathways during the fall migration that follow linear features. Finally, we describe proposed migratory pathways for these three species that can be used to identify stop-over sites, assess small-scale migration and highlight areas that should be prioritized for actions to reduce the effects of wind farm mortality.",
+        "DOI": "10.7717/peerj.11177",
+        "url": "https://peerj.com/articles/11177",
+        "tags": []
+      }
+    },
+    {
+      "key": "6INW79HE",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "I7BRQUNU",
+        "title": "Full Text PDF",
+        "filename": "Wieringa et al. - 2020 - Using trace elements to identify the geographic origin of migratory bats.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://peerj.com/articles/10082.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "I7BRQUNU",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Using trace elements to identify the geographic origin of migratory bats",
+        "date": "2020-10-19",
+        "creators": [
+          {
+            "firstName": "Jamin G.",
+            "lastName": "Wieringa",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Juliet",
+            "lastName": "Nagel",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "David M.",
+            "lastName": "Nelson",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Bryan C.",
+            "lastName": "Carstens",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "H. Lisle",
+            "lastName": "Gibbs",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The expansion of the wind energy industry has had benefits in terms of increased renewable energy production but has also led to increased mortality of migratory bats due to interactions with wind turbines. A key question that could guide bat-related management activities is identifying the geographic origin of bats killed at wind-energy facilities. Generating this information requires developing new methods for identifying the geographic sources of individual bats. Here we explore the viability of assigning geographic origin using trace element analyses of fur to infer the summer molting location of eastern red bats (Lasiurus borealis). Our approach is based on the idea that the concentration of trace elements in bat fur is related through the food chain to the amount of trace elements present in the soil, which varies across large geographic scales. Specifically, we used inductively coupled plasma–mass spectrometry to determine the concentration of fourteen trace elements in fur of 126 known-origin eastern red bats to generate a basemap for assignment throughout the range of this species in eastern North America. We then compared this map to publicly available soil trace element concentrations for the U.S. and Canada, used a probabilistic framework to generate likelihood-of-origin maps for each bat, and assessed how well trace element profiles predicted the origins of these individuals. Overall, our results suggest that trace elements allow successful assignment of individual bats 80% of the time while reducing probable locations in half. Our study supports the use of trace elements to identify the geographic origin of eastern red and perhaps other migratory bats, particularly when combined with data from other biomarkers such as genetic and stable isotope data.",
+        "DOI": "10.7717/peerj.10082",
+        "url": "https://peerj.com/articles/10082",
+        "tags": []
+      }
+    },
+    {
+      "key": "J4XUNU9J",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "WHSWD22Q",
+        "title": "Snapshot",
+        "filename": "ecs2.html",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ecs2.4588",
+        "contentType": "text/html",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "5RMYWDP3",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "WHSWD22Q",
+        "title": "Full Text PDF",
+        "filename": "Wieringa et al. - 2023 - Combining stable isotopes, trace elements, and distribution models to assess the geographic origins.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecs2.4588",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "WHSWD22Q",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Combining stable isotopes, trace elements, and distribution models to assess the geographic origins of migratory bats",
+        "date": "2023",
+        "creators": [
+          {
+            "firstName": "Jamin G.",
+            "lastName": "Wieringa",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Juliet",
+            "lastName": "Nagel",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "C. J.",
+            "lastName": "Campbell",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "David M.",
+            "lastName": "Nelson",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Bryan C.",
+            "lastName": "Carstens",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "H. Lisle",
+            "lastName": "Gibbs",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The expansion of industrial-scale wind-energy facilities has not only increased the production of low-carbon emission energy but has also resulted in mortality of wildlife, including migratory bats. Management decisions can be limited by a lack of understanding of the geographic impact of bats killed at wind-energy facilities. Several studies have leveraged stable hydrogen isotope ratios (δ2H) of bat fur to illuminate this issue but are limited in the precision of conclusion because δ2H values vary primarily across latitudinal and elevational bands. One approach to increase the precision of geographic assignment is to combine independent inferences about spatial location from additional biomarkers and other related information. To test this possibility, we assigned known-origin individuals of three bat species (Lasiurus borealis, L. cinereus, and Lasionycteris noctivagans) commonly killed at on-shore wind-energy facilities in North America to a probable origin using δ2H values, trace element concentrations, and species distribution models. We used cross-validated calibrated combined model tuning to determine the degree to which assignment probabilities improved when combining datasets. We found that combining markers typically performed better than single approaches. For Lasiurus borealis and L. cinereus, combining all three data sources outperformed any single or other combined approach. With an accuracy set at 80%, an average of 39.7% and 36.0% of each species' total geographic range was considered a potential origin, respectively; stable hydrogen alone included 51.8% and 50.6% of the total geographic area. In contrast, for Lasionycteris noctivagans, including trace elements did not increase precision and adding distribution data to δ2H values only improved precision by 0.6%. Thus, we found that a combination of multiple biomarkers typically, but not always, outperforms single-marker approaches and optimized combinations of different markers outperform equal weighting of each marker. From a practical perspective, δ2H values performed better than trace elements alone; in cases where cost is a limiting factor, the stable hydrogen should be the single biomarker used in conjunction with species distribution models. Overall, these results highlight the importance of validating methods for each species they are applied to and show that combining information from intrinsic biomarker approaches is a useful tool to document bat movements.",
+        "DOI": "10.1002/ecs2.4588",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ecs2.4588",
+        "tags": [
+          {
+            "tag": "SDM"
+          },
+          {
+            "tag": "conservation"
+          },
+          {
+            "tag": "isotopes"
+          },
+          {
+            "tag": "migratory bats"
+          },
+          {
+            "tag": "trace elements"
+          },
+          {
+            "tag": "wind energy"
+          }
+        ]
+      }
+    },
     {
       "key": "2FVDBW4E",
       "data": {
