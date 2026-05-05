@@ -1,8 +1,417 @@
 {
-  "generated_at": "2026-05-04T09:51:34.092Z",
+  "generated_at": "2026-05-05T09:42:27.215Z",
   "group_id": "5253055",
-  "total_items": 4184,
+  "total_items": 4192,
   "items": [
+    {
+      "key": "G8YAZPWY",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "Q43DX9TF",
+        "title": "PDF",
+        "filename": "Ronning - Minimizing Risk of Bird Strike to Rotorcraft.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "Q43DX9TF",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Minimizing Risk of Bird Strike to Rotorcraft",
+        "creators": [
+          {
+            "firstName": "Donald J",
+            "lastName": "Ronning",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "IWLHRKU7",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "DBUPQ2AC",
+        "title": "PDF",
+        "filename": "Wiggelinkhuizen - Bird collision monitoring system for multi-megawatt wind turbines WT-Bird®.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "DBUPQ2AC",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Bird collision monitoring system for multi-megawatt wind turbines WT-Bird®",
+        "creators": [
+          {
+            "firstName": "E J",
+            "lastName": "Wiggelinkhuizen",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The effects of wind turbines on birds have been studied for almost twenty years, mainly by visual observation and radar. This has provided a good insight in the collision risks for several land-based wind farms. Still more accurate data are needed to assess the actual mortality rates and eventually the collision risks, especially for large (offshore) wind farms.",
+        "tags": []
+      }
+    },
+    {
+      "key": "MDSYDKEU",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "8VCJXA68",
+        "title": "PDF",
+        "filename": "Verhoef et al. - WT-Bird A Low Cost Solution for Detecting Bird Collisions.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "8VCJXA68",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "WT-Bird A Low Cost Solution for Detecting Bird Collisions",
+        "creators": [
+          {
+            "firstName": "J P",
+            "lastName": "Verhoef",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "P J",
+            "lastName": "Eecen",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "R J",
+            "lastName": "Nijdam",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "H",
+            "lastName": "Korterink",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "H H",
+            "lastName": "Scholtens",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The large-scale implementation of wind energy is hampered to a large extent by the unknown effects that wind turbines may have on the environment. The collision of birds with turbines and the distortion of the migration routes are in that respect points of great concern. The project “WT-Bird , A low cost solution for detecting bird collision” focused on developing a reliable and cheaper method for counting bird collisions in order to obtain more insight in the actual size of the problem, especially in offshore applications for which no alternative detection method is available.",
+        "tags": []
+      }
+    },
+    {
+      "key": "7L67GWYA",
+      "data": {
+        "itemType": "report",
+        "title": "3rd Edition: Summary of bird fatality monitoring data contained in AWWIC",
+        "date": "2025-10-14",
+        "creators": [
+          {
+            "firstName": "Eric",
+            "lastName": "Schauber",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Ryan S",
+            "lastName": "Butryn",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Shilo K",
+            "lastName": "Felton",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "UCALQUTB",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Estimating animal densities in the aerosphere using weather radar: To Z or not to Z?",
+        "date": "08/2012",
+        "creators": [
+          {
+            "firstName": "Phillip B",
+            "lastName": "Chilson",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Winifred F",
+            "lastName": "Frick",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Phillip M",
+            "lastName": "Stepanian",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "J Ryan",
+            "lastName": "Shipley",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Thomas H",
+            "lastName": "Kunz",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jeffrey F",
+            "lastName": "Kelly",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Weather radars provide near-continuous recording and extensive spatial coverage, which is a valuable resource for biologists, who wish to observe and study animal movements in the aerosphere over a wide range of temporal and spatial scales. Powerful biological inferences can be garnered from radar data that have been processed primarily with the intention of understanding meteorology. However, when seeking to answer certain quantitative biological questions, e.g., those related to density of animals, assumptions made in processing radar data for meteorological purposes interfere with biological inference. In particular, values of the radar reflectivity factor (Z ) reported by weather radars are not well suited for biological interpretation. The mathematical framework we present here allows researchers to interpret weather radar data originating from biological scatterers (bioscatterers) without relying on assumptions developed specifically for meteorological phenomena. The mathematical principles discussed are used to interpret received echo power as it relates to bioscatterers. We examine the relationships among measurement error and these bioscatter signals using a radar simulator. Our simulation results demonstrate that within 30–90 km from a radar, distances typical for observing aerial vertebrates such as birds and bats, measurement error associated with number densities of animals within the radar sampling volume are low enough to allow reasonable estimates of aerial densities for population monitoring. The framework presented for using radar echoes for quantifying biological populations observed by radar in their aerosphere habitats enhances use of radar remote-sensing for long-term population monitoring as well as a host of other ecological applications, such as studies on phenology, movement, and aerial behaviors.",
+        "DOI": "10.1890/ES12-00027.1",
+        "url": "https://esajournals.onlinelibrary.wiley.com/doi/10.1890/ES12-00027.1",
+        "tags": []
+      }
+    },
+    {
+      "key": "UJXGL7C8",
+      "data": {
+        "itemType": "report",
+        "title": "The role of regional-scale weather variables in  predicting bat mortality and bat acoustic activity:  Potential for use in the development of smart curtailment algorithms",
+        "date": "July 26, 2021",
+        "creators": [
+          {
+            "firstName": "Andrew",
+            "lastName": "Farnsworth",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kyle G",
+            "lastName": "Horton",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kevin W",
+            "lastName": "Heist",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Eli S",
+            "lastName": "Bridge",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Robert H",
+            "lastName": "Diehl",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Winifred F",
+            "lastName": "Frick",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jeffrey F",
+            "lastName": "Kelly",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Phillip M",
+            "lastName": "Stepanian",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Reducing bat mortality at wind energy facilities is a priority for wind-wildlife stakeholders. Curtailment (shutting down turbines) under certain conditions has proven to be effective in reducing bat fatalities. To date, two curtailment strategies show both promise and limitations. The simplest strategy, “blanket” curtailment during low wind-speed conditions, typically results in reduced collision risk but also results in unnecessary loss of energy production if turbines are shut down when bats are not present. “Smart” curtailment uses other variables, e.g., temperature and real-time acoustic activity measurements, to guide curtailment decisions, but unplanned curtailment resulting in unplanned reductions in power generation can complicate electrical grid management strategies. This study applied an approach previously used for forecasting bird migration based on weather data (BirdCast), and developed models using statistical and machine learning approaches to see if regional scale meteorological variables could predict increases in bat acoustic activity and collision risk to better inform curtailment. Given the scale of movements exhibited by bats during migration, a regional approach to smart curtailment could help identify trends that small-scale smart curtailment algorithms are not able to detect .",
+        "url": "https://rewi.org/wp-content/uploads/2021/07/WWRF_Summary_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity.pdf",
+        "tags": [
+          {
+            "tag": "Bats"
+          },
+          {
+            "tag": "Fatality"
+          },
+          {
+            "tag": "Land-based Wind"
+          },
+          {
+            "tag": "Midwest"
+          },
+          {
+            "tag": "Minimization"
+          },
+          {
+            "tag": "North America"
+          },
+          {
+            "tag": "Onshore wind"
+          },
+          {
+            "tag": "Previous field data"
+          },
+          {
+            "tag": "REWRF Funded"
+          },
+          {
+            "tag": "U.S. - Great Lakes-Big Rivers (USFWS Region 3)"
+          },
+          {
+            "tag": "program_wind"
+          }
+        ]
+      }
+    },
+    {
+      "key": "47TIHD92",
+      "data": {
+        "itemType": "report",
+        "title": "The Role of Regional Scale Weather Variables in Predicting Bat Mortality and Bat Acoustic Activity: Potential for Use in the Development of Smart Curtailment Algorithms",
+        "date": "July 26, 2021",
+        "creators": [
+          {
+            "firstName": "Andrew",
+            "lastName": "Farnsworth",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kyle",
+            "lastName": "Horton",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kevin",
+            "lastName": "Heist",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Eli",
+            "lastName": "Bridge",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Robert H",
+            "lastName": "Diehl",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Winifred F",
+            "lastName": "Frick",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jeffrey F",
+            "lastName": "Kelly",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Phillip M",
+            "lastName": "Stepanian",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The primary objective of this study was to explore the use of regional-scale, i.e., synoptic, meteorological variables to predict broader-scale movements of bats to further the goal of reducing bat fatalities at wind energy facilities. This effort represented a preliminary, proof-of-concept approach for future exploration, and its intent was not for operational use in the near-term. We investigated the feasibility of decision support tools for bat fatality reduction that employ machine learning approaches, more specifically gradient-boosted linear regression trees. We modeled bat mortality and bat activity, estimated as bat echolocations derived from audio recordings of echolocation activity, with 31 predictor variables including: atmospheric conditions at surface and pressure-level measures of wind speed; air temperature and turbulent kinetic energy (a measure of wind velocity fluctuation); landcover characteristics (USGS 2011 National Landcover Database, 30 m resolution) at 100 m and 2 km surrounding acoustic recording sites; temporal data (e.g. ordinal date); and geographic data (e.g. latitude). The intent of our modeling effort was to produce a model for forecasting when, where, and under what conditions bats would occur in close proximities to wind turbines.\nWe explored the potential application of the most current modeling methodologies for forecasting bird migration based on weather variables (e.g., BirdCast) for predicting bat acoustic activity and collision risk. We chose to focus this initial effort on the Great Lakes region because of the density of available data and accessibility with respect to bat distribution information, existing mortality and acoustic data, and predictor variables, with a plan to develop additional region-specific models for bats for future testing at multiple wind facilities. We used gradient-boosted regression trees to generate two models: 1) a regional model using acoustic recordings of echolocation activity in the Great Lakes region to predict bat echolocation based on weather, habitat, and geographic variables; and 2) a broader but more diffuse model with samples from bat fatalities at wind energy facilities to predict periods of heightened bat collision risk from weather and geographic variables. At present, there is no model to directly relate preor post-construction acoustic activity and bat fatalities at wind facilities. To evaluate the efficacy of using weather variables with the power embodied in the BirdCast migration forecasts that are extensible across the contiguous United States, we separately modeled these distinct and different data representing bats.\nThe best all-species gradient-boosted regression tree model explained 73.0% of the variation (R2=0.73) in bat echolocation activity from acoustic data from nearly 120,000 recording periods and produced explanatory predictions for areas that were not directly sampled. This acoustic activity model was based on the following most important variables whose contributions we determined in terms of their gain in predictive performance: 1) surface temperature; 2) % water within a 2 km radius; 3) hour after sunset; 4) ordinal date; and 5) hour before sunrise. The best all-species mortality model explained 44% of the variation (R2=0.44) in bat fatality data from post-construction fatality monitoring datasets, with the most important variables being 1) longitude, 2) ordinal date, and 3) latitude; followed by 4) surface, and 5) air temperatures. We did not include landcover predictors in the mortality model and did not have a sufficiently broad geographic and spatial sampling of fatality search data (6,289 site-search days; 226,842 turbine-search days), or the necessary randomization in methods, to apply this model to areas beyond locations with data – i.e., we could not expand to novel spatial and temporal extents because of a lack of fatality search data. respect to potential expectations of model behavior, parameters, and accuracy, as well as important caveats regarding availability and robustness for statistical efforts with existing data.\nWe produced proof-of-concept, generalizable models that predicted heightened bat echolocation activity and number of fatalities from variables, including habitat type, atmospheric conditions, and indicators of seasonality and geography. We used bat echolocation as a surrogate for bat activity, and bat collision risk was estimated from bat fatalities collected during carcass searches. These two independent models were spatially explicit in terms of their data inputs, predicting at a localized scale in their respective study areas. Acoustic data were generally more accessible than mortality data, primarily because of experience, expense, and availability of acoustic monitoring methods relative to searching for carcasses. The models performed well, and results support further exploration to expand analysis with data from regions beyond those encompassed by this study and could be considered for integration with smart curtailment algorithms. Such consideration of application in operational environments will require additional research guided by this proof-of-concept study. Our results complement efforts to increase the efficiency of bat risk minimization strategies focused on individual projects, by providing a tool for predicting movements or activity of bats and thus bat collision risk over larger spatial scales during migration, movements to or from maternity roosts and hibernacula, or mass roost emergences (as witnessed in Mexican free-tailed bats). Our efforts support further exploration of smart curtailment algorithms that account for weather variables at a regional scale as opposed to relying on weather data from met towers located within projects. Regional models could provide advanced warning of periods of increased risk to bats and allow energy producers and managers of regional electric grids to plan for periods of reduced power generation.",
+        "url": "https://rewi.org/wp-content/uploads/2021/07/WWRF_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity.pdf",
+        "tags": [
+          {
+            "tag": "Bats"
+          },
+          {
+            "tag": "Collision risk"
+          },
+          {
+            "tag": "North America"
+          },
+          {
+            "tag": "Onshore wind"
+          },
+          {
+            "tag": "U.S. - Great Lakes-Big Rivers (USFWS Region 3)"
+          },
+          {
+            "tag": "program_wind"
+          },
+          {
+            "tag": "wis_t"
+          }
+        ]
+      }
+    },
+    {
+      "key": "ANKY5787",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Climate and weather impact timing of emergence of bats",
+        "date": "2012-8-2",
+        "creators": [
+          {
+            "firstName": "Winifred F",
+            "lastName": "Frick",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Phillip M",
+            "lastName": "Stepanian",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jeffrey F",
+            "lastName": "Kelly",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Kenneth W",
+            "lastName": "Howard",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Charles M",
+            "lastName": "Kuster",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Thomas H",
+            "lastName": "Kunz",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Phillip B",
+            "lastName": "Chilson",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Brock",
+            "lastName": "Fenton",
+            "creatorType": "editor"
+          }
+        ],
+        "abstractNote": "Interest in forecasting impacts of climate change have heightened attention in recent decades to how animals respond to variation in climate and weather patterns. One difficulty in determining animal response to climate variation is lack of longterm datasets that record animal behaviors over decadal scales. We used radar observations from the national NEXRAD network of Doppler weather radars to measure how group behavior in a colonially-roosting bat species responded to annual variation in climate and daily variation in weather over the past 11 years. Brazilian free-tailed bats (Tadarida brasiliensis) form dense aggregations in cave roosts in Texas. These bats emerge from caves daily to forage at high altitudes, which makes them detectable with Doppler weather radars. Timing of emergence in bats is often viewed as an adaptive trade-off between emerging early and risking predation or increased competition and emerging late which restricts foraging opportunities. We used timing of emergence from five maternity colonies of Brazilian free-tailed bats in southcentral Texas during the peak lactation period (15 June–15 July) to determine whether emergence behavior was associated with summer drought conditions and daily temperatures. Bats emerged significantly earlier during years with extreme drought conditions than during moist years. Bats emerged later on days with high surface temperatures in both dry and moist years, but there was no relationship between surface temperatures and timing of emergence in summers with normal moisture levels. We conclude that emergence behavior is a flexible animal response to climate and weather conditions and may be a useful indicator for monitoring animal response to long-term shifts in climate.",
+        "DOI": "10.1371/journal.pone.0042737",
+        "url": "https://dx.plos.org/10.1371/journal.pone.0042737",
+        "tags": []
+      }
+    },
+    {
+      "key": "425ULMXN",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "7L67GWYA",
+        "title": "PDF",
+        "filename": "AWWIC_Bird-Technical-Report_3rd-Edition_2025.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
     {
       "key": "P7TDE5K9",
       "data": {
@@ -1248,60 +1657,6 @@
         "abstractNote": "The uncertain natures of renewable energy lead to its underutilization; energy storage unit (ESU) is expected to be one of the most promising solutions to this issue. This paper evaluates the impact of ESUs on renewable energy curtailment. For any ﬁxed renewable power output, the evaluation model minimizes the total amount of curtailment and is formulated as a mixed integer linear program (MILP) with the complementarity constraints on the charging and discharging behaviors of ESUs; by treating the power and energy capacities of ESUs as parameters, the MILP is transformed into a multi-parametric MILP (mp-MILP), whose optimal value function (OVF) explicitly maps the parameters to the renewable energy curtailment. Further, given the inexactness of uncertainty’s probability distribution, a distributionally robust mp-MILP (DR-mp-MILP) is proposed that considers the worst distribution in a neighborhood of the empirical distribution built by the representative scenarios. The DR-mp-MILP has a max–min form and is reformed as a canonical mp-MILP by duality theory. The proposed method was validated on the modiﬁed IEEE nine-bus systems; the parameterized OVFs provide insightful suggestions on storage sizing.",
         "DOI": "10.3390/app11031135",
         "url": "https://www.mdpi.com/2076-3417/11/3/1135",
-        "tags": []
-      }
-    },
-    {
-      "key": "ANKY5787",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Climate and weather impact timing of emergence of bats",
-        "date": "2012-8-2",
-        "creators": [
-          {
-            "firstName": "Winifred F.",
-            "lastName": "Frick",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Phillip M.",
-            "lastName": "Stepanian",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Jeffrey F.",
-            "lastName": "Kelly",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Kenneth W.",
-            "lastName": "Howard",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Charles M.",
-            "lastName": "Kuster",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Thomas H.",
-            "lastName": "Kunz",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Phillip B.",
-            "lastName": "Chilson",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Brock",
-            "lastName": "Fenton",
-            "creatorType": "editor"
-          }
-        ],
-        "abstractNote": "Interest in forecasting impacts of climate change have heightened attention in recent decades to how animals respond to variation in climate and weather patterns. One difficulty in determining animal response to climate variation is lack of longterm datasets that record animal behaviors over decadal scales. We used radar observations from the national NEXRAD network of Doppler weather radars to measure how group behavior in a colonially-roosting bat species responded to annual variation in climate and daily variation in weather over the past 11 years. Brazilian free-tailed bats (Tadarida brasiliensis) form dense aggregations in cave roosts in Texas. These bats emerge from caves daily to forage at high altitudes, which makes them detectable with Doppler weather radars. Timing of emergence in bats is often viewed as an adaptive trade-off between emerging early and risking predation or increased competition and emerging late which restricts foraging opportunities. We used timing of emergence from five maternity colonies of Brazilian free-tailed bats in southcentral Texas during the peak lactation period (15 June–15 July) to determine whether emergence behavior was associated with summer drought conditions and daily temperatures. Bats emerged significantly earlier during years with extreme drought conditions than during moist years. Bats emerged later on days with high surface temperatures in both dry and moist years, but there was no relationship between surface temperatures and timing of emergence in summers with normal moisture levels. We conclude that emergence behavior is a flexible animal response to climate and weather conditions and may be a useful indicator for monitoring animal response to long-term shifts in climate.",
-        "DOI": "10.1371/journal.pone.0042737",
-        "url": "https://dx.plos.org/10.1371/journal.pone.0042737",
         "tags": []
       }
     },
@@ -2661,50 +3016,6 @@
             "creatorType": "author"
           }
         ],
-        "tags": []
-      }
-    },
-    {
-      "key": "UCALQUTB",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Estimating animal densities in the aerosphere using weather radar: To <i>Z</i> or not to <i>Z</i> ?",
-        "date": "08/2012",
-        "creators": [
-          {
-            "firstName": "Phillip B",
-            "lastName": "Chilson",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Winifred F",
-            "lastName": "Frick",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Phillip M",
-            "lastName": "Stepanian",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "J Ryan",
-            "lastName": "Shipley",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Thomas H",
-            "lastName": "Kunz",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Jeffrey F",
-            "lastName": "Kelly",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Weather radars provide near-continuous recording and extensive spatial coverage, which is a valuable resource for biologists, who wish to observe and study animal movements in the aerosphere over a wide range of temporal and spatial scales. Powerful biological inferences can be garnered from radar data that have been processed primarily with the intention of understanding meteorology. However, when seeking to answer certain quantitative biological questions, e.g., those related to density of animals, assumptions made in processing radar data for meteorological purposes interfere with biological inference. In particular, values of the radar reflectivity factor (Z ) reported by weather radars are not well suited for biological interpretation. The mathematical framework we present here allows researchers to interpret weather radar data originating from biological scatterers (bioscatterers) without relying on assumptions developed specifically for meteorological phenomena. The mathematical principles discussed are used to interpret received echo power as it relates to bioscatterers. We examine the relationships among measurement error and these bioscatter signals using a radar simulator. Our simulation results demonstrate that within 30–90 km from a radar, distances typical for observing aerial vertebrates such as birds and bats, measurement error associated with number densities of animals within the radar sampling volume are low enough to allow reasonable estimates of aerial densities for population monitoring. The framework presented for using radar echoes for quantifying biological populations observed by radar in their aerosphere habitats enhances use of radar remote-sensing for long-term population monitoring as well as a host of other ecological applications, such as studies on phenology, movement, and aerial behaviors.",
-        "DOI": "10.1890/ES12-00027.1",
-        "url": "https://esajournals.onlinelibrary.wiley.com/doi/10.1890/ES12-00027.1",
         "tags": []
       }
     },
@@ -11750,52 +12061,6 @@
           },
           {
             "tag": "U.S. - Mountain-Prairie (USFWS Region 6)"
-          },
-          {
-            "tag": "program_wind"
-          }
-        ]
-      }
-    },
-    {
-      "key": "UJXGL7C8",
-      "data": {
-        "itemType": "report",
-        "title": "WWRF_Summary_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity",
-        "date": "July 26, 2021",
-        "creators": [],
-        "abstractNote": "Reducing bat mortality at wind energy facilities is a priority for wind-wildlife stakeholders. Curtailment (shutting down turbines) under certain conditions has proven to be effective in reducing bat fatalities. To date, two curtailment strategies show both promise and limitations. The simplest strategy, “blanket” curtailment during low wind-speed conditions, typically results in reduced collision risk but also results in unnecessary loss of energy production if turbines are shut down when bats are not present. “Smart” curtailment uses other variables, e.g., temperature and real-time acoustic activity measurements, to guide curtailment decisions, but unplanned curtailment resulting in unplanned reductions in power generation can complicate electrical grid management strategies. This study applied an approach previously used for forecasting bird migration based on weather data (BirdCast), and developed models using statistical and machine learning approaches to see if regional scale meteorological variables could predict increases in bat acoustic activity and collision risk to better inform curtailment. Given the scale of movements exhibited by bats during migration, a regional approach to smart curtailment could help identify trends that small-scale smart curtailment algorithms are not able to detect .",
-        "url": "https://rewi.org/wp-content/uploads/2021/07/WWRF_Summary_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity.pdf",
-        "tags": [
-          {
-            "tag": "Bats"
-          },
-          {
-            "tag": "Fatality"
-          },
-          {
-            "tag": "Land-based Wind"
-          },
-          {
-            "tag": "Midwest"
-          },
-          {
-            "tag": "Minimization"
-          },
-          {
-            "tag": "North America"
-          },
-          {
-            "tag": "Onshore wind"
-          },
-          {
-            "tag": "Previous field data"
-          },
-          {
-            "tag": "REWRF Funded"
-          },
-          {
-            "tag": "U.S. - Great Lakes-Big Rivers (USFWS Region 3)"
           },
           {
             "tag": "program_wind"
@@ -56049,65 +56314,6 @@
         "tags": [
           {
             "tag": "program_wind"
-          }
-        ]
-      }
-    },
-    {
-      "key": "47TIHD92",
-      "data": {
-        "itemType": "report",
-        "title": "The Role of Regional Scale Weather Variables in Predicting Bat Mortality and Bat Acoustic Activity: Potential for Use in the Development of Smart Curtailment Algorithms",
-        "date": "July 26, 2021",
-        "creators": [
-          {
-            "firstName": "Andrew",
-            "lastName": "Farnsworth",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Kyle",
-            "lastName": "Horton",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Kevin",
-            "lastName": "Heist",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Eli",
-            "lastName": "Bridge",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Robert H.",
-            "lastName": "Diehl",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Winifred",
-            "lastName": "Frick",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Jeff",
-            "lastName": "Kelly",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Phil",
-            "lastName": "Stepanian",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://rewi.org/wp-content/uploads/2021/07/WWRF_Role-of-Regional-Scale-Weather-Variables-in-Predicting-Bat-Mortality-and-Bat-Acoustic-Activity.pdf",
-        "tags": [
-          {
-            "tag": "program_wind"
-          },
-          {
-            "tag": "wis_t"
           }
         ]
       }
