@@ -1,8 +1,166 @@
 {
-  "generated_at": "2026-05-05T09:42:27.215Z",
+  "generated_at": "2026-05-06T09:53:25.946Z",
   "group_id": "5253055",
-  "total_items": 4192,
+  "total_items": 4195,
   "items": [
+    {
+      "key": "CW6IQSIV",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "VKYGQPRC",
+        "title": "Full Text",
+        "filename": "Zargane et al. - 2026 - A Multi-Source Spatiotemporal Framework for Vegetation Anomaly Detection in Solar Photovoltaic Field.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://www.mdpi.com/2673-9941/6/3/21/pdf?version=1777366917",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "VKYGQPRC",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "A Multi-Source Spatiotemporal Framework for Vegetation Anomaly Detection in Solar Photovoltaic Fields Using Hierarchical Labels and Hybrid Deep Learning",
+        "date": "2026/6",
+        "creators": [
+          {
+            "firstName": "Chahrazad",
+            "lastName": "Zargane",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Anas",
+            "lastName": "Kabbori",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Azidine",
+            "lastName": "Guezzaz",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Said",
+            "lastName": "Benkirane",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Mourade",
+            "lastName": "Azrour",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Moroccan installations of solar photovoltaic panels experience operational difficulties due to shading and vegetation-related soiling, which reduce energy output by 15–30%. Most monitoring systems depend upon a single vegetation index, which can reduce the accuracy of detecting even moderate anomalies. This paper presents a novel integration of multi-criteria hierarchical labeling with dual-branch deep learning for enhanced vegetation anomaly detection. We combined MODIS (2000–2015) and Sentinel-2 (2015–2025) images and NASA POWER weather records to study a 25-year vegetation record using multi-source satellite data in 5 of Morocco’s ecologically diverse zones. We introduced a three-class hierarchical labeling scheme (normal, moderate, severe) for dynamic vegetation models based on combined vegetation indices (NDVI, EVI, NDWI) and meteorological thresholds. The proposed dual-branch architecture uses independent data streams for unfused data, which include temporal multi-scale CNNs (TMSCNN) for spatiotemporal modeling and bidirectional LSTMs for weather-integrated vegetation data. Systematic ablation studies show improvements from using NDVI (68.98%) to multispectral indices (77.74%), meteorological integration (81.02%), and a final accuracy of 82.34% ± 0.88%. The moderate anomaly class exhibits lower precision (65%), demonstrating the challenge of operationalizing severity-based anomaly classification. This work integrates hierarchical, multi-criteria labeling and hybrid deep learning for solar photovoltaic vegetation monitoring.",
+        "DOI": "10.3390/solar6030021",
+        "url": "https://www.mdpi.com/2673-9941/6/3/21",
+        "tags": [
+          {
+            "tag": "LSTM"
+          },
+          {
+            "tag": "Morocco"
+          },
+          {
+            "tag": "TMSCNN"
+          },
+          {
+            "tag": "deep learning"
+          },
+          {
+            "tag": "multi-criteria labeling"
+          },
+          {
+            "tag": "remote sensing"
+          },
+          {
+            "tag": "solar photovoltaic"
+          },
+          {
+            "tag": "vegetation anomaly detection"
+          }
+        ]
+      }
+    },
+    {
+      "key": "HVCXRPJU",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "9EVKYWN3",
+        "title": "Full Text PDF",
+        "filename": "Saad and Leil - 2026 - Impacts of Renewable Energy Sources on Biological Diversity and Conservation An Overview.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://srcest.org.ly/journal/index.php/ljest/article/download/380/385",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "9EVKYWN3",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Impacts of Renewable Energy Sources on Biological Diversity and Conservation: An Overview",
+        "date": "2026-04-30",
+        "creators": [
+          {
+            "firstName": "Said A.",
+            "lastName": "Saad",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Ibrahim Mohamed Abou El",
+            "lastName": "Leil",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "في الوقت الحاضر، تُعتبر الطاقة المتجددة نوعًا نظيفًا ومختلفًا من الطاقة.   تحاول هذه الدراسة توضيح كيفية تأثير مصادر الطاقة المتجددة، مثل الألواح الشمسية الكهروضوئية (PV)، ومزارع الرياح، وتوليد الطاقة الكهرومائية، على التنوع البيولوجي لمواطن الحيوانات البرية والمائية.   في 55% من الأبحاث السابقة حول توربينات مزارع الرياح، تتراوح معدلات وفاة الطيور بين 0.0 إلى 2.0 حالة وفاة/توربين/سنة، في حين تتراوح معدلات وفاة الطيور الجارحة بين 0.0 إلى 0.1 حالة وفاة/توربين/سنة في 79.4% من الدراسات.  هذا يعتمد على موقع وطريقة تركيب التوربينات.   أكثر التهديدات المذكورة كانت الطيور المهاجرة (الإوز المهاجر، الكركي، الدراج، الدراج الذهبي)، الطيور المائية (أنواع الإوز)، الطيور العشبية (السُمانة المشتركة، الدراج الذهبي، الدراج، الدراج ذو الخاتم)، والطيور الجارحة (الباز المشترك، الشاهين المشترك، والنسر الأحمر).   تتراوح معدلات وفيات الخفافيش من 0.0 إلى 47.5 حالة وفاة لكل توربين سنويًا في مزارع الرياح المختلفة.   تبحث الدراسة أيضًا في التأثيرات الضارة للخزانات الكهرومائية على التنوع البيولوجي، بما في ذلك السلاحف العذبة والمخلوقات المائية والبرية، بالإضافة إلى التأثيرات السلبية لتركيبات الطاقة الشمسية على النظم البيئية والحياة البرية.   ومع ذلك، كانت فقدان المواطن والمسارات الهجرية المنتظمة للحيوانات البرية تشير إلى هذه العواقب.",
+        "DOI": "10.63359/h0j5xs25",
+        "url": "https://srcest.org.ly/journal/index.php/ljest/article/view/380",
+        "tags": [
+          {
+            "tag": "Biodiversity"
+          },
+          {
+            "tag": "Renewable energy sources"
+          },
+          {
+            "tag": "animals"
+          },
+          {
+            "tag": "aquatic"
+          },
+          {
+            "tag": "impacts"
+          },
+          {
+            "tag": "terrestrial"
+          },
+          {
+            "tag": "wildlife"
+          },
+          {
+            "tag": "الاثار"
+          },
+          {
+            "tag": "الاحياء"
+          },
+          {
+            "tag": "الارضية"
+          },
+          {
+            "tag": "التنوع"
+          },
+          {
+            "tag": "المائية"
+          },
+          {
+            "tag": "مصادر الطاقة المتجددة"
+          }
+        ]
+      }
+    },
     {
       "key": "G8YAZPWY",
       "data": {
@@ -32329,6 +32487,51 @@
       }
     },
     {
+      "key": "XWB4Z8P9",
+      "data": {
+        "itemType": "report",
+        "title": "A Multi-Sensor Approach for Measuring Bird and Bat Collisions with Offshore Wind Turbines (Final Technical Report)",
+        "date": "2025-10-03",
+        "creators": [
+          {
+            "name": "USDOE Office of Energy Efficiency and Renewable Energy (EERE), Renewable Power Office. Wind Energy Technologies Office",
+            "creatorType": "author"
+          },
+          {
+            "name": "Dutch Innovation Fund",
+            "creatorType": "author"
+          },
+          {
+            "name": "Vineyard Wind",
+            "creatorType": "author"
+          },
+          {
+            "name": "Diamond Offshore Wind",
+            "creatorType": "author"
+          },
+          {
+            "name": "Western EcoSystems Technology, Inc. (WEST), Cheyenne, WY (United States)",
+            "creatorType": "author"
+          },
+          {
+            "name": "The Netherlands Organisation for Applied Scientific Research (TNO), The Hague (Netherlands)",
+            "creatorType": "author"
+          },
+          {
+            "name": "National Renewable Energy Laboratory (NREL), Golden, CO (United States). National Wind Technology Center",
+            "creatorType": "author"
+          }
+        ],
+        "DOI": "10.2172/3011525",
+        "url": "https://www.osti.gov/biblio/3011525",
+        "tags": [
+          {
+            "tag": "program_wind"
+          }
+        ]
+      }
+    },
+    {
       "key": "MI2JUVHB",
       "data": {
         "itemType": "journalArticle",
@@ -34776,50 +34979,6 @@
         "itemType": "document",
         "title": "2012_USFWS_ Land based wind energy guidelines",
         "creators": [],
-        "tags": [
-          {
-            "tag": "program_wind"
-          }
-        ]
-      }
-    },
-    {
-      "key": "XWB4Z8P9",
-      "data": {
-        "itemType": "report",
-        "title": "A Multi-Sensor Approach for Measuring Bird and Bat Collisions with Offshore Wind Turbines (Final Technical Report)",
-        "date": "2025-10-03",
-        "creators": [
-          {
-            "name": "USDOE Office of Energy Efficiency and Renewable Energy (EERE), Renewable Power Office. Wind Energy Technologies Office",
-            "creatorType": "author"
-          },
-          {
-            "name": "Dutch Innovation Fund",
-            "creatorType": "author"
-          },
-          {
-            "name": "Vineyard Wind",
-            "creatorType": "author"
-          },
-          {
-            "name": "Diamond Offshore Wind",
-            "creatorType": "author"
-          },
-          {
-            "name": "Western EcoSystems Technology, Inc. (WEST), Cheyenne, WY (United States)",
-            "creatorType": "author"
-          },
-          {
-            "name": "The Netherlands Organisation for Applied Scientific Research (TNO), The Hague (Netherlands)",
-            "creatorType": "author"
-          },
-          {
-            "name": "National Renewable Energy Laboratory (NREL), Golden, CO (United States). National Wind Technology Center",
-            "creatorType": "author"
-          }
-        ],
-        "url": "https://www.osti.gov/biblio/3011525",
         "tags": [
           {
             "tag": "program_wind"
@@ -131425,90 +131584,6 @@
         "url": "https://www.mdpi.com/2073-445X/9/2/34/pdf?version=1581683615",
         "contentType": "application/pdf",
         "linkMode": "imported_url",
-        "tags": []
-      }
-    },
-    {
-      "key": "RXSKKKPT",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Impact of Agrochemicals on Soil Microbiota and Management: A Review",
-        "date": "2020-01-23",
-        "creators": [
-          {
-            "firstName": "Ram",
-            "lastName": "Meena",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Sandeep",
-            "lastName": "Kumar",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Rahul",
-            "lastName": "Datta",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Rattan",
-            "lastName": "Lal",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Vinod",
-            "lastName": "Vijayakumar",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Martin",
-            "lastName": "Brtnicky",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Mahaveer",
-            "lastName": "Sharma",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Gulab",
-            "lastName": "Yadav",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Manoj",
-            "lastName": "Jhariya",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Chetan",
-            "lastName": "Jangir",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Shamina",
-            "lastName": "Pathan",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Tereza",
-            "lastName": "Dokulilova",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Vaclav",
-            "lastName": "Pecina",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Theodore",
-            "lastName": "Marfo",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "The World Health Organization (WHO) states that in developing nations, there are three million cases of agrochemical poisoning. The prolonged intensive and indiscriminate use of agrochemicals adversely affected the soil biodiversity, agricultural sustainability, and food safety, bringing in long-term harmful effects on nutritional security, human and animal health. Most of the agrochemicals negatively affect soil microbial functions and biochemical processes. The alteration in diversity and composition of the beneficial microbial community can be unfavorable to plant growth and development either by reducing nutrient availability or by increasing disease incidence. Currently, there is a need for qualitative, innovative, and demand-driven research in soil science, especially in developing countries for facilitating of high-quality eco-friendly research by creating a conducive and trustworthy work atmosphere, thereby rewarding productivity and merits. Hence, we reviewed (1) the impact of various agrochemicals on the soil microbial diversity and environment; (2) the importance of smallholder farmers for sustainable crop protection and enhancement solutions, and (3) management strategies that serve the scientific community, policymakers, and land managers in integrating soil enhancement and sustainability practices in smallholder farming households. The current review provides an improved understanding of agricultural soil management for food and nutritional security.",
-        "DOI": "10.3390/land9020034",
-        "url": "https://www.mdpi.com/2073-445X/9/2/34",
         "tags": []
       }
     },
