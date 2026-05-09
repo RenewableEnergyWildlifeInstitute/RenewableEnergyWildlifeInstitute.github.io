@@ -1,8 +1,26 @@
 {
-  "generated_at": "2026-05-08T09:38:22.279Z",
+  "generated_at": "2026-05-09T09:35:39.781Z",
   "group_id": "5253055",
-  "total_items": 4195,
+  "total_items": 4196,
   "items": [
+    {
+      "key": "J8PILFG7",
+      "data": {
+        "itemType": "thesis",
+        "title": "Response of Mammals to Solar Energy Developments in the Miami Valley, Ohio, USA",
+        "date": "2026",
+        "creators": [
+          {
+            "firstName": "Connor Raynor",
+            "lastName": "Kurz",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Solar energy plays an important role in reducing greenhouse gas and carbon emissions whilst mitigating climate change. However, its effects on mammals remain poorly understood in the Midwestern United States. As solar development continues to expand across the region, it increasingly alters landscapes that support a wide range of mammalian species. While renewable energy provides many environmental benefits, associated landscape change may influence mammal diversity and activity patterns. As solar infrastructure continues to expand across Ohio, there is increasing concern about its potential impacts on terrestrial species, particularly small and medium-bodied mammals that rely on contiguous habitat. Bats on the other hand provide critical ecosystem services, yet their responses to renewable energy development remain poorly understood and all bat species in Ohio are state listed. Therefore, understanding how different mammal species respond to solar energy development is essential when informing land management and guiding strategies that balance renewable energy implementation with wildlife conservation. The aim of the first chapter was to evaluate how terrestrial mammal communities respond to landscape changes associated with solar energy developments. Using camera trap data collected at solar sites, restored prairie sites, and restored forested areas, I assessed mammal activity, richness, and diversity in relation to solar development and adjacent environmental characteristics. Activity patterns varied among species, with some generalist species exhibited similar or higher detection rates near solar facilities, while others were less frequently detected in these developed habitats. Overall, our response variables were positively associated with vegetation productivity and activity was negatively associated with distance to roads and water sources. Simpson’s diversity only was negatively associated with area size and built cover. These results suggest that while some terrestrial mammals may tolerate or adapt to solar infrastructure, maintaining and improving nearby habitat is critical in supporting diverse mammal communities. In the second chapter, I used an acoustic monitoring methodology across solar energy developments, restored prairies, and restored forests to evaluate patterns of bat activity, richness, and diversity in relation to environmental and landscape variables. Bat activity and diversity were generally lower at solar sites compared to forests and prairies and was more strongly influenced by nighttime lights than by any other covariate. Bat activity increased with distance from roads and showed no association with proximity to water. Simpson’s diversity of bat communities increased with area size, with larger sites supporting higher diversity than smaller sites. By identifying key factors associated with bat activity and diversity in these landscapes, this research contributes to a growing understanding of wildlife responses to renewable energy development and provides insight for minimizing impacts on bat populations.",
+        "url": "https://etd.ohiolink.edu/acprod/odb_etd/etd/r/1501/10?clear=10&p10_accession_num=dayton1776685357262366",
+        "tags": []
+      }
+    },
     {
       "key": "7FN2XW75",
       "data": {
@@ -4838,20 +4856,6 @@
       }
     },
     {
-      "key": "E7YYNKVL",
-      "data": {
-        "itemType": "attachment",
-        "parentItem": "MCIKGXNJ",
-        "title": "PDF",
-        "filename": "Jones et al. - 2003 - Biological Correlates of Extinction Risk in Bats.pdf",
-        "note": "",
-        "creators": [],
-        "contentType": "application/pdf",
-        "linkMode": "imported_file",
-        "tags": []
-      }
-    },
-    {
       "key": "MCIKGXNJ",
       "data": {
         "itemType": "journalArticle",
@@ -4882,6 +4886,20 @@
             "tag": "wis_t"
           }
         ]
+      }
+    },
+    {
+      "key": "E7YYNKVL",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "MCIKGXNJ",
+        "title": "PDF",
+        "filename": "Jones et al. - 2003 - Biological Correlates of Extinction Risk in Bats.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
       }
     },
     {
@@ -14735,6 +14753,43 @@
       }
     },
     {
+      "key": "5R8R7N4X",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Development of a landscape integrity model framework to support regional conservation planning",
+        "date": "2018-04",
+        "creators": [
+          {
+            "firstName": "Leroy J",
+            "lastName": "Walston",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Heidi M",
+            "lastName": "Hartmann",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Land managers increasingly rely upon landscape assessments to understand the status of natural resources and identify conservation priorities. Many of these landscape planning efforts rely on geospatial models that characterize the ecological integrity of the landscape. These general models utilize measures of habitat disturbance and human activity to map indices of ecological integrity. We built upon these modeling frameworks by developing a Landscape Integrity Index (LII) model using geospatial datasets of the human footprint, as well as incorporation of other indicators of ecological integrity such as biodiversity and vegetation departure. Our LII model serves as a general indicator of ecological integrity in a regional context of human activity, biodiversity, and change in habitat composition. We also discuss the application of the LII framework in two related coarse-filter landscape conservation approaches to expand the size and connectedness of protected areas as regional mitigation for anticipated land-use changes.",
+        "DOI": "10.1371/journal.pone.0195115",
+        "url": "https://doi.org/10.1371/journal.pone.0195115",
+        "tags": [
+          {
+            "tag": "Peer Reviewed"
+          },
+          {
+            "tag": "data_public"
+          },
+          {
+            "tag": "relevance_high"
+          },
+          {
+            "tag": "tagged_ajw"
+          }
+        ]
+      }
+    },
+    {
       "key": "RESN9J4B",
       "data": {
         "itemType": "journalArticle",
@@ -14797,57 +14852,6 @@
       }
     },
     {
-      "key": "5R8R7N4X",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Development of a landscape integrity model framework to support regional conservation planning",
-        "date": "2018-04",
-        "creators": [
-          {
-            "firstName": "Leroy J",
-            "lastName": "Walston",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Heidi M",
-            "lastName": "Hartmann",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "Land managers increasingly rely upon landscape assessments to understand the status of natural resources and identify conservation priorities. Many of these landscape planning efforts rely on geospatial models that characterize the ecological integrity of the landscape. These general models utilize measures of habitat disturbance and human activity to map indices of ecological integrity. We built upon these modeling frameworks by developing a Landscape Integrity Index (LII) model using geospatial datasets of the human footprint, as well as incorporation of other indicators of ecological integrity such as biodiversity and vegetation departure. Our LII model serves as a general indicator of ecological integrity in a regional context of human activity, biodiversity, and change in habitat composition. We also discuss the application of the LII framework in two related coarse-filter landscape conservation approaches to expand the size and connectedness of protected areas as regional mitigation for anticipated land-use changes.",
-        "DOI": "10.1371/journal.pone.0195115",
-        "url": "https://doi.org/10.1371/journal.pone.0195115",
-        "tags": [
-          {
-            "tag": "Peer Reviewed"
-          },
-          {
-            "tag": "data_public"
-          },
-          {
-            "tag": "relevance_high"
-          },
-          {
-            "tag": "tagged_ajw"
-          }
-        ]
-      }
-    },
-    {
-      "key": "G2HRAUM6",
-      "data": {
-        "itemType": "attachment",
-        "parentItem": "JKWVWHUN",
-        "title": "PDF",
-        "filename": "Vázquez et al. - 2015 - Toxic trace elements at gastrointestinal level.pdf",
-        "note": "",
-        "creators": [],
-        "contentType": "application/pdf",
-        "linkMode": "imported_file",
-        "tags": []
-      }
-    },
-    {
       "key": "JKWVWHUN",
       "data": {
         "itemType": "journalArticle",
@@ -14887,6 +14891,20 @@
         ],
         "DOI": "10.1016/j.fct.2015.10.006",
         "url": "https://linkinghub.elsevier.com/retrieve/pii/S0278691515300764",
+        "tags": []
+      }
+    },
+    {
+      "key": "G2HRAUM6",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "JKWVWHUN",
+        "title": "PDF",
+        "filename": "Vázquez et al. - 2015 - Toxic trace elements at gastrointestinal level.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
         "tags": []
       }
     },
@@ -16184,46 +16202,6 @@
       }
     },
     {
-      "key": "HH5YJ2M2",
-      "data": {
-        "itemType": "book",
-        "title": "Bats of Texas",
-        "date": "2012-04",
-        "creators": [
-          {
-            "firstName": "Loren K",
-            "lastName": "Ammerman",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Christine L",
-            "lastName": "Hice",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "David J",
-            "lastName": "Schmidly",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "With all new illustrations, color photographs, revised species accounts, updated maps, and a sturdy flexible binding, this new edition of the authoritative guide to bats in Texas will serve as the field guide and all-around reference of choice for amateur naturalists as well as mammalogists, wildlife biologists, and professional conservationists.Texas is home to all four families of bats that occur in the United States, including thirty-three species of these important yet increasingly threatened mammals. Although five species, each represented by a single specimen, may be regarded as vagrants, no other state has a bat fauna more diverse, from the state’s most common species, the Brazilian free-tailed bat, to the rare hairy-legged vampire.The introductory chapter of this new edition of Bats of Texas surveys bats in general—their appearance, distribution, classification, evolution, biology, and life history—and discusses public health and bat conservation. An updated account for each species follows, with pictures by an outstanding nature photographer, distribution maps, and a thorough bibliography. Bats of Texas also features revised and illustrated dichotomous keys accompanied by gracefully detailed line drawings to aid in identification. A list of specimens examined is located at batsoftexas.com.",
-        "tags": [
-          {
-            "tag": "Bats"
-          },
-          {
-            "tag": "Nature / Animals / Mammals"
-          },
-          {
-            "tag": "Nature / Reference"
-          },
-          {
-            "tag": "Science / Life Sciences / Zoology / Mammals"
-          }
-        ]
-      }
-    },
-    {
       "key": "9VQMYMQ4",
       "data": {
         "itemType": "journalArticle",
@@ -16262,6 +16240,46 @@
           },
           {
             "tag": "United States"
+          }
+        ]
+      }
+    },
+    {
+      "key": "HH5YJ2M2",
+      "data": {
+        "itemType": "book",
+        "title": "Bats of Texas",
+        "date": "2012-04",
+        "creators": [
+          {
+            "firstName": "Loren K",
+            "lastName": "Ammerman",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Christine L",
+            "lastName": "Hice",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "David J",
+            "lastName": "Schmidly",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "With all new illustrations, color photographs, revised species accounts, updated maps, and a sturdy flexible binding, this new edition of the authoritative guide to bats in Texas will serve as the field guide and all-around reference of choice for amateur naturalists as well as mammalogists, wildlife biologists, and professional conservationists.Texas is home to all four families of bats that occur in the United States, including thirty-three species of these important yet increasingly threatened mammals. Although five species, each represented by a single specimen, may be regarded as vagrants, no other state has a bat fauna more diverse, from the state’s most common species, the Brazilian free-tailed bat, to the rare hairy-legged vampire.The introductory chapter of this new edition of Bats of Texas surveys bats in general—their appearance, distribution, classification, evolution, biology, and life history—and discusses public health and bat conservation. An updated account for each species follows, with pictures by an outstanding nature photographer, distribution maps, and a thorough bibliography. Bats of Texas also features revised and illustrated dichotomous keys accompanied by gracefully detailed line drawings to aid in identification. A list of specimens examined is located at batsoftexas.com.",
+        "tags": [
+          {
+            "tag": "Bats"
+          },
+          {
+            "tag": "Nature / Animals / Mammals"
+          },
+          {
+            "tag": "Nature / Reference"
+          },
+          {
+            "tag": "Science / Life Sciences / Zoology / Mammals"
           }
         ]
       }
@@ -16677,43 +16695,6 @@
       }
     },
     {
-      "key": "J4R7NW7R",
-      "data": {
-        "itemType": "journalArticle",
-        "title": "Radar analysis of fall bird migration stopover sites in the northeastern U.S.",
-        "date": "2014-08",
-        "creators": [
-          {
-            "firstName": "Jeffrey J",
-            "lastName": "Buler",
-            "creatorType": "author"
-          },
-          {
-            "firstName": "Deanna K",
-            "lastName": "Dawson",
-            "creatorType": "author"
-          }
-        ],
-        "abstractNote": "The national network of weather surveillance radars (WSR-88D) detects flying birds and is a useful remote-sensing tool for ornithological study. We used data collected during fall 2008 and 2009 by 16 WSR-88D radars in the northeastern U.S. to quantify the spatial distribution of landbirds during migratory stopover. We geo-referenced estimates based on radar reflectivity, of the density of migrants aloft at their abrupt evening exodus from daytime stopover sites, to the approximate locations from which they emerged. We classified bird stopover use by the magnitude and variation of radar reflectivity across nights; areas were considered \"important\" stopover sites for conservation if bird density was consistently high. We developed statistical models that predict potentially important stopover sites across the region, based on land cover, ground elevation, and geographic location. Large areas of regionally important stopover sites were located along the coastlines of Long Island Sound, throughout the Delmarva Peninsula, in areas surrounding Baltimore and Washington, along the western edge of the Adirondack Mountains, and within the Appalachian Mountains of southwestern Virginia and West Virginia. Locally important stopover sites generally were associated with deciduous forests embedded within landscapes dominated by developed or agricultural lands, or near the shores of major water bodies. Preserving or enhancing patches of natural habitat, particularly deciduous forests, in developed or agricultural landscapes and along major coastlines could be a priority for conservation plans addressing the stopover requirements of migratory landbirds in the northeastern U.S.",
-        "DOI": "10.1650/CONDOR-13-162.1",
-        "url": "https://academic.oup.com/condor/article/116/3/357-370/5153136",
-        "tags": [
-          {
-            "tag": "Birds"
-          },
-          {
-            "tag": "North America"
-          },
-          {
-            "tag": "Raptors"
-          },
-          {
-            "tag": "U.S. - Northeast (USFWS Region 5)"
-          }
-        ]
-      }
-    },
-    {
       "key": "E4G6DCQM",
       "data": {
         "itemType": "journalArticle",
@@ -16759,6 +16740,43 @@
           },
           {
             "tag": "North America"
+          }
+        ]
+      }
+    },
+    {
+      "key": "J4R7NW7R",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Radar analysis of fall bird migration stopover sites in the northeastern U.S.",
+        "date": "2014-08",
+        "creators": [
+          {
+            "firstName": "Jeffrey J",
+            "lastName": "Buler",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Deanna K",
+            "lastName": "Dawson",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The national network of weather surveillance radars (WSR-88D) detects flying birds and is a useful remote-sensing tool for ornithological study. We used data collected during fall 2008 and 2009 by 16 WSR-88D radars in the northeastern U.S. to quantify the spatial distribution of landbirds during migratory stopover. We geo-referenced estimates based on radar reflectivity, of the density of migrants aloft at their abrupt evening exodus from daytime stopover sites, to the approximate locations from which they emerged. We classified bird stopover use by the magnitude and variation of radar reflectivity across nights; areas were considered \"important\" stopover sites for conservation if bird density was consistently high. We developed statistical models that predict potentially important stopover sites across the region, based on land cover, ground elevation, and geographic location. Large areas of regionally important stopover sites were located along the coastlines of Long Island Sound, throughout the Delmarva Peninsula, in areas surrounding Baltimore and Washington, along the western edge of the Adirondack Mountains, and within the Appalachian Mountains of southwestern Virginia and West Virginia. Locally important stopover sites generally were associated with deciduous forests embedded within landscapes dominated by developed or agricultural lands, or near the shores of major water bodies. Preserving or enhancing patches of natural habitat, particularly deciduous forests, in developed or agricultural landscapes and along major coastlines could be a priority for conservation plans addressing the stopover requirements of migratory landbirds in the northeastern U.S.",
+        "DOI": "10.1650/CONDOR-13-162.1",
+        "url": "https://academic.oup.com/condor/article/116/3/357-370/5153136",
+        "tags": [
+          {
+            "tag": "Birds"
+          },
+          {
+            "tag": "North America"
+          },
+          {
+            "tag": "Raptors"
+          },
+          {
+            "tag": "U.S. - Northeast (USFWS Region 5)"
           }
         ]
       }
@@ -18658,20 +18676,6 @@
       }
     },
     {
-      "key": "DFP96LVQ",
-      "data": {
-        "itemType": "attachment",
-        "parentItem": "EXB8MDQ4",
-        "title": "PDF",
-        "filename": "Elith et al. - 2008 - A working guide to boosted regression trees.pdf",
-        "note": "",
-        "creators": [],
-        "contentType": "application/pdf",
-        "linkMode": "imported_file",
-        "tags": []
-      }
-    },
-    {
       "key": "EXB8MDQ4",
       "data": {
         "itemType": "journalArticle",
@@ -18697,6 +18701,20 @@
         "abstractNote": "1. Ecologists use statistical models for both explanation and prediction, and need techniques that are flexible enough to express typical features of their data, such as nonlinearities and interactions. 2. This study provides a working guide to boosted regression trees (BRT), an ensemble method for fitting statistical models that differs fundamentally from conventional techniques that aim to fit a single parsimonious model. Boosted regression trees combine the strengths of two algorithms: regression trees (models that relate a response to their predictors by recursive binary splits) and boosting (an adaptive method for combining many simple models to give improved predictive performance). The final BRT model can be understood as an additive regression model in which individual terms are simple trees, fitted in a forward, stagewise fashion. 3. Boosted regression trees incorporate important advantages of tree-based methods, handling different types of predictor variables and accommodating missing data. They have no need for prior data transformation or elimination of outliers, can fit complex nonlinear relationships, and automatically handle interaction effects between predictors. Fitting multiple trees in BRT overcomes the biggest drawback of single tree models: their relatively poor predictive performance. Although BRT models are complex, they can be summarized in ways that give powerful ecological insight, and their predictive performance is superior to most traditional modelling methods. 4. The unique features of BRT raise a number of practical issues in model fitting. We demonstrate the practicalities and advantages of using BRT through a distributional analysis of the short-finned eel (Anguilla australis Richardson), a native freshwater fish of New Zealand. We use a data set of over 13 000 sites to illustrate effects of several settings, and then fit and interpret a model using a subset of the data. We provide code and a tutorial to enable the wider use of BRT by ecologists.",
         "DOI": "10.1111/j.1365-2656.2008.01390.x",
         "url": "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.1365-2656.2008.01390.x",
+        "tags": []
+      }
+    },
+    {
+      "key": "DFP96LVQ",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "EXB8MDQ4",
+        "title": "PDF",
+        "filename": "Elith et al. - 2008 - A working guide to boosted regression trees.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
         "tags": []
       }
     },
