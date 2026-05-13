@@ -1,8 +1,103 @@
 {
-  "generated_at": "2026-05-11T10:20:10.045Z",
+  "generated_at": "2026-05-13T09:58:08.187Z",
   "group_id": "5253055",
-  "total_items": 4196,
+  "total_items": 4199,
   "items": [
+    {
+      "key": "P6W9BNMH",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "D5ZRM3SH",
+        "title": "ScienceDirect Full Text PDF",
+        "filename": "Xie et al. - 2026 - Large-scale photovoltaic deployment in the Taklamakan Desert could intensify regional water stress.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://pdf.sciencedirectassets.com/315713/AIP/1-s2.0-S2095927326005037/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFYaCXVzLWVhc3QtMSJGMEQCIAoWZrWC6ctJkUpS7eTvvbVYQKzAH6W4Cmd%2Fl%2Fw60AmiAiAgcRsdlt0NVLrtKW%2Bon9zdDeGveTH3Iavd1r06QyBx0iqyBQgfEAUaDDA1OTAwMzU0Njg2NSIMUHGrlArFr55hiioSKo8FZp6CVhFYL044LNXJc%2BS6XTrVr6IP3on3T3msIL6dtUacMydoEo1QEFa7zr5szLszSD2q%2Fe%2BesL6nGnkt%2FkM398Mb64SkGkq3vxJCkfI5n38wbORorVIhUHpPn%2BSLe2iQjRCd9aTzSLuLbKz1xE0iTmXW%2BGZIzjCuBp2VMI1wKqMYDJWfvhXU3bxRvtZAm01uiEAxOSaGh31YKnWLJ7sgDietmPg3EpQA3IdfOh2ln3Iy3feVPC%2FCiwe4Hh7IZW1KAsOnCg6ouvdyczdMjaMrjXIz34fkCbxeI1JQA0n6BdN4N%2Brdq2CQX0gAw6ojFLGxdvDLagNYSm2EFspoYm36zUUqAGAwmcG0pdkL1nfLTSmgliDHvmkIxTAfmFQGBF65%2B9Cc7LNLCtI%2BfOIcFW4MtcfbnTzObMp1HTOeGO7KhbDEzsFR6bgU8W3BonA%2BIZegS30b%2BlkczKyBBVqXYqZcep6CMhzmSAvXCV6XahvP8zsZNI3XnBjmJgikAbZ9ENbLjY%2FucG2oQEdBnFV54Uswl5wSpYSgQn4b3YL4nmMw0MUkwoDAqN3CwkMAP3YLFguoyrBDduIDjgem4GSz%2F82cHZuBI1FgQHQyZg52x8Xbj6cOH3ajiaGK%2BUr1KnlAYx2fmCJ47moW4FMWGYfQNRC%2FXehLA5qx7o7T4w1NxTyUpy3%2FS9PW5PLN0t73i5PLgsrEqQbRLBie%2BP4g8Rgfq%2BcwMXPZoET%2Fo%2FVwfRiRlGtCqX9WWxacoqLkzTMfduAHeotYUKMcNgUmilkFuHQGpkT3fz%2FQqd0EKetp6Md9JuGkzwvK1ag5hN%2BxgF7o3WAKSuYSifV7ZvoAFhCJuw6Q%2F4Im3eqO3TCOiPBsgsSu5jVS4DC%2Fk4nQBjqyAcg3t4aWBbqoq3bnOcpxj7uhGyKTvS75EjoRPaaaStHW0aAUfCO%2BwTfNjyZfFzk1SzK%2FIgHuUF%2FJYzmmyQug8QMaYUDsl4I42uQ7oEQNbjwm8RZ%2F557FB1gLx9tNrSGAlT1hTNewwSkxmz%2Fx%2B2bwtvvjUEqvYzgpBWNDSVi%2BlnGU%2BBzPWLfPiywbutlGpfgrPwfel0T1Ibw%2BtB60pzjAVCiDJDE%2BGjsvP0Lm%2BSw96GNuwvs%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260511T215445Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYQJFXW76D%2F20260511%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ae622903d698cffd27c599042b6c8c7127964e725ef77d7ebeab01940d137e45&hash=8f49f3fda859619d8928d69d48fe551259fb3fd36379222af52d6b5648fa5828&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S2095927326005037&tid=spdf-bad2320c-beab-4736-8e83-7e1e43894ec0&sid=2c87b6386ad10240fe7bb866a18588766244gxrqa&type=client&tsoh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&rh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&ua=13155b05035659075b58&rr=9fa46c896b7cb031&cc=us",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "GX5EH49S",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "D5ZRM3SH",
+        "title": "ScienceDirect Snapshot",
+        "filename": "S2095927326005037.html",
+        "note": "",
+        "creators": [],
+        "url": "https://www.sciencedirect.com/science/article/pii/S2095927326005037",
+        "contentType": "text/html",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "D5ZRM3SH",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Large-scale photovoltaic deployment in the Taklamakan Desert could intensify regional water stress",
+        "date": "2026-05-08",
+        "creators": [
+          {
+            "firstName": "Tingting",
+            "lastName": "Xie",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Zhengyao",
+            "lastName": "Lu",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Wei",
+            "lastName": "Huang",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jing",
+            "lastName": "Tang",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Tinghai",
+            "lastName": "Ou",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Deliang",
+            "lastName": "Chen",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Fahu",
+            "lastName": "Chen",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Northwest China’s arid climate and fragile ecosystems are becoming wetter and greener. However, the rapid expansion of photovoltaic (PV) infrastructure in this region alters land-atmosphere interactions, with potential consequences for local climate and water resources. Here, we use a combined climate and dynamic vegetation modeling approach to assess the effects of hypothetical PV deployment across the Tarim Basin, home to the world’s second-largest mobile desert. We find that large-scale PV installations may significantly reduce water resources in populated areas, with over 30% reductions in runoff, precipitation, and aridity index, alongside an 8.5% decline in soil moisture. High-efficiency PV panels increase surface albedo, leading to surface cooling and intensified anticyclonic circulation, which suppresses precipitation and triggers vegetation decline. This vegetation feedback amplifies aridity by modifying albedo and evapotranspiration. These results highlight the critical need to incorporate vegetation feedback in future studies to fully evaluate PV’s hydrological impacts and stress the importance of careful planning to mitigate environmental risks associated with large-scale solar projects in Northwest China.",
+        "DOI": "10.1016/j.scib.2026.05.005",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2095927326005037",
+        "tags": [
+          {
+            "tag": "Climate-ecosystem simulation"
+          },
+          {
+            "tag": "Northwest China"
+          },
+          {
+            "tag": "Solar farm"
+          },
+          {
+            "tag": "Vegetation feedback"
+          },
+          {
+            "tag": "Water resources"
+          }
+        ]
+      }
+    },
     {
       "key": "J8PILFG7",
       "data": {
