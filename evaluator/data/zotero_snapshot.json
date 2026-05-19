@@ -1,8 +1,150 @@
 {
-  "generated_at": "2026-05-18T10:34:35.822Z",
+  "generated_at": "2026-05-19T10:21:43.736Z",
   "group_id": "5253055",
-  "total_items": 4199,
+  "total_items": 4205,
   "items": [
+    {
+      "key": "26HZS4DI",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "AL88RZR7",
+        "title": "Snapshot",
+        "filename": "ece3.html",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ece3.71657",
+        "contentType": "text/html",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "AL88RZR7",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Autumn Migration to Higher Latitudes in Seminole Bats (Lasiurus seminolus) Redefines Seasonal Ranges: Evidence From Stable Isotopes and Fatality Data From Wind Energy Facilities",
+        "date": "2025",
+        "creators": [
+          {
+            "firstName": "Julia R.",
+            "lastName": "Wilson",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Michael C.",
+            "lastName": "True",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Caitlin J.",
+            "lastName": "Campbell",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The linkages between individual migrations and population-level distributions are essential for understanding ecological dynamics. Here we describe how an unconventional migratory strategy in the Seminole bat (Lasiurus seminolus) results in an extended autumn range, both north and west of its currently described range. Awareness of this redefined distribution will likely reduce possible misidentification with a similar species, the eastern red bat (L. borealis), during any form of monitoring for purposes of conservation and management efforts. At wind energy facilities during the autumn seasons of 2019–2022 in Iowa, Illinois, Indiana, Michigan, Ohio, and Maryland, we discovered 49 Seminole bat carcasses as fatalities in autumn. All were outside of the species' currently described range in the southeastern United States. For 10 carcasses, we confirmed species identification using molecular techniques. We then modeled the geographic origins of viable fur samples from 17 carcasses using stable hydrogen isotope analysis. Finally, we synthesized current and historical records of the species to redefine seasonal range boundaries. Genetic analysis confirmed that carcasses were Seminole bats, and stable isotope analysis revealed that all bats sampled had migrated north between summer and autumn, leaving the previously defined species range. Our seasonally explicit range delineation for Seminole bats shows that this species expands its range northward in summer and again expands its range in autumn to the north and west to a region that is 1.3 million km2 larger than previously recognized. Northward migration in autumn, and the corresponding range extension, were previously undetected in Seminole bats. Our findings also demonstrate that this species, like its congeners, is susceptible to wind turbine fatality. Although the breadth of conservation risk is unknown, this study highlights the importance of obtaining an accurate understanding of migratory movements and the distribution of species to aid in species identification, management, and conservation.",
+        "DOI": "10.1002/ece3.71657",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ece3.71657",
+        "tags": [
+          {
+            "tag": "Bats"
+          },
+          {
+            "tag": "annual cycle"
+          },
+          {
+            "tag": "migratory bat"
+          },
+          {
+            "tag": "novel movement"
+          },
+          {
+            "tag": "phenology"
+          },
+          {
+            "tag": "range extent"
+          },
+          {
+            "tag": "renewable energy"
+          },
+          {
+            "tag": "seasonal movement"
+          }
+        ]
+      }
+    },
+    {
+      "key": "EZ7ETGPN",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "AL88RZR7",
+        "title": "Full Text PDF",
+        "filename": "Wilson et al. - 2025 - Autumn Migration to Higher Latitudes in Seminole Bats (Lasiurus seminolus) Redefines Seasonal Ranges.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ece3.71657",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "Z3RELMCB",
+      "data": {
+        "itemType": "note",
+        "parentItem": "AL88RZR7",
+        "note": "<p>e71657 ECE-2025-01-00005.R2</p>",
+        "creators": [],
+        "tags": []
+      }
+    },
+    {
+      "key": "YKXH32D7",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Advancing interpretation of stable isotope assignment maps: comparing and summarizing origins of known-provenance migratory bats",
+        "date": "2020-06-02",
+        "creators": [
+          {
+            "firstName": "Caitlin J",
+            "lastName": "Campbell",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Matthew C",
+            "lastName": "Fitzpatrick",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Hannah B",
+            "lastName": "Vander Zanden",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "David M",
+            "lastName": "Nelson",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Probability-of-origin maps deduced from stable isotope data are important for inferring broadscale patterns of animal migration, but few resources and tools for interpreting and validating these maps exist. For example, quantitative tools for comparing multiple probability-of-origin maps do not exist, and many existing approaches for geographic assignment of individuals have not been validated or compared with respect to precision and accuracy. To address these challenges, we created and analyzed probability-of-origin maps using stable hydrogen isotope values from known-origin individuals of three species of migratory bat. We used a metric of spatial overlap to group individuals by areas of origin without a priori knowledge of such regions. The metric of spatial similarity allowed for quantitative comparison of geographic origins and grouping of individuals with similar origins. We then compared four approaches for inferring origins (cumulative-sum, odds-ratio, quantileonly, and quantile-simulation) across a range of thresholds and probable minimum distance traveled. The accuracy of geographic origins and minimum distance traveled varied across species at most threshold values for most approaches. The cumulative-sum and quantilesimulation approaches had generally higher precision at a given level of accuracy than the odds-ratio and quantile-only approaches, and many threshold values were associated with a relatively high degree (> 300 km) of variation in minimum distance traveled. Overall, these results reinforce the importance of validating assignment techniques with known-origin individuals when possible. We present the tools discussed as part of an R package, ‘isocat’ (“Isotope Origin Clustering and Assignment Tools”).",
+        "DOI": "10.1515/ami-2020-0004",
+        "url": "https://www.degruyter.com/document/doi/10.1515/ami-2020-0004/html",
+        "tags": []
+      }
+    },
+    {
+      "key": "X2XXB6IU",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "YKXH32D7",
+        "title": "PDF",
+        "filename": "Campbell et al. - 2020 - Advancing interpretation of stable isotope assignment maps comparing and summarizing origins of kno.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
     {
       "key": "P6W9BNMH",
       "data": {
