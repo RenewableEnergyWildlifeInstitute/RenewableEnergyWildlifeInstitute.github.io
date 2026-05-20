@@ -1,8 +1,88 @@
 {
-  "generated_at": "2026-05-19T10:21:43.736Z",
+  "generated_at": "2026-05-20T10:12:44.755Z",
   "group_id": "5253055",
-  "total_items": 4205,
+  "total_items": 4207,
   "items": [
+    {
+      "key": "6HS2CJZY",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "EEN4Q7SJ",
+        "title": "ScienceDirect Full Text PDF",
+        "filename": "Su et al. - 2026 - Potential exposure of dryland biodiversity to large-scale solar photovoltaic expansion in Northwest.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://pdf.sciencedirectassets.com/271832/1-s2.0-S0195925526X20017/1-s2.0-S0195925526001654/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLWVhc3QtMSJGMEQCIFncoiLQlNPdtGv5mWPfSGutCmBLK6tKuYSndwABMDudAiBKGUxSn6ynD%2BkVKsxDLzQA%2FpJGWN7m86r0Lxu8y6TL8Sq7BQjY%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAUaDDA1OTAwMzU0Njg2NSIMDwsMCT%2FRuIc%2B7lBqKo8FObYUJLzdKzmsXh3jjPbs5wVmmFV8%2BITKdm%2BEtBNj%2F3RMj50DCDBR6W9Kvq%2BljxWlcwW2fhagRe8c3mkC57vuvP1s6VdjsYWTD5sERptwrtf8r%2FHc8jsxzUt%2B3smxqXhZSyBUqBzU166IxydcRb%2BcPbFtQeHZUdvSx6Cru1rYkAv6kkj8EUpNbnoP98GhzP21IZAb3D2rCFEHAXrFspWNp2DHENVDsdBKm%2Fo08YfkYKQSo6TybH0AP29wZfB8tNVPtNicEZYYTgvGit0mRcDqZzUxNjjWQCclhpgRlG%2BsSulJBn%2BXlMc9CclOSj6TOFNpwj3gFD27FkF5fzUy%2Bbzfq0dy%2F%2FIZfsxnzXeF0hRdb1K7Z3WI86%2BeGhTkuJKS08Qf%2Fc%2FdPdR4Z2CJFX9tIm9ofkdErhDRdNYhnnkfjS6DSCOU9UIeNP9XC6Y%2BBzToGg8ahXsrCoKtDY30oxxlFdNEow0n3kSpNdeUL%2BNv2E4ZV3Ba4EWMnOeTRttTDNWn0IQrj9usVEAxxNVXDi1lOoiXnu1M8eMju%2BdCt1MBTl9R34%2Fy5r0nLQWCCK%2FmoZ33s844D7iFubuYuqxj35rpLWjo0hS4v0kBL2iuUWCEHMqFn2TLyaHjrOLsDcq%2B1J3el6FN7OqZ8JTzTzimlHrLSa55rqeSD5OCajHUQWqHp3mT%2Ba49qVR7GvYdEw4PIxuITJhZvCvR9QNsjxkOYxitzWz3J%2BEmsJLr6gnQfrz79cfKr5pvAU61rIHHAQu3pPn4wL4zpVwOFFxX1D8%2BQ5fMsEIW6JZ8BgpTLx5yrBcbZPUC22SHwC91v7%2F8HnZq2fJblgpGHbyhLcHgpYGeAv1hdHCs6cPXDSy1EqaEJfRF3CHIcDDI%2FrHQBjqyARWFSYNJYpGWktHA%2F9IACxv72lR7%2Fupw1lZnxh4L5ndLfsmAh3zbqvePdVUKRb1SElM%2FUDDwNNu2ST%2FKrHNNee6k075VsJVXAF%2BCHf%2BYpqA%2FrBIPOiQiRUaCMFyeegsCHhagmBnem4Kxv09eexbXM4%2FRPVM9KNou7S%2Fw4Vn23LS4G66nKwfsPqx5LO28EDD8yIqLBXwT33p2vbD%2F5d8LThxVkrUf4dgDSHHORPWhp80avDo%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260519T164043Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYWUZVE2TQ%2F20260519%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=be5ce8df2a13587f51e33c850c0a5fe196d27f1b1e1eddc1a8a5a162546ba21f&hash=ecfe5087441461c203244a86551dcb408bf57a4089a9078d8d13a8a16f100fd0&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0195925526001654&tid=spdf-2993aa73-5915-4fcc-a5a1-211243a6bb0e&sid=9885c2f741e3004460099141206ebb96f1c1gxrqa&type=client&tsoh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&rh=d3d3LXNjaWVuY2VkaXJlY3QtY29tLnV0ay5pZG0ub2NsYy5vcmc%3D&ua=13155b05075657065b59&rr=9fe48b88bb8adadc&cc=us",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "EEN4Q7SJ",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "Potential exposure of dryland biodiversity to large-scale solar photovoltaic expansion in Northwest China",
+        "date": "2026-07-01",
+        "creators": [
+          {
+            "firstName": "Yingqing",
+            "lastName": "Su",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Chengpeng",
+            "lastName": "Lu",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Wei",
+            "lastName": "Liu",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Honghua",
+            "lastName": "Xia",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Xianglong",
+            "lastName": "Gao",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jutao",
+            "lastName": "Zhang",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Qi",
+            "lastName": "Feng",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "The scaling of renewable energy infrastructure and the conservation of biodiversity are crucial for achieving sustainable development and climate goals. However, the spatial extent of potential biodiversity exposure to photovoltaic solar (PV) infrastructure—defined here as the spatial overlap of species habitats with areas beyond core construction zones during both construction and operational phases—remains insufficiently quantified, especially under climate change. Here we address this gap by assessing this exposure in the arid region of Northwest China (ANWC), integrating three complementary models (system dynamics (SD), patch-generating land use simulation (PLUS), and BIOMOD2 ensemble) to project PV expansion and spatial overlap with biodiversity under current conditions and three future climate scenarios (Ecological Protection, Trend Continuation, and Economic Growth). Currently, PV coverage in this dryland region is 300 km2 and is projected to expand to 2600–5200 km2 by 2100, representing a 14-fold increase under the Economic Growth scenario. Spatial overlap between projected PV infrastructure and biodiversity hotspots remains limited under both present and future scenarios, with the proportion of modelled species distributions exposed to PV expansion being less than 1% at the regional scale. This low proportion reflects current and projected siting patterns (i.e., PV development predominantly avoids high-suitability habitats) rather than the magnitude of species-level responses. This study provides a spatially explicit quantification of potential exposure, not direct ecological impacts. Our findings highlight the need for proactive siting and mitigation strategies to ensure that renewable energy expansion proceeds in alignment with biodiversity conservation goals and the United Nations Sustainable Development Goals (SDGs 7, 13, and 15).",
+        "DOI": "10.1016/j.eiar.2026.108491",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0195925526001654",
+        "tags": [
+          {
+            "tag": "Biodiversity"
+          },
+          {
+            "tag": "China's drylands"
+          },
+          {
+            "tag": "Photovoltaic solar"
+          },
+          {
+            "tag": "Potential exposure"
+          },
+          {
+            "tag": "SD-PLUS-BIOMOD2 model"
+          }
+        ]
+      }
+    },
     {
       "key": "26HZS4DI",
       "data": {
