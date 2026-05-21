@@ -1,8 +1,159 @@
 {
-  "generated_at": "2026-05-20T10:12:44.755Z",
+  "generated_at": "2026-05-21T10:20:21.550Z",
   "group_id": "5253055",
-  "total_items": 4207,
+  "total_items": 4214,
   "items": [
+    {
+      "key": "SN6HJPLF",
+      "data": {
+        "itemType": "bookSection",
+        "title": "Acccounting for the fraction of carcasses outside the searched area in the estimation of bird and bat fatalities at wind energy facilities",
+        "date": "2024",
+        "creators": [
+          {
+            "firstName": "Daniel",
+            "lastName": "Dalthorp",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Manuela M P",
+            "lastName": "Huso",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Mark",
+            "lastName": "Dalthorp",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Jeffrey",
+            "lastName": "Mintz",
+            "creatorType": "author"
+          }
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "VE7YFUSN",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "SN6HJPLF",
+        "title": "PDF",
+        "filename": "Dalthorp et al. - 2024 - Acccounting for the fraction of carcasses outside the searched area in the estimation of bird and ba.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "C8UXK4LC",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "ZZAIXJSI",
+        "title": "PDF",
+        "filename": "Dalthorp et al. - 2024 - Accounting for the fraction of carcasses outside the searched area in the estimation of bird and bat.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "UXWDXLPE",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "XUMSVZ22",
+        "title": "Accepted Version",
+        "filename": "Simmons et al. - 2026 - Crouching tiger, hidden dangers Avian fatality rates reduced by red-blade patterning at a species-r.pdf",
+        "note": "",
+        "creators": [],
+        "url": "https://www.biorxiv.org/content/biorxiv/early/2026/05/07/2026.05.04.722424.full.pdf",
+        "contentType": "application/pdf",
+        "linkMode": "imported_url",
+        "tags": []
+      }
+    },
+    {
+      "key": "XUMSVZ22",
+      "data": {
+        "itemType": "preprint",
+        "title": "Crouching tiger, hidden dangers: Avian fatality rates reduced by red-blade patterning at a species-rich African wind farm",
+        "date": "2026-05-07",
+        "creators": [
+          {
+            "firstName": "Robert E",
+            "lastName": "Simmons",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Marlei",
+            "lastName": "Martins",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Francisco",
+            "lastName": "Cervantes",
+            "creatorType": "author"
+          }
+        ],
+        "abstractNote": "Abstract\n          Avian collision rates are certain to rise as renewable energy industries roll out wind and solar farms to reduce fossil fuel impacts in biologically diverse areas of the world. Technological solutions are often sought to decrease mortality rates, but for developing nations automated shut downs are expensive, and alternatives required. A promising route is to increase blade visibility to birds using high contrast colours. Despite the success of the solid black-blade experiment in Norway only one other black-blade field-study in the Netherlands has explored this possibility, with no significant results. We tested the use of colour-patterned blades at a species-rich, 37-turbine, wind facility in Hopefield, South Africa. Two broad “signal red” stripes were applied to a single blade at four high-fatality turbines, in 2023 by Umoya Energy. Avian fatality rates were compared before and after painting using the Before-After-Control-Impact (BACI) approach. Seventy-five fatalities of 23 species of raptors, passerines and wetland species over 24 months were compared for the same 20 turbines after patterning with two sets of controls: (i) their four nearest neighbours (NN) and (ii) all 16 controls (AC). Over 32 months 25 fatalities were recorded, 23 occurred at the controls and only two at the patterned turbines. Testing with Bayesian Generalized Linear Models (BGLMs) revealed a median 83% reduction in fatalities at the patterned blades for both the NN turbines (credible intervals 14% - 98%) and the AC comparisons (30% - 97%). Bayes Factors (BF) revealed strong statistical support for NN (BF = 49.9) and AC comparisons (BF = 159). There was little evidence that birds avoiding patterned turbines increased fatalities at the neighbouring turbines as there was a small median 15% increase in fatality rates when NN controls were compared with other controls, and weak statistical support (BF = 0.15). Among 14 raptor species recorded on site, 10 species have suffered fatalities. Of seven individuals killed prior to treatment at the four patterned blades, only one was killed post-treatment suggesting blade patterning is equally effective at reducing raptor fatalities. Our results show that patterned blades had a high probability (83%) of reducing fatalities with strong statistical support despite the small samples. This supports the Norway experiment in a high diversity African setting, but with red patterns not a solid black design. The strong effect of red stripes may arise from both the high contrast it provides and the possible warning effect that red may elicit. We call for additional experiments to differentiate the effect of patterns and colours for the optimal design to reduce avian-turbine collisions.",
+        "DOI": "10.64898/2026.05.04.722424",
+        "url": "http://biorxiv.org/lookup/doi/10.64898/2026.05.04.722424",
+        "tags": []
+      }
+    },
+    {
+      "key": "7FLYRF7H",
+      "data": {
+        "itemType": "attachment",
+        "parentItem": "XAN5BU5Q",
+        "title": "PDF",
+        "filename": "Murgatroyd et al. - 2021 - A predictive model for improving placement of wind turbines to minimise collision risk potential for.pdf",
+        "note": "",
+        "creators": [],
+        "contentType": "application/pdf",
+        "linkMode": "imported_file",
+        "tags": []
+      }
+    },
+    {
+      "key": "XAN5BU5Q",
+      "data": {
+        "itemType": "journalArticle",
+        "title": "A predictive model for improving placement of wind turbines to minimise collision risk potential for a large soaring raptor",
+        "date": "04/2021",
+        "creators": [
+          {
+            "firstName": "Megan",
+            "lastName": "Murgatroyd",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Willem",
+            "lastName": "Bouten",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Arjun",
+            "lastName": "Amar",
+            "creatorType": "author"
+          },
+          {
+            "firstName": "Ailsa",
+            "lastName": "McKenzie",
+            "creatorType": "editor"
+          }
+        ],
+        "abstractNote": "Abstract\n            \n              \n                \n                  With the rapid growth of wind energy developments world‐wide, it is critical that the negative impacts on wildlife are considered and mitigated. This includes minimising the number of large soaring raptors, which are killed when they collide with wind turbines.\n                \n                \n                  To reduce the likelihood of raptor collisions, turbines should be placed at locations which are least used by sensitive species. For resident or breeding species, this is often delineated crudely through the use of circular buffers centred on nest sites, which assume uniform habitat use around a nest site.\n                \n                \n                  Using GPS tracking data together with a digital elevation model we build and cross‐validate a simple generalisable model, to classify the spatial likelihood of wind turbine collisions for resident adult Verreaux's eagles in any landscape where there are known nests. We apply our methods to operational developments in South Africa to validate the model and demonstrate its ability in predicting actual collision mortalities.\n                \n                \n                  \n                    Our collision risk potential (CRP) model included the variables distance to nest, distance to conspecific nest, slope, distance to slope and elevation. Using our model, rather than a circular buffer, resulted in\n                    c\n                    . 4%–5% improvement in eagle protection while excluding development from the same amount (but not shape) of area. For an equal level of eagle protection, our model can make\n                    c\n                    . 20%–21% more area available for wind energy development compared to a circular buffer.\n                  \n                \n                \n                  Exploring collisions at operational wind farms in South Africa we show that our CRP model correctly predicted 79% of known collisions, while circular buffers (5.2 km radius) only captured 50% of collisions.\n                \n                \n                  \n                    Synthesis and applications\n                    . We show that by using predictive models to account for habitat use instead of simple buffers around a nest, a greater area of land can be made available for wind energy development without increased mortality risk to raptors. Our predictive model can be used to provide robust guidance on wind turbine placement in South Africa in a way which minimises the conflict between a vulnerable raptor species and the development of renewable energy.",
+        "DOI": "10.1111/1365-2664.13799",
+        "url": "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.13799",
+        "tags": []
+      }
+    },
     {
       "key": "6HS2CJZY",
       "data": {
